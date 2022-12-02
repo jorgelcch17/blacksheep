@@ -8,6 +8,7 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
+use App\Http\Livewire\DetailsComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
@@ -26,6 +27,8 @@ use App\Http\Livewire\User\UserDashboardComponent;
 Route::get('/', HomeComponent::class)->name('home');
 
 Route::get('/tienda', ShopComponent::class)->name('shop');
+
+Route::get('/producto/{slug}', DetailsComponent::class)->name('product.details');
 
 Route::get('/carrito', CartComponent::class)->name('shop.cart');
 
