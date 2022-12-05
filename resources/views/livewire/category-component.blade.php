@@ -24,7 +24,7 @@
                         <div class="shop-product-fillter">
                             <div class="totall-product">
                                 <p> Se ha encontrado <strong class="text-brand">{{ $products->total() }}</strong>
-                                    productos para ti!</p>
+                                    productos para ti de <strong class="text-brand">{{ $category_name }}</strong>!</p>
                             </div>
                             <div class="sort-by-product-area">
                                 <div class="sort-by-cover mr-10">
@@ -60,8 +60,9 @@
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ $orderBy == 'por defecto' ? 'active' : '' }}" href="#"
-                                                    wire:click.prevent="changeOrderBy('por defecto')">por defecto</a>
+                                            <li><a class="{{ $orderBy == 'por defecto' ? 'active' : '' }}"
+                                                    href="#" wire:click.prevent="changeOrderBy('por defecto')">por
+                                                    defecto</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Precio: Bajo a alto' ? 'active' : '' }}"
                                                     href="#"
@@ -157,7 +158,9 @@
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorias</h5>
                             <ul class="categories">
                                 @foreach ($categories as $category)
-                                    <li><a href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a></li>
+                                    <li><a
+                                            href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
