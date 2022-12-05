@@ -60,8 +60,9 @@
                                     </div>
                                     <div class="sort-by-dropdown">
                                         <ul>
-                                            <li><a class="{{ $orderBy == 'por defecto' ? 'active' : '' }}" href="#"
-                                                    wire:click.prevent="changeOrderBy('por defecto')">por defecto</a>
+                                            <li><a class="{{ $orderBy == 'por defecto' ? 'active' : '' }}"
+                                                    href="#" wire:click.prevent="changeOrderBy('por defecto')">por
+                                                    defecto</a>
                                             </li>
                                             <li><a class="{{ $orderBy == 'Precio: Bajo a alto' ? 'active' : '' }}"
                                                     href="#"
@@ -157,23 +158,25 @@
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorias</h5>
                             <ul class="categories">
                                 @foreach ($categories as $category)
-                                    <li><a href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a></li>
+                                    <li><a
+                                            href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
                         <!-- Fillter By Price -->
                         <div class="sidebar-widget price_range range mb-30">
                             <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Fill by price</h5>
+                                <h5 class="widget-title mb-10">Filtrar por precio</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
                             <div class="price-filter">
                                 <div class="price-filter-inner">
-                                    <div id="slider-range"></div>
+                                    <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price"
-                                                placeholder="Add Your Price">
+                                            <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span> -
+                                            <span class="text-info">Bs {{ $max_value }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -276,3 +279,23 @@
         </section>
     </main>
 </div>
+
+@push('scripts')
+    <script>
+        var sliderrange = $('#slider-range');
+        var amountprice = $('#amount');
+        $(function() {
+            sliderrange.slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [0, 1000],
+                slide: function(event, ui) {
+                    // amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    @this.set('min_value', ui.values[0]);
+                    @this.set('max_value', ui.values[1]);
+                }
+            });
+        });
+    </script>
+@endpush
