@@ -14,42 +14,48 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive">
-                            <table class="table shopping-summery text-center clean">
-                                <thead>
-                                    <tr class="main-heading">
-                                        <th scope="col">Image</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Subtotal</th>
-                                        <th scope="col">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(Session::has('success_message'))
-                                        <div class="alert alert-success">
-                                            <strong>Éxito:</strong> {{ Session::get('success_message') }}
-                                        </div>
-                                    @endif
-                                    @if (Cart::count() > 0)
+                            @if (Session::has('success_message'))
+                                <div class="alert alert-success">
+                                    <strong>Éxito:</strong> {{ Session::get('success_message') }}
+                                </div>
+                            @endif
+                            @if (Cart::count() > 0)
+                                <table class="table shopping-summery text-center clean">
+                                    <thead>
+                                        <tr class="main-heading">
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Subtotal</th>
+                                            <th scope="col">Remove</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
                                         @foreach (Cart::content() as $item)
                                             <tr>
                                                 <td class="image product-thumbnail"><img
-                                                        src="{{ asset('assets/imgs/shop/product-')}}{{ $item->model->id }}-1.jpg"
+                                                        src="{{ asset('assets/imgs/shop/product-') }}{{ $item->model->id }}-1.jpg"
                                                         alt="#"></td>
                                                 <td class="product-des product-name">
-                                                    <h5 class="product-name"><a href="product-details.html">{{ $item->model->name }}</a></h5>
+                                                    <h5 class="product-name"><a
+                                                            href="product-details.html">{{ $item->model->name }}</a>
+                                                    </h5>
                                                     {{-- <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy
                                                         magndapibus.
                                                     </p> --}}
                                                 </td>
-                                                <td class="price" data-title="Price"><span>Bs {{ $item->model->regular_price }} </span></td>
+                                                <td class="price" data-title="Price"><span>Bs
+                                                        {{ $item->model->regular_price }} </span></td>
                                                 <td class="text-center" data-title="Stock">
                                                     <div class="detail-qty border radius  m-auto">
-                                                        <a href="#" class="qty-down" wire:click.prevent="decreaseQuantity('{{$item->rowId}}')"><i
+                                                        <a href="#" class="qty-down"
+                                                            wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"><i
                                                                 class="fi-rs-angle-small-down"></i></a>
                                                         <span class="qty-val">{{ $item->qty }}</span>
-                                                        <a href="#" class="qty-up" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"><i
+                                                        <a href="#" class="qty-up"
+                                                            wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"><i
                                                                 class="fi-rs-angle-small-up"></i></a>
                                                     </div>
                                                 </td>
@@ -57,70 +63,22 @@
                                                     <span>Bs {{ $item->subtotal }} </span>
                                                 </td>
                                                 <td class="action" data-title="Remove"><a href="#"
-                                                        class="text-muted"><i class="fi-rs-trash"></i></a></td>
+                                                        class="text-muted"
+                                                        wire:click.prevent="destroy('{{ $item->rowId }}')"><i
+                                                            class="fi-rs-trash"></i></a></td>
                                             </tr>
                                         @endforeach
-                                    @else
-                                        <p>El carrito esta vacío</p>
-                                    @endif
-                                    {{-- <tr>
-                                        <td class="image"><img src="{{ asset('assets/imgs/shop/product-11-2.jpg') }}" alt="#">
-                                        </td>
-                                        <td class="product-des">
-                                            <h5 class="product-name"><a href="product-details.html">Amazon Essentials
-                                                    Women's Tank</a></h5>
-                                            <p class="font-xs">Sit at ipsum amet clita no est,<br> sed amet sadipscing
-                                                et gubergren</p>
-                                        </td>
-                                        <td class="price" data-title="Price"><span>$75.00 </span></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down"><i
-                                                        class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">2</span>
-                                                <a href="#" class="qty-up"><i
-                                                        class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" data-title="Cart">
-                                            <span>$150.00 </span>
-                                        </td>
-                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i
-                                                    class="fi-rs-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="image"><img src="{{ asset('assets/imgs/shop/product-6-1.jpg') }}" alt="#">
-                                        </td>
-                                        <td class="product-des">
-                                            <h5 class="product-name"><a href="product-details.html">Amazon Brand - Daily
-                                                    Ritual Women's Jersey </a></h5>
-                                            <p class="font-xs">Erat amet et et amet diam et et.<br> Justo amet at dolore
-                                            </p>
-                                        </td>
-                                        <td class="price" data-title="Price"><span>$62.00 </span></td>
-                                        <td class="text-center" data-title="Stock">
-                                            <div class="detail-qty border radius  m-auto">
-                                                <a href="#" class="qty-down"><i
-                                                        class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i
-                                                        class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </td>
-                                        <td class="text-right" data-title="Cart">
-                                            <span>$62.00 </span>
-                                        </td>
-                                        <td class="action" data-title="Remove"><a href="#" class="text-muted"><i
-                                                    class="fi-rs-trash"></i></a></td>
-                                    </tr> --}}
-                                    <tr>
-                                        <td colspan="6" class="text-end">
-                                            <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i>
-                                                Clear Cart</a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        <tr>
+                                            <td colspan="6" class="text-end">
+                                                <a href="#" class="text-muted" wire:click.prevent="clearAll()"> <i class="fi-rs-cross-small"></i>
+                                                    Clear Cart</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @else
+                                <p>El carrito esta vacío</p>
+                            @endif
                         </div>
                         <div class="cart-action text-end">
                             <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
@@ -440,12 +398,14 @@
                                                 <tr>
                                                     <td class="cart_total_label">Cart Subtotal</td>
                                                     <td class="cart_total_amount"><span
-                                                            class="font-lg fw-900 text-brand">Bs {{ Cart::subtotal() }}</span></td>
+                                                            class="font-lg fw-900 text-brand">Bs
+                                                            {{ Cart::subtotal() }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Impuesto</td>
                                                     <td class="cart_total_amount"><span
-                                                            class="font-lg fw-900 text-brand">Bs {{ Cart::tax() }}</span></td>
+                                                            class="font-lg fw-900 text-brand">Bs
+                                                            {{ Cart::tax() }}</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Shipping</td>
@@ -455,7 +415,8 @@
                                                 <tr>
                                                     <td class="cart_total_label">Total</td>
                                                     <td class="cart_total_amount"><strong><span
-                                                                class="font-xl fw-900 text-brand">Bs {{ Cart::total() }}</span></strong>
+                                                                class="font-xl fw-900 text-brand">Bs
+                                                                {{ Cart::total() }}</span></strong>
                                                     </td>
                                                 </tr>
                                             </tbody>
