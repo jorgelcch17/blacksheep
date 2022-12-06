@@ -138,8 +138,8 @@
                                             </div>
                                             <div class="product-action-1 show">
                                                 @if ($witems->contains($product->id))
-                                                    <a aria-label="Add to Wishlist" class="action-btn hover-up wishlisted"
-                                                        href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Remove from Wishlist" class="action-btn hover-up wishlisted"
+                                                        href="wishlist.php" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
                                                 @else
                                                     <a aria-label="Add to Wishlist" class="action-btn hover-up"
                                                         href="#" wire:click.prevent="addToWishlist({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fi-rs-heart"></i></a>
