@@ -11,7 +11,7 @@ class CartComponent extends Component
     {
         $product = Cart::get($rowId);
         $qty = $product->qty + 1;
-        Cart::update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $qty);
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
 
@@ -19,20 +19,20 @@ class CartComponent extends Component
     {
         $product = Cart::get($rowId);
         $qty = $product->qty - 1;
-        Cart::update($rowId, $qty);
+        Cart::instance('cart')->update($rowId, $qty);
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
 
     public function destroy($id)
     {
-        Cart::remove($id);
+        Cart::instance('cart')->remove($id);
         $this->emitTo('cart-icon-component', 'refreshComponent');
         session()->flash('success_message', 'El producto ha sido removido!');
     }
 
     public function clearAll()
     {
-        Cart::destroy();
+        Cart::instance('cart')->destroy();
         $this->emitTo('cart-icon-component', 'refreshComponent');
     }
 
