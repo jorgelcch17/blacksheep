@@ -27,7 +27,7 @@
                                         All Products
                                     </div>
                                     <div class="col-md-6">
-                                        
+                                        <a href="{{ route('admin.product.add') }}" class="btn btn-success float-end">Add new product</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +56,7 @@
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>
-                                                    <img src="{{ asset('assets/imgs/shop/product-') }}{{ $product->id }}-1.jpg" alt="{{ $product->name }}" width="60">
+                                                    <img src="{{ asset('assets/imgs/products') }}/{{ $product->image }}" alt="{{ $product->name }}" width="60">
                                                 </td>
                                                 <td>{{ $product->name }}</td>
                                                 <td>{{ $product->stock_status }}</td>
