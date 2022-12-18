@@ -107,7 +107,8 @@
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('product.details', $fproduct->slug) }}">
-                                                    <img class="default-img" src="{{ asset('assets/imgs/products') }}/{{ $fproduct->image }}"
+                                                    <img class="default-img"
+                                                        src="{{ asset('assets/imgs/products') }}/{{ $fproduct->image }}"
                                                         alt="">
                                                     {{-- <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg"
                                                         alt=""> --}}
@@ -130,7 +131,9 @@
                                             <div class="product-category">
                                                 <a href="shop.html">Clothing</a>
                                             </div>
-                                            <h2><a href="{{ route('product.details', $fproduct->slug) }}">{{ $fproduct->name }}</a></h2>
+                                            <h2><a
+                                                    href="{{ route('product.details', $fproduct->slug) }}">{{ $fproduct->name }}</a>
+                                            </h2>
                                             <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>90%</span>
@@ -142,7 +145,9 @@
                                             </div>
                                             <div class="product-action-1 show">
                                                 <a aria-label="Add To Cart" class="action-btn hover-up"
-                                                    href="#" wire:click.prevent="store({{ $fproduct->id }}, '{{ $fproduct->name }}', {{ $fproduct->regular_price }})"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                    href="#"
+                                                    wire:click.prevent="store({{ $fproduct->id }}, '{{ $fproduct->name }}', {{ $fproduct->regular_price }})"><i
+                                                        class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -803,8 +808,8 @@
                                                     class="fi-rs-eye"></i></a>
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                 href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up"
-                                                href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i
+                                                    class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="new">New</span>
@@ -847,8 +852,8 @@
                                                     class="fi-rs-eye"></i></a>
                                             <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                 href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up"
-                                                href="compare.php"><i class="fi-rs-shuffle"></i></a>
+                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i
+                                                    class="fi-rs-shuffle"></i></a>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -896,65 +901,17 @@
             <div class="container wow fadeIn animated">
                 <h3 class="section-title mb-20"><span>Popular</span> Categories</h3>
                 <div class="carausel-6-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow"
-                        id="carausel-6-columns-arrows"></div>
+                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows">
+                    </div>
                     <div class="carausel-6-columns" id="carausel-6-columns">
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-1.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">T-Shirt</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"> <img src="assets/imgs/shop/category-thumb-2.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Bags</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-3.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Sandan</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-4.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Scarf Cap</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-5.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Shoes</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-6.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Pillowcase</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-7.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Jumpsuits</a></h5>
-                        </div>
-                        <div class="card-1">
-                            <figure class=" img-hover-scale overflow-hidden">
-                                <a href="shop.html"><img src="assets/imgs/shop/category-thumb-8.jpg"
-                                        alt=""></a>
-                            </figure>
-                            <h5><a href="shop.html">Hats</a></h5>
-                        </div>
+                        @foreach ($pcategories as $pcategory)
+                            <div class="card-1">
+                                <figure class=" img-hover-scale overflow-hidden">
+                                    <a href="{{ route('product.category', $pcategory->slug) }}"><img src="{{ asset('assets/imgs/categories') }}/{{ $pcategory->image }}"></a>
+                                </figure>
+                                <h5><a href="shop.html">{{ $pcategory->name }}</a></h5>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
