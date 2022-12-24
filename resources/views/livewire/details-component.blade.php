@@ -3,9 +3,9 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Fashion
-                    <span></span> Abstract Print Patchwork Dress
+                    <a href="index.html" rel="nofollow">Inicio</a>
+                    <span></span> {{ $product->category->name }}
+                    <span></span> {{ $product->name }}
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
                                     <!-- End Gallery -->
                                     <div class="social-icons single-share">
                                         <ul class="text-grey-5 d-inline-block">
-                                            <li><strong class="mr-10">Share this:</strong></li>
+                                            <li><strong class="mr-10">Compartir esto:</strong></li>
                                             <li class="social-facebook"><a href="#"><img
                                                         src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
                                                         alt=""></a></li>
@@ -91,14 +91,14 @@
                                         <h2 class="title-detail">{{ $product->name }}</h2>
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
-                                                <span> Brands: <a href="shop.html">Bootstrap</a></span>
+                                                <span> Marca: <a href="shop.html">Bootstrap</a></span>
                                             </div>
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
                                                     <div class="product-rating" style="width:90%">
                                                     </div>
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (25 reviews)</span>
+                                                <span class="font-small ml-5 text-muted"> (25 reseñas)</span>
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
@@ -143,7 +143,7 @@
                                             </ul>
                                         </div>
                                         <div class="attr-detail attr-size">
-                                            <strong class="mr-10">Size</strong>
+                                            <strong class="mr-10">Talla</strong>
                                             <ul class="list-filter size-filter font-small">
                                                 <li><a href="#">S</a></li>
                                                 <li class="active"><a href="#">M</a></li>
@@ -162,8 +162,7 @@
                                                         class="fi-rs-angle-small-up"></i></a>
                                             </div>
                                             <div class="product-extra-link2">
-                                                <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Add to
-                                                    cart</button>
+                                                <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir al carrito</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                     href="wishlist.php"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up"
@@ -172,11 +171,10 @@
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
                                             <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                            <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a
+                                            <li class="mb-5">Etiquetas: <a href="#" rel="tag">Cloth</a>, <a
                                                     href="#" rel="tag">Women</a>, <a href="#"
                                                     rel="tag">Dress</a> </li>
-                                            <li>Availability:<span class="in-stock text-success ml-5">8 Items In
-                                                    Stock</span></li>
+                                            <li>Disponibilidad:<span class="in-stock text-success ml-5">8 unidades disponibles</span></li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -186,15 +184,15 @@
                                 <ul class="nav nav-tabs text-uppercase">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
-                                            href="#Description">Description</a>
+                                            href="#Description">Descripción</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab"
-                                            href="#Additional-info">Additional info</a>
+                                            href="#Additional-info">Detalles adicionales</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab"
-                                            href="#Reviews">Reviews (3)</a>
+                                            href="#Reviews">Reseñas (3)</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
@@ -339,7 +337,7 @@
                                         <div class="comments-area">
                                             <div class="row">
                                                 <div class="col-lg-8">
-                                                    <h4 class="mb-30">Customer questions & answers</h4>
+                                                    <h4 class="mb-30">Preguntas y Respuestas de los clientes</h4>
                                                     <div class="comment-list">
                                                         <div class="single-comment justify-content-between d-flex">
                                                             <div class="user justify-content-between d-flex">
@@ -347,21 +345,20 @@
                                                                     <img src="{{ asset('assets/imgs/page/avatar-6.jpg') }}"
                                                                         alt="">
                                                                     <h6><a href="#">Jacky Chan</a></h6>
-                                                                    <p class="font-xxs">Since 2012</p>
+                                                                    <p class="font-xxs">Desde 2012</p>
                                                                 </div>
                                                                 <div class="desc">
                                                                     <div class="product-rate d-inline-block">
                                                                         <div class="product-rating" style="width:90%">
                                                                         </div>
                                                                     </div>
-                                                                    <p>Thank you very fast shipping from Poland only
-                                                                        3days.</p>
+                                                                    <p>gracias por el envío muy rápido desde Polonia solo en 3 días.</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
-                                                                            <p class="font-xs mr-30">December 4, 2020
+                                                                            <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Reply <i
+                                                                                class="text-brand btn-reply">Responder <i
                                                                                     class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
@@ -375,20 +372,20 @@
                                                                     <img src="{{ asset('assets/imgs/page/avatar-7.jpg') }}"
                                                                         alt="">
                                                                     <h6><a href="#">Ana Rosie</a></h6>
-                                                                    <p class="font-xxs">Since 2008</p>
+                                                                    <p class="font-xxs">Desde 2008</p>
                                                                 </div>
                                                                 <div class="desc">
                                                                     <div class="product-rate d-inline-block">
                                                                         <div class="product-rating" style="width:90%">
                                                                         </div>
                                                                     </div>
-                                                                    <p>Great low price and works well.</p>
+                                                                    <p>Gran precio bajo y funciona bien.</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
-                                                                            <p class="font-xs mr-30">December 4, 2020
+                                                                            <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Reply <i
+                                                                                class="text-brand btn-reply">Responder <i
                                                                                     class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
@@ -402,21 +399,20 @@
                                                                     <img src="{{ asset('assets/imgs/page/avatar-8.jpg') }}"
                                                                         alt="">
                                                                     <h6><a href="#">Steven Keny</a></h6>
-                                                                    <p class="font-xxs">Since 2010</p>
+                                                                    <p class="font-xxs">Desde 2010</p>
                                                                 </div>
                                                                 <div class="desc">
                                                                     <div class="product-rate d-inline-block">
                                                                         <div class="product-rating" style="width:90%">
                                                                         </div>
                                                                     </div>
-                                                                    <p>Authentic and Beautiful, Love these way more than
-                                                                        ever expected They are Great earphones</p>
+                                                                    <p>auténticos y hermosos, amo estos mucho más de lo que alguna vez esperé. Son unos excelentes auriculares.</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
-                                                                            <p class="font-xs mr-30">December 4, 2020
+                                                                            <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Reply <i
+                                                                                class="text-brand btn-reply">Responder <i
                                                                                     class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
@@ -427,52 +423,51 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <h4 class="mb-30">Customer reviews</h4>
+                                                    <h4 class="mb-30">Reseñas de los clientes</h4>
                                                     <div class="d-flex mb-30">
                                                         <div class="product-rate d-inline-block mr-15">
                                                             <div class="product-rating" style="width:90%">
                                                             </div>
                                                         </div>
-                                                        <h6>4.8 out of 5</h6>
+                                                        <h6>4.8 de 5</h6>
                                                     </div>
                                                     <div class="progress">
-                                                        <span>5 star</span>
+                                                        <span>5 estrellas</span>
                                                         <div class="progress-bar" role="progressbar"
                                                             style="width: 50%;" aria-valuenow="50" aria-valuemin="0"
                                                             aria-valuemax="100">50%</div>
                                                     </div>
                                                     <div class="progress">
-                                                        <span>4 star</span>
+                                                        <span>4 estrellas</span>
                                                         <div class="progress-bar" role="progressbar"
                                                             style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
                                                             aria-valuemax="100">25%</div>
                                                     </div>
                                                     <div class="progress">
-                                                        <span>3 star</span>
+                                                        <span>3 estrellas</span>
                                                         <div class="progress-bar" role="progressbar"
                                                             style="width: 45%;" aria-valuenow="45" aria-valuemin="0"
                                                             aria-valuemax="100">45%</div>
                                                     </div>
                                                     <div class="progress">
-                                                        <span>2 star</span>
+                                                        <span>2 estrellas</span>
                                                         <div class="progress-bar" role="progressbar"
                                                             style="width: 65%;" aria-valuenow="65" aria-valuemin="0"
                                                             aria-valuemax="100">65%</div>
                                                     </div>
                                                     <div class="progress mb-30">
-                                                        <span>1 star</span>
+                                                        <span>1 estrella</span>
                                                         <div class="progress-bar" role="progressbar"
                                                             style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
                                                             aria-valuemax="100">85%</div>
                                                     </div>
-                                                    <a href="#" class="font-xs text-muted">How are ratings
-                                                        calculated?</a>
+                                                    <a href="#" class="font-xs text-muted">¿Cómo se calculan las puntuaciones?</a>
                                                 </div>
                                             </div>
                                         </div>
                                         <!--comment form-->
                                         <div class="comment-form">
-                                            <h4 class="mb-15">Add a review</h4>
+                                            <h4 class="mb-15">Agrega una reseña</h4>
                                             <div class="product-rate d-inline-block mb-30">
                                             </div>
                                             <div class="row">
@@ -483,35 +478,34 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                                                        placeholder="Write Comment"></textarea>
+                                                                        placeholder="Escribe un comentario"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <input class="form-control" name="name"
                                                                         id="name" type="text"
-                                                                        placeholder="Name">
+                                                                        placeholder="Nombre">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <input class="form-control" name="email"
                                                                         id="email" type="email"
-                                                                        placeholder="Email">
+                                                                        placeholder="Correo">
                                                                 </div>
                                                             </div>
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <input class="form-control" name="website"
                                                                         id="website" type="text"
-                                                                        placeholder="Website">
+                                                                        placeholder="sitio web">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <button type="submit"
-                                                                class="button button-contactForm">Submit
-                                                                Review</button>
+                                                                class="button button-contactForm">Enviar Reseña</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -522,7 +516,7 @@
                             </div>
                             <div class="row mt-60">
                                 <div class="col-12">
-                                    <h3 class="section-title style-1 mb-30">Related products</h3>
+                                    <h3 class="section-title style-1 mb-30">Productos relacionados</h3>
                                 </div>
                                 <div class="col-12">
                                     <div class="row related-products">
@@ -534,7 +528,7 @@
                                                             <a href="{{ route('product.details', $rproduct->slug) }}"
                                                                 tabindex="0">
                                                                 <img class="default-img"
-                                                                    src="{{ asset('assets/imgs/shop/product-') }}{{ $rproduct->id }}-1.jpg"
+                                                                    src="{{ asset('assets/imgs/products') }}/{{ $rproduct->image }}"
                                                                     alt="{{ $rproduct->name }}">
                                                                 <img class="hover-img"
                                                                     src="{{ asset('assets/imgs/shop/product-2-2.jpg') }}"
@@ -556,7 +550,7 @@
                                                         </div>
                                                         <div
                                                             class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="hot">Hot</span>
+                                                            <span class="hot">En demanda</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap">
@@ -581,7 +575,7 @@
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
                         <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
                             <ul class="categories">
                                 <li><a href="shop.html">Shoes & Bags</a></li>
                                 <li><a href="shop.html">Blouses & Shirts</a></li>

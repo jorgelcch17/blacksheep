@@ -11,8 +11,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>
-                    <span></span> All Products
+                    <a href="/" rel="nofollow">Inicio</a>
+                    <span></span> Todos los productos
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        All Products
+                                        Todos los productos
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.product.add') }}" class="btn btn-success float-end">Add new product</a>
+                                        <a href="{{ route('admin.product.add') }}" class="btn btn-success float-end">Nuevo Producto</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,13 +39,13 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
-                                            <th>Name</th>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
                                             <th>Stock</th>
-                                            <th>Price</th>
-                                            <th>Category</th>
-                                            <th>Date</th>
-                                            <th>Action</th>
+                                            <th>Precio</th>
+                                            <th>Categoría</th>
+                                            <th>Creado el</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -89,7 +89,7 @@
                     <div class="col-md-12 text-center">
                         <h4 class="pb-3">Quieres borrar este registro?</h4>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteProduct()">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteProduct()">Sí, Eliminar</button>
                     </div>
                 </div>
             </div>

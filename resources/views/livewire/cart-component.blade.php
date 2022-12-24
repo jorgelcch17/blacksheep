@@ -3,9 +3,9 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Shop
-                    <span></span> Your Cart
+                    <a href="index.html" rel="nofollow">Inicio</a>
+                    <span></span> Tienda
+                    <span></span> Carrito
                 </div>
             </div>
         </div>
@@ -23,12 +23,12 @@
                                 <table class="table shopping-summery text-center clean">
                                     <thead>
                                         <tr class="main-heading">
-                                            <th scope="col">Image</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Price</th>
-                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Imagen</th>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Precio</th>
+                                            <th scope="col">Cantidad</th>
                                             <th scope="col">Subtotal</th>
-                                            <th scope="col">Remove</th>
+                                            <th scope="col">Remover</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,16 +81,16 @@
                             @endif
                         </div>
                         <div class="cart-action text-end">
-                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Update Cart</a>
-                            <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continue Shopping</a>
+                            <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Actualizar Carrito</a>
+                            <a class="btn "><i class="fi-rs-shopping-bag mr-10"></i>Continuar Comprando</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
                             <div class="col-lg-6 col-md-12">
                                 <div class="heading_s1 mb-3">
-                                    <h4>Calculate Shipping</h4>
+                                    <h4>Calcular envío</h4>
                                 </div>
-                                <p class="mt-15 mb-30">Flat rate: <span class="font-xl text-brand fw-900">5%</span>
+                                <p class="mt-15 mb-30">Tarifa fija: <span class="font-xl text-brand fw-900">5%</span>
                                 </p>
                                 <form class="field_form shipping_calculator">
                                     <div class="form-row">
@@ -348,24 +348,24 @@
                                     </div>
                                     <div class="form-row row">
                                         <div class="form-group col-lg-6">
-                                            <input required="required" placeholder="State / Country" name="name"
+                                            <input required="required" placeholder="Ciudad / Pais" name="name"
                                                 type="text">
                                         </div>
                                         <div class="form-group col-lg-6">
-                                            <input required="required" placeholder="PostCode / ZIP" name="name"
+                                            <input required="required" placeholder="Código Postal / ZIP" name="name"
                                                 type="text">
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-lg-12">
                                             <button class="btn  btn-sm"><i
-                                                    class="fi-rs-shuffle mr-10"></i>Update</button>
+                                                    class="fi-rs-shuffle mr-10"></i>Actualizar</button>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="mb-30 mt-50">
                                     <div class="heading_s1 mb-3">
-                                        <h4>Apply Coupon</h4>
+                                        <h4>Aplicar Cupón</h4>
                                     </div>
                                     <div class="total-amount">
                                         <div class="left">
@@ -374,11 +374,11 @@
                                                     <div class="form-row row justify-content-center">
                                                         <div class="form-group col-lg-6">
                                                             <input class="font-medium" name="Coupon"
-                                                                placeholder="Enter Your Coupon">
+                                                                placeholder="Ingresa tu cupón">
                                                         </div>
                                                         <div class="form-group col-lg-6">
                                                             <button class="btn  btn-sm"><i
-                                                                    class="fi-rs-label mr-10"></i>Apply</button>
+                                                                    class="fi-rs-label mr-10"></i>Aplicar</button>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -390,13 +390,13 @@
                             <div class="col-lg-6 col-md-12">
                                 <div class="border p-md-4 p-30 border-radius cart-totals">
                                     <div class="heading_s1 mb-3">
-                                        <h4>Cart Totals</h4>
+                                        <h4>Total del carrito</h4>
                                     </div>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <td class="cart_total_label">Cart Subtotal</td>
+                                                    <td class="cart_total_label">Subtotal</td>
                                                     <td class="cart_total_amount"><span
                                                             class="font-lg fw-900 text-brand">Bs
                                                             {{ Cart::subtotal() }}</span></td>
@@ -408,9 +408,8 @@
                                                             {{ Cart::tax() }}</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="cart_total_label">Shipping</td>
-                                                    <td class="cart_total_amount"> <i class="ti-gift mr-5"></i> Free
-                                                        Shipping</td>
+                                                    <td class="cart_total_label">Envío</td>
+                                                    <td class="cart_total_amount"> <i class="ti-gift mr-5"></i>Gratis</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="cart_total_label">Total</td>
@@ -423,7 +422,7 @@
                                         </table>
                                     </div>
                                     <a href="checkout.html" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
-                                        Proceed To CheckOut</a>
+                                        Ir a pagar</a>
                                 </div>
                             </div>
                         </div>

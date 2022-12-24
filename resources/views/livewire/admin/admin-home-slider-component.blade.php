@@ -39,14 +39,14 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
-                                            <th>TopTitle</th>
-                                            <th>Title</th>
-                                            <th>SubTitle</th>
-                                            <th>Offer</th>
-                                            <th>link</th> 
-                                            <th>Status</th> 
-                                            <th>Action</th> 
+                                            <th>Imagen</th>
+                                            <th>Título Superior</th>
+                                            <th>Título</th>
+                                            <th>Subtítulo</th>
+                                            <th>Oferta</th>
+                                            <th>Enlace</th> 
+                                            <th>Estado</th> 
+                                            <th>Acción</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -62,10 +62,10 @@
                                                 <td>{{ $slide->sub_title }}</td>
                                                 <td>{{ $slide->offer }}</td>
                                                 <td>{{ $slide->link }}</td>
-                                                <td>{{ $slide->status == 1? 'Active':'Inactive'}}</td>
+                                                <td>{{ $slide->status == 1? 'Activo':'Inactivo'}}</td>
                                                 <td>
                                                     <a href="{{ route('admin.home.slide.edit', ['slide_id'=>$slide->id]) }}" class="text-info">Editar</a>
-                                                    <a href="#" class="text-danger" style="margin-left:20px;" onclick="deleteConfirmation({{$slide->id}})">Delete</a>
+                                                    <a href="#" class="text-danger" style="margin-left:20px;" onclick="deleteConfirmation({{$slide->id}})">Eliminar</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -88,7 +88,7 @@
                     <div class="col-md-12 text-center">
                         <h4 class="pb-3">Quieres borrar este registro?</h4>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteSlide()">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteSlide()">Sí, Eliminar</button>
                     </div>
                 </div>
             </div>

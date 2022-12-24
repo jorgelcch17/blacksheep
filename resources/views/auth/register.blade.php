@@ -68,8 +68,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>                    
-                    <span></span> Register
+                    <a href="/" rel="nofollow">Inicio</a>                    
+                    <span></span> Registrarse
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                             <div class="login_wrap widget-taber-content p-30 background-white border-radius-5">
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
-                                            <h3 class="mb-30">Create an Account</h3>
+                                            <h3 class="mb-30">Crear una cuenta</h3>
                                         </div>                                        
                                         <form method="post" action="{{ route('register') }}">
                                             @csrf
@@ -102,16 +102,16 @@
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox12" value="">
-                                                        <label class="form-check-label" for="exampleCheckbox12"><span>I agree to terms &amp; Policy.</span></label>
+                                                        <label class="form-check-label" for="exampleCheckbox12"><span>Acepto los términos &amp; Políticas.</span></label>
                                                     </div>
                                                 </div>
-                                                <a href="privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Lean more</a>
+                                                <a href="privacy-policy.html"><i class="fi-rs-book-alt mr-5 text-muted"></i>Conocer más</a>
                                             </div>
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Submit &amp; Register</button>
+                                                <button type="submit" class="btn btn-fill-out btn-block hover-up" name="login">Enviar &amp; Registrarse</button>
                                             </div>
                                         </form>                                        
-                                        <div class="text-muted text-center">Already have an account? <a href="{{ route('login') }}">Sign in now</a></div>
+                                        <div class="text-muted text-center">¿Ya tienes una cuenta? <a href="{{ route('login') }}">Inicia sesión ahora</a></div>
                                     </div>
                                 </div>
                             </div>                            

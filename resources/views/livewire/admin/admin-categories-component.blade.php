@@ -11,8 +11,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>
-                    <span></span> All Categories
+                    <a href="/" rel="nofollow">Inicio</a>
+                    <span></span> Todas las categorías
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        All Categories
+                                        Todas las categorías
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.category.add') }}" class="btn btn-success float-end">Agregar Nuevo</a>
+                                        <a href="{{ route('admin.category.add') }}" class="btn btn-success float-end">Nueva Categoría</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,11 +39,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Image</th>
-                                            <th>Name</th>
+                                            <th>Imagen</th>
+                                            <th>Nombre</th>
                                             <th>Slug</th>
                                             <th>Popular</th>
-                                            <th>Action</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,10 +58,10 @@
                                                 </td>
                                                 <td>{{ $category->name }}</td>
                                                 <td>{{ $category->slug }}</td>
-                                                <td>{{ $category->is_popular == 1 ? 'Yes':'No'}}</td>
+                                                <td>{{ $category->is_popular == 1 ? 'Si':'No'}}</td>
                                                 <td>
                                                     <a href="{{ route('admin.category.edit', ['category_id'=>$category->id]) }}" class="text-info">Editar</a>
-                                                    <a href="#" class="text-danger" style="margin-left:20px;" onclick="deleteConfirmation({{$category->id}})">Delete</a>
+                                                    <a href="#" class="text-danger" style="margin-left:20px;" onclick="deleteConfirmation({{$category->id}})">Eliminar</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -85,7 +85,7 @@
                     <div class="col-md-12 text-center">
                         <h4 class="pb-3">Quieres borrar este registro?</h4>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteCategory()">Delete</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteCategory()">Sí, Eliminar</button>
                     </div>
                 </div>
             </div>

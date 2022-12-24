@@ -12,8 +12,7 @@
                                         <h2 class="animated fw-900">{{ $slide->title }}</h2>
                                         <h1 class="animated fw-900 text-brand">{{ $slide->sub_title }}</h1>
                                         <p class="animated">{{ $slide->offer }}</p>
-                                        <a class="animated btn btn-brush btn-brush-3" href="{{ $slide->link }}"> Shop
-                                            Now
+                                        <a class="animated btn btn-brush btn-brush-3" href="{{ $slide->link }}"> Compra ahora
                                         </a>
                                     </div>
                                 </div>
@@ -37,37 +36,37 @@
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-1.png" alt="">
-                            <h4 class="bg-1">Free Shipping</h4>
+                            <h4 class="bg-1">Envío gratis</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-2.png" alt="">
-                            <h4 class="bg-3">Online Order</h4>
+                            <h4 class="bg-3">Compra en línea</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-3.png" alt="">
-                            <h4 class="bg-2">Save Money</h4>
+                            <h4 class="bg-2">Ahorra dinero</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-4.png" alt="">
-                            <h4 class="bg-4">Promotions</h4>
+                            <h4 class="bg-4">Promociones</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-5.png" alt="">
-                            <h4 class="bg-5">Happy Sell</h4>
+                            <h4 class="bg-5">Venta Feliz</h4>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                         <div class="banner-features wow fadeIn animated hover-up">
                             <img src="assets/imgs/theme/icons/feature-6.png" alt="">
-                            <h4 class="bg-6">24/7 Support</h4>
+                            <h4 class="bg-6">Soporte 24/7</h4>
                         </div>
                     </div>
                 </div>
@@ -81,20 +80,19 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab"
                                 data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one"
-                                aria-selected="true">Featured</button>
+                                aria-selected="true">Destacados</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two"
                                 type="button" role="tab" aria-controls="tab-two"
-                                aria-selected="false">Popular</button>
+                                aria-selected="false">Populares</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three"
-                                type="button" role="tab" aria-controls="tab-three" aria-selected="false">New
-                                added</button>
+                                type="button" role="tab" aria-controls="tab-three" aria-selected="false">Recientes</button>
                         </li>
                     </ul>
-                    <a href="#" class="view-more d-none d-md-flex">View More<i
+                    <a href="#" class="view-more d-none d-md-flex">Ver más<i
                             class="fi-rs-angle-double-small-right"></i></a>
                 </div>
                 <!--End nav-tabs-->
@@ -124,7 +122,7 @@
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a> --}}
                                             </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
+                                                <span class="hot">En demanda</span>
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">
@@ -141,7 +139,7 @@
                                             </div>
                                             <div class="product-price">
                                                 <span>Bs {{ $fproduct->regular_price }}</span>
-                                                <span class="old-price">$245.8</span>
+                                                <span class="old-price">Bs 245.8</span>
                                             </div>
                                             <div class="product-action-1 show">
                                                 <a aria-label="Add To Cart" class="action-btn hover-up"
@@ -180,7 +178,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                                            <span class="hot">En demanda</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -225,7 +223,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
+                                            <span class="new">Nuevo</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -270,7 +268,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="best">Best Sell</span>
+                                            <span class="best">Más vendido</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -315,7 +313,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="sale">Sale</span>
+                                            <span class="sale">Oferta</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -450,7 +448,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
+                                            <span class="new">Nuevo</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -542,7 +540,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                                            <span class="hot">En demanda</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -587,7 +585,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
+                                            <span class="new">Nuevo</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -632,7 +630,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="best">Best Sell</span>
+                                            <span class="best">Más vendido</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -677,7 +675,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="sale">Sale</span>
+                                            <span class="sale">Oferta</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -812,7 +810,7 @@
                                                     class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
+                                            <span class="new">Nuevo</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -899,7 +897,7 @@
         </section>
         <section class="popular-categories section-padding mt-15 mb-25">
             <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20"><span>Popular</span> Categories</h3>
+                <h3 class="section-title mb-20"><span>Categorías</span> Populares</h3>
                 <div class="carausel-6-columns-cover position-relative">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-arrows">
                     </div>
@@ -954,7 +952,7 @@
         </section>
         <section class="section-padding">
             <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20"><span>New</span> Arrivals</h3>
+                <h3 class="section-title mb-20"><span>Nuevas</span> Llegadas</h3>
                 <div class="carausel-6-columns-cover position-relative">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow"
                         id="carausel-6-columns-2-arrows"></div>
@@ -981,7 +979,7 @@
                                             href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a> --}}
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="new">New</span>
+                                        <span class="new">Nuevo</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
@@ -1004,7 +1002,7 @@
 
         <section class="section-padding">
             <div class="container">
-                <h3 class="section-title mb-20 wow fadeIn animated"><span>Featured</span> Brands</h3>
+                <h3 class="section-title mb-20 wow fadeIn animated"><span>Marcas</span> Destacadas</h3>
                 <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow"
                         id="carausel-6-columns-3-arrows"></div>

@@ -20,8 +20,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Shop
+                    <a href="index.html" rel="nofollow">Inicio</a>
+                    <span></span> Tienda
                 </div>
             </div>
         </div>
@@ -119,12 +119,12 @@
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                             </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
-                                                <span class="hot">Hot</span>
+                                                <span class="hot">En demanda</span>
                                             </div>
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop.html">Music</a>
+                                                <a href="shop.html">{{ $product->category->name }}</a>
                                             </div>
                                             <h2><a href="product-details.html">{{ $product->name }}</a></h2>
                                             <div class="rating-result" title="90%">
@@ -138,13 +138,13 @@
                                             </div>
                                             <div class="product-action-1 show">
                                                 @if ($witems->contains($product->id))
-                                                    <a aria-label="Remove from Wishlist" class="action-btn hover-up wishlisted"
+                                                    <a aria-label="Remover de mi lista de deseos" class="action-btn hover-up wishlisted"
                                                         href="wishlist.php" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
                                                 @else
-                                                    <a aria-label="Add to Wishlist" class="action-btn hover-up"
+                                                    <a aria-label="Agregar a mi lista de deseos" class="action-btn hover-up"
                                                         href="#" wire:click.prevent="addToWishlist({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fi-rs-heart"></i></a>
                                                 @endif
-                                                <a aria-label="Add To Cart" class="action-btn hover-up"
+                                                <a aria-label="Agregar al carrito" class="action-btn hover-up"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"
                                                     href="shop-cart.php"><i class="fi-rs-shopping-bag-add"></i></a>
                                             </div>
@@ -175,7 +175,7 @@
                             <div class="col-lg-12 col-mg-6"></div>
                         </div>
                         <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorias</h5>
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
                             <ul class="categories">
                                 @foreach ($categories as $category)
                                     <li><a
@@ -207,45 +207,45 @@
                                     <div class="custome-checkbox">
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red
+                                        <label class="form-check-label" for="exampleCheckbox1"><span>Rojo
                                                 (56)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox2" value="">
-                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green
+                                        <label class="form-check-label" for="exampleCheckbox2"><span>Verde
                                                 (78)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox3" value="">
-                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue
+                                        <label class="form-check-label" for="exampleCheckbox3"><span>Azul
                                                 (54)</span></label>
                                     </div>
-                                    <label class="fw-900 mt-15">Item Condition</label>
+                                    <label class="fw-900 mt-15">Condicion del producto</label>
                                     <div class="custome-checkbox">
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>New
+                                        <label class="form-check-label" for="exampleCheckbox11"><span>Nuevo
                                                 (1506)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
+                                        <label class="form-check-label" for="exampleCheckbox21"><span>Reacondicionado
                                                 (27)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used
+                                        <label class="form-check-label" for="exampleCheckbox31"><span>Usado
                                                 (45)</span></label>
                                     </div>
                                 </div>
                             </div>
                             <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                                Fillter</a>
+                                Filtrar</a>
                         </div>
                         <!-- Product sidebar Widget -->
                         <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">New products</h5>
+                                <h5 class="widget-title mb-10">Nuevos productos</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
                             <div class="single-post clearfix">
@@ -254,7 +254,7 @@
                                 </div>
                                 <div class="content pt-10">
                                     <h5><a href="product-details.html">Chen Cardigan</a></h5>
-                                    <p class="price mb-0 mt-5">$99.50</p>
+                                    <p class="price mb-0 mt-5">Bs 99.50</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:90%"></div>
                                     </div>
@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="content pt-10">
                                     <h6><a href="product-details.html">Chen Sweater</a></h6>
-                                    <p class="price mb-0 mt-5">$89.50</p>
+                                    <p class="price mb-0 mt-5">Bs 89.50</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:80%"></div>
                                     </div>
@@ -278,7 +278,7 @@
                                 </div>
                                 <div class="content pt-10">
                                     <h6><a href="product-details.html">Colorful Jacket</a></h6>
-                                    <p class="price mb-0 mt-5">$25</p>
+                                    <p class="price mb-0 mt-5">Bs 25</p>
                                     <div class="product-rate">
                                         <div class="product-rating" style="width:60%"></div>
                                     </div>

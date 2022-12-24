@@ -12,7 +12,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="/" rel="nofollow">Home</a>
+                    <a href="/" rel="nofollow">Inicio</a>
                     <span></span> Editar Categoria
                 </div>
             </div>
@@ -25,11 +25,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        Editar Categoria
+                                        Editar Categoría
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.categories') }}" class="btn btn-success float-end">All
-                                            Categories</a>
+                                        <a href="{{ route('admin.categories') }}" class="btn btn-success float-end">Todas las Categorias</a>
                                     </div>
                                 </div>
                             </div>
@@ -56,7 +55,7 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <label for="image" class="form-label">Image</label>
+                                        <label for="image" class="form-label">Imagen</label>
                                         <input type="file" class="form-control" wire:model="newimage">
                                         @error('newimage')
                                             <p class="text-danger">{{ $message }}</p>
@@ -71,7 +70,7 @@
                                         <label class="form-label" for="is_popular">Popular</label>
                                         <select name="is_popular" class="form-control" wire:model="is_popular">
                                             <option value="0">No</option>
-                                            <option value="1">Yes</option>
+                                            <option value="1">Si</option>
                                         </select>
                                         @error('is_popular')
                                             <p class="text-danger">{{ $message }}</p>

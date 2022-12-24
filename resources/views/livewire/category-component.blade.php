@@ -12,8 +12,9 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow">Home</a>
-                    <span></span> Shop
+                    <a href="index.html" rel="nofollow">Inicio</a>
+                    <span></span> Tienda
+                    <span></span> {{ $category_name }}
                 </div>
             </div>
         </div>
@@ -111,7 +112,7 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop.html">Music</a>
+                                                <a href="shop.html">{{ $product->category->name }}</a>
                                             </div>
                                             <h2><a href="product-details.html">{{ $product->name }}</a></h2>
                                             <div class="rating-result" title="90%">
@@ -167,7 +168,7 @@
                         <!-- Fillter By Price -->
                         <div class="sidebar-widget price_range range mb-30">
                             <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Fill by price</h5>
+                                <h5 class="widget-title mb-10">Filtrar por precio</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
                             <div class="price-filter">
@@ -175,7 +176,7 @@
                                     <div id="slider-range"></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price"
+                                            <span>Rango:</span><input type="text" id="amount" name="price"
                                                 placeholder="Add Your Price">
                                         </div>
                                     </div>
@@ -200,32 +201,32 @@
                                         <label class="form-check-label" for="exampleCheckbox3"><span>Blue
                                                 (54)</span></label>
                                     </div>
-                                    <label class="fw-900 mt-15">Item Condition</label>
+                                    <label class="fw-900 mt-15">Condición del producto</label>
                                     <div class="custome-checkbox">
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>New
+                                        <label class="form-check-label" for="exampleCheckbox11"><span>Nuevo
                                                 (1506)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
+                                        <label class="form-check-label" for="exampleCheckbox21"><span>Reacondicionado
                                                 (27)</span></label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" name="checkbox"
                                             id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used
+                                        <label class="form-check-label" for="exampleCheckbox31"><span>Usado
                                                 (45)</span></label>
                                     </div>
                                 </div>
                             </div>
                             <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                                Fillter</a>
+                                Filtrar</a>
                         </div>
                         <!-- Product sidebar Widget -->
                         <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">New products</h5>
+                                <h5 class="widget-title mb-10">Nuevos Productos</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
                             <div class="single-post clearfix">
