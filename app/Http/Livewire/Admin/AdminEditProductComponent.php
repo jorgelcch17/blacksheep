@@ -8,6 +8,7 @@ use App\Models\Category;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use App\Models\Product;
+use App\Models\Brand;
 
 class AdminEditProductComponent extends Component
 {
@@ -25,6 +26,7 @@ class AdminEditProductComponent extends Component
     public $quantity;
     public $image;
     public $category_id;
+    public $brand_id;
     public $newimage;
 
     public function mount($product_id)
@@ -43,6 +45,7 @@ class AdminEditProductComponent extends Component
         $this->quantity = $product->quantity;
         $this->image = $product->image;
         $this->category_id = $product->category_id;
+        $this->brand_id = $product->brand_id;
     }
 
     public function generateSlug()
@@ -58,13 +61,14 @@ class AdminEditProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
+            // 'sale_price' => 'required',
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
             'image' => 'required',
             'category_id' => 'required',
+            'brand_id' => 'required',
         ]);
         $product = Product::find($this->product_id);
         $product->name = $this->name;
@@ -72,7 +76,14 @@ class AdminEditProductComponent extends Component
         $product->short_description = $this->short_description;
         $product->description = $this->description;
         $product->regular_price = $this->regular_price;
-        $product->sale_price = $this->sale_price;
+        if($this->sale_price)
+        {
+            $product->sale_price = $this->sale_price;
+        }
+        else
+        {
+            $product->sale_price = null;
+        }
         $product->SKU = $this->sku;
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
@@ -85,6 +96,7 @@ class AdminEditProductComponent extends Component
             $product->image = $imageName;
         }
         $product->category_id = $this->category_id;
+        $product->brand_id = $this->brand_id;
         $product->save();
 
         session()->flash('message', 'Producto actualizado exitosamente');
@@ -93,6 +105,7 @@ class AdminEditProductComponent extends Component
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-edit-product-component', compact('categories'));
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        return view('livewire.admin.admin-edit-product-component', compact('categories', 'brands'));
     }
 }

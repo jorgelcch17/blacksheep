@@ -12,7 +12,8 @@
                                         <h2 class="animated fw-900">{{ $slide->title }}</h2>
                                         <h1 class="animated fw-900 text-brand">{{ $slide->sub_title }}</h1>
                                         <p class="animated">{{ $slide->offer }}</p>
-                                        <a class="animated btn btn-brush btn-brush-3" href="{{ $slide->link }}"> Compra ahora
+                                        <a class="animated btn btn-brush btn-brush-3" href="{{ $slide->link }}"> Compra
+                                            ahora
                                         </a>
                                     </div>
                                 </div>
@@ -89,7 +90,8 @@
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three"
-                                type="button" role="tab" aria-controls="tab-three" aria-selected="false">Recientes</button>
+                                type="button" role="tab" aria-controls="tab-three"
+                                aria-selected="false">Recientes</button>
                         </li>
                     </ul>
                     <a href="#" class="view-more d-none d-md-flex">Ver más<i
@@ -905,7 +907,8 @@
                         @foreach ($pcategories as $pcategory)
                             <div class="card-1">
                                 <figure class=" img-hover-scale overflow-hidden">
-                                    <a href="{{ route('product.category', $pcategory->slug) }}"><img src="{{ asset('assets/imgs/categories') }}/{{ $pcategory->image }}"></a>
+                                    <a href="{{ route('product.category', $pcategory->slug) }}"><img
+                                            src="{{ asset('assets/imgs/categories') }}/{{ $pcategory->image }}"></a>
                                 </figure>
                                 <h5><a href="shop.html">{{ $pcategory->name }}</a></h5>
                             </div>
@@ -1002,32 +1005,16 @@
 
         <section class="section-padding">
             <div class="container">
-                <h3 class="section-title mb-20 wow fadeIn animated"><span>Marcas</span> Destacadas</h3>
+                <h3 class="section-title mb-20 wow fadeIn animated"><span>Nuestras</span> Marcas</h3>
                 <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow"
                         id="carausel-6-columns-3-arrows"></div>
                     <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-1.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-2.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-3.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-4.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-5.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-6.png" alt="">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-3.png" alt="">
-                        </div>
+                        @foreach ($brands as $brand)
+                            <div class="brand-logo">
+                                <img class="img-grey-hover" src="{{ asset('assets/imgs/brands') }}/{{ $brand->logo }}" alt="logo {{ $brand->name }}">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

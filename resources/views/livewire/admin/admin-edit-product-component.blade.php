@@ -147,6 +147,18 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+                                    <div class="mb-3 mt-3">
+                                        <label for="brand_id" class="form-label">Marca</label>
+                                        <select class="form-control" name="brand_id" wire:model="brand_id">
+                                            <option value="">Seleccione Marca</option>
+                                            @foreach($brands as $brand)
+                                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('brand_id')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
 
                                     <button type="submit" class="btn btn-primary float-end">Actualizar</button>
                                 </form>

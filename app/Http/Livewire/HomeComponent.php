@@ -7,6 +7,7 @@ use App\Models\HomeSlider;
 use App\Models\Product;
 use Cart;
 use App\Models\Category;
+use App\Models\Brand;
 
 class HomeComponent extends Component
 {
@@ -23,6 +24,7 @@ class HomeComponent extends Component
         $lproducts = Product::orderBy('created_at', 'DESC')->get(); // Latest Products for Home Page
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8); // products featured
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(4); // cattegories featured
-         return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories'));
+        $brands = Brand::where('status', 1)->inRandomOrder()->get();
+         return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories', 'brands'));
     }
 }

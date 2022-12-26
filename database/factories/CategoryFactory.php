@@ -22,6 +22,8 @@ class CategoryFactory extends Factory
         return [
             'name' => $category_name,
             'slug' => $slug,
+            'image' => 'category_' . rand(1, 6) . '.png',
+            'is_popular' => 1,
         ];
     }
 }

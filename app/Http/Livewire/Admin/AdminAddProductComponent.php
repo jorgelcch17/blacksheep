@@ -8,6 +8,7 @@ use App\Models\Category;
 use Livewire\WithFileUploads;
 use App\Models\Product;
 use Carbon\Carbon;
+use App\Models\Brand;
 
 class AdminAddProductComponent extends Component
 {
@@ -24,6 +25,7 @@ class AdminAddProductComponent extends Component
     public $quantity;
     public $image;
     public $category_id;
+    public $brand_id;
 
     public function generateSlug()
     {
@@ -38,13 +40,14 @@ class AdminAddProductComponent extends Component
             'short_description' => 'required',
             'description' => 'required',
             'regular_price' => 'required',
-            'sale_price' => 'required',
+            // 'sale_price' => 'required',
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
             'quantity' => 'required',
             'image' => 'required',
             'category_id' => 'required',
+            'brand_id' => 'required',
         ]);
         $product = new Product();
         $product->name = $this->name;
@@ -61,14 +64,16 @@ class AdminAddProductComponent extends Component
         $this->image->storeAs('products', $imageName);
         $product->image = $imageName;
         $product->category_id = $this->category_id;
+        $product->brand_id = $this->brand_id;
         $product->save();
 
-        session()->flash('message', 'Producto craedo exitosamente');
+        session()->flash('message', 'Producto creado exitosamente');
     }
 
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-add-product-component', compact('categories'));
+        $brands = Brand::orderBy('name', 'ASC')->get();
+        return view('livewire.admin.admin-add-product-component', compact('categories', 'brands'));
     }
 }

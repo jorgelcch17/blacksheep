@@ -91,7 +91,7 @@
                                         <h2 class="title-detail">{{ $product->name }}</h2>
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
-                                                <span> Marca: <a href="shop.html">Bootstrap</a></span>
+                                                <span> Marca: <a href="shop.html">{{ $product->brand->name }}</a></span>
                                             </div>
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">

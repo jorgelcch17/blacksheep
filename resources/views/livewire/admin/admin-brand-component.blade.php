@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="/" rel="nofollow">Inicio</a>
-                    <span></span> Todos los productos
+                    <span></span> Todas las marcas
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
                             <div class="card-header">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        Todos los productos
+                                        Todas las marcas
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.product.add') }}" class="btn btn-success float-end">Nuevo Producto</a>
+                                        <a href="{{ route('admin.brand.add') }}" class="btn btn-success float-end">Nueva Marca</a>
                                     </div>
                                 </div>
                             </div>
@@ -39,41 +39,35 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Imagen</th>
+                                            <th>Logo</th>
                                             <th>Nombre</th>
-                                            <th>Stock</th>
-                                            <th>Precio</th>
-                                            <th>Categoría</th>
-                                            <th>Marca</th>
-                                            <th>Creado el</th>
+                                            <th>Slug</th>
+                                            <th>Estado</th>
                                             <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     @php
-                                        $i = ($products->currentPage()-1)*$products->perPage();
+                                        $i = ($brands->currentPage()-1)*$brands->perPage();
                                     @endphp
-                                        @foreach($products as $product)
+                                        @foreach($brands as $brand)
                                             <tr>
                                                 <td>{{ ++$i }}</td>
                                                 <td>
-                                                    <img src="{{ asset('assets/imgs/products') }}/{{ $product->image }}" alt="{{ $product->name }}" width="60">
+                                                    <img src="{{ asset('assets/imgs/brands') }}/{{ $brand->logo }}" alt="logo {{ $brand->name }}" width="60">
                                                 </td>
-                                                <td>{{ $product->name }}</td>
-                                                <td>{{ $product->stock_status }}</td>
-                                                <td>{{ $product->regular_price }}</td>
-                                                <td>{{ $product->category->name }}</td>
-                                                <td>{{ $product->brand->name }}</td>
-                                                <td>{{ $product->created_at }}</td>
+                                                <td>{{ $brand->name }}</td>
+                                                <td>{{ $brand->slug }}</td>
+                                                <td>{{ $brand->status == 1 ? 'Si':'No'}}</td>
                                                 <td>
-                                                    <a href="{{ route('admin.product.edit', $product->id) }}" class="text-info">Editar</a>
-                                                    <a href="#" onclick="deleteConfirmation({{ $product->id }})" class="text-danger">Eliminar</a>
+                                                    <a href="{{ route('admin.brand.edit', $brand->id) }}" class="text-info">Editar</a>
+                                                    <a href="#" class="text-danger" style="margin-left:20px;" onclick="deleteConfirmation({{$brand->id}})">Eliminar</a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $products->links() }}
+                                {{ $brands->links() }}
                             </div>
                         </div>
                     </div>
@@ -91,7 +85,7 @@
                     <div class="col-md-12 text-center">
                         <h4 class="pb-3">Quieres borrar este registro?</h4>
                         <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Cancelar</button>
-                        <button type="button" class="btn btn-danger" onclick="deleteProduct()">Sí, Eliminar</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteBrand()">Sí, Eliminar</button>
                     </div>
                 </div>
             </div>
@@ -102,12 +96,12 @@
 @push('scripts')
     <script>
         function deleteConfirmation(id){
-            @this.set('product_id', id);
+            @this.set('brand_id', id);
             $('#deleteConfirmation').modal('show');
         }
 
-        function deleteProduct(){
-            @this.call('deleteProduct');
+        function deleteBrand(){
+            @this.call('deleteBrand');
             $('#deleteConfirmation').modal('hide');
         }
     </script>
