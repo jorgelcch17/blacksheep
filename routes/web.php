@@ -12,6 +12,7 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\WishlistComponent;
+use App\Http\Livewire\ContactComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminCategoriesComponent;
@@ -26,6 +27,7 @@ use App\Http\Livewire\Admin\AdminEditHomeSlideComponent;
 use App\Http\Livewire\Admin\AdminBrandComponent;
 use App\Http\Livewire\Admin\AdminAddBrandComponent;
 use App\Http\Livewire\Admin\AdminEditBrandComponent;
+use App\Http\Livewire\Admin\AdminMessagesComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 
 /*
@@ -55,6 +57,8 @@ Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 
+Route::get('/contact', ContactComponent::class)->name('contact');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -82,6 +86,7 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/brands', AdminBrandComponent::class)->name('admin.brands');
     Route::get('/admin/brand/add', AdminAddBrandComponent::class)->name('admin.brand.add');
     Route::get('/admin/brand/edit/{brand_id}', AdminEditBrandComponent::class)->name('admin.brand.edit');
+    Route::get('/admin/messages', AdminMessagesComponent::class)->name('admin.messages');
 });
 
 

@@ -424,7 +424,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="contact.html">Contacto</a></li>
+                                    <li><a href="{{ route('contact') }}">Contacto</a></li>
                                     @auth
                                         <li><a href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
                                             @if (Auth::user()->utype === 'ADM')
@@ -437,6 +437,7 @@
                                                     <li><a href="#">Ordenes</a></li>
                                                     <li><a href="#">Clientes</a></li>
                                                     <li><a href="{{ route('admin.brands') }}">Marcas</a></li>
+                                                    <li><a href="{{ route('admin.messages') }}">Mensajes</a></li>
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">
