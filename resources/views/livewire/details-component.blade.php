@@ -1,4 +1,11 @@
 <div>
+    <style>
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
             <div class="container">
@@ -16,7 +23,7 @@
                         <div class="product-detail accordion-detail">
                             <div class="row mb-50">
                                 <div class="col-md-6 col-sm-12 col-xs-12">
-                                    <div class="detail-gallery">
+                                    <div class="detail-gallery" wire:ignore>
                                         <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                         <!-- MAIN SLIDES -->
                                         <div class="product-image-slider">
@@ -24,47 +31,35 @@
                                                 <img src="{{ asset('assets/imgs/products') }}/{{ $product->image }}"
                                                     alt="product image">
                                             </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-1.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-3.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-4.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-5.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-6.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
-                                            <figure class="border-radius-10">
-                                                <img src="{{ asset('assets/imgs/shop/product-16-7.jpg') }}"
-                                                    alt="product image">
-                                            </figure>
+                                            @php
+                                                $images = explode(',', $product->images);
+                                            @endphp
+                                            @foreach ($images as $image)
+                                                @if ($image)
+                                                    <figure class="border-radius-10">
+                                                        <img class="h-auto object-fit-fill"
+                                                            src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                            alt="product image" style="width: 100%;">
+                                                    </figure>
+                                                @endif
+                                            @endforeach
                                         </div>
                                         <!-- THUMBNAILS -->
                                         <div class="slider-nav-thumbnails pl-15 pr-15">
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-3.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-4.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-5.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-6.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-7.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-8.jpg') }}"
-                                                    alt="product image"></div>
-                                            <div><img src="{{ asset('assets/imgs/shop/thumbnail-9.jpg') }}"
-                                                    alt="product image"></div>
+                                            <figure class="border-radius-10">
+                                                <img src="{{ asset('assets/imgs/products') }}/{{ $product->image }}"
+                                                    alt="product image">
+                                            </figure>
+                                            @foreach ($images as $image)
+                                                {{-- <div><img src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                        alt="product image"></div> --}}
+                                                @if ($image)
+                                                    <figure class="border-radius-10">
+                                                        <img src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                            alt="product image">
+                                                    </figure>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     <!-- End Gallery -->
@@ -91,7 +86,8 @@
                                         <h2 class="title-detail">{{ $product->name }}</h2>
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
-                                                <span> Marca: <a href="shop.html">{{ $product->brand->name }}</a></span>
+                                                <span> Marca: <a
+                                                        href="shop.html">{{ $product->brand->name }}</a></span>
                                             </div>
                                             <div class="product-rate-cover text-end">
                                                 <div class="product-rate d-inline-block">
@@ -154,27 +150,42 @@
                                         </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
-                                            <div class="detail-qty border radius">
+                                            {{-- <div class="detail-qty border radius">
                                                 <a href="#" class="qty-down"><i
                                                         class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
+                                                <span class="qty-val" wire:model="qty">{{ $qty }}</span>
                                                 <a href="#" class="qty-up"><i
                                                         class="fi-rs-angle-small-up"></i></a>
+                                            </div> --}}
+                                            <div class="cart-product-quantity d-block mb-4">
+                                                <div class="d-flex align-items-center">
+                                                    <input type="button" value="-" class="rounded-circle p-0"
+                                                        style="width: 34px; height: 34px;" wire:click.prevent="decreaseQuantity">
+                                                    <input type="number" name="quantity" value="1"
+                                                        title="Qty" class="p-3 mx-2" size="4"
+                                                        style="width: 50px; text-align:center;" wire:model="qty">
+                                                    <input type="button" value="+" class="rounded-circle p-0"
+                                                        style="width: 34px; height: 34px;" wire:click.prevent="increaseQuantity">
+                                                </div>
                                             </div>
                                             <div class="product-extra-link2">
-                                                <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir al carrito</button>
+                                                <button type="button" class="button button-add-to-cart"
+                                                    wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir
+                                                    al carrito</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                    href="wishlist.php"><i class="fi-rs-heart"></i></a>
+                                                    href="#" wire:click.prevent="addToWishlist({{$product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up"
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                             </div>
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
-                                            <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-                                            <li class="mb-5">Etiquetas: <a href="#" rel="tag">Cloth</a>, <a
-                                                    href="#" rel="tag">Women</a>, <a href="#"
-                                                    rel="tag">Dress</a> </li>
-                                            <li>Disponibilidad:<span class="in-stock text-success ml-5">8 unidades disponibles</span></li>
+                                            <li class="mb-5">SKU: <a href="#">{{ $product->SKU }}</a></li>
+                                            <li class="mb-5">Etiquetas: <a href="#" rel="tag">Cloth</a>,
+                                                <a href="#" rel="tag">Women</a>, <a href="#"
+                                                    rel="tag">Dress</a>
+                                            </li>
+                                            <li>Disponibilidad:<span class="in-stock text-success ml-5">8 unidades
+                                                    disponibles</span></li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -352,14 +363,15 @@
                                                                         <div class="product-rating" style="width:90%">
                                                                         </div>
                                                                     </div>
-                                                                    <p>gracias por el envío muy rápido desde Polonia solo en 3 días.</p>
+                                                                    <p>gracias por el envío muy rápido desde Polonia
+                                                                        solo en 3 días.</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
                                                                             <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Responder <i
-                                                                                    class="fi-rs-arrow-right"></i> </a>
+                                                                                class="text-brand btn-reply">Responder
+                                                                                <i class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -385,8 +397,8 @@
                                                                             <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Responder <i
-                                                                                    class="fi-rs-arrow-right"></i> </a>
+                                                                                class="text-brand btn-reply">Responder
+                                                                                <i class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -406,14 +418,16 @@
                                                                         <div class="product-rating" style="width:90%">
                                                                         </div>
                                                                     </div>
-                                                                    <p>auténticos y hermosos, amo estos mucho más de lo que alguna vez esperé. Son unos excelentes auriculares.</p>
+                                                                    <p>auténticos y hermosos, amo estos mucho más de lo
+                                                                        que alguna vez esperé. Son unos excelentes
+                                                                        auriculares.</p>
                                                                     <div class="d-flex justify-content-between">
                                                                         <div class="d-flex align-items-center">
                                                                             <p class="font-xs mr-30">Diciembre 4, 2020
                                                                                 at 3:12 pm </p>
                                                                             <a href="#"
-                                                                                class="text-brand btn-reply">Responder <i
-                                                                                    class="fi-rs-arrow-right"></i> </a>
+                                                                                class="text-brand btn-reply">Responder
+                                                                                <i class="fi-rs-arrow-right"></i> </a>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -461,7 +475,8 @@
                                                             style="width: 85%;" aria-valuenow="85" aria-valuemin="0"
                                                             aria-valuemax="100">85%</div>
                                                     </div>
-                                                    <a href="#" class="font-xs text-muted">¿Cómo se calculan las puntuaciones?</a>
+                                                    <a href="#" class="font-xs text-muted">¿Cómo se calculan las
+                                                        puntuaciones?</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -505,7 +520,8 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <button type="submit"
-                                                                class="button button-contactForm">Enviar Reseña</button>
+                                                                class="button button-contactForm">Enviar
+                                                                Reseña</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -530,9 +546,19 @@
                                                                 <img class="default-img"
                                                                     src="{{ asset('assets/imgs/products') }}/{{ $rproduct->image }}"
                                                                     alt="{{ $rproduct->name }}">
-                                                                <img class="hover-img"
-                                                                    src="{{ asset('assets/imgs/shop/product-2-2.jpg') }}"
-                                                                    alt="">
+                                                                {{-- imprimiendo la segunda imagen que esta en el campo de images --}}
+                                                                @php
+                                                                    $simages = explode(',', $rproduct->images);
+                                                                    // convertir array a collection
+                                                                    $simages = collect($simages);
+                                                                @endphp
+                                                                @foreach ($simages as $image)
+                                                                    @if ($loop->index == 1)
+                                                                        <img class="hover-img"
+                                                                            src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                                            alt="">
+                                                                    @endif
+                                                                @endforeach
                                                             </a>
                                                         </div>
                                                         <div class="product-action-1">
@@ -586,77 +612,22 @@
                                 <li><a href="shop.html">Accessories</a></li>
                             </ul>
                         </div>
-                        <!-- Fillter By Price -->
-                        <div class="sidebar-widget price_range range mb-30">
-                            <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Fill by price</h5>
-                                <div class="bt-1 border-color-1"></div>
-                            </div>
-                            <div class="price-filter">
-                                <div class="price-filter-inner">
-                                    <div id="slider-range"></div>
-                                    <div class="price_slider_amount">
-                                        <div class="label-input">
-                                            <span>Range:</span><input type="text" id="amount" name="price"
-                                                placeholder="Add Your Price">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list-group">
-                                <div class="list-group-item mb-10 mt-10">
-                                    <label class="fw-900">Color</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red
-                                                (56)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox2" value="">
-                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green
-                                                (78)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox3" value="">
-                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue
-                                                (54)</span></label>
-                                    </div>
-                                    <label class="fw-900 mt-15">Item Condition</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>New
-                                                (1506)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Refurbished
-                                                (27)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Used
-                                                (45)</span></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                                Fillter</a>
-                        </div>
                         <!-- Product sidebar Widget -->
                         <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">New products</h5>
+                                <h5 class="widget-title mb-10">Nuevos Productos</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
                             @foreach ($nproducts as $nproduct)
                                 <div class="single-post clearfix">
                                     <div class="image">
-                                        <img src="{{ asset('assets/imgs/shop/thumbnail-')}}{{$nproduct->id}}.jpg" alt="{{ $nproduct->name }}">
+                                        <img src="{{ asset('assets/imgs/products') }}/{{ $nproduct->image }}"
+                                            alt="{{ $nproduct->name }}">
                                     </div>
                                     <div class="content pt-10">
-                                        <h5><a href="{{ route('product.details', $nproduct->slug) }}">{{ $nproduct->name }}</a></h5>
+                                        <h5><a
+                                                href="{{ route('product.details', $nproduct->slug) }}">{{ $nproduct->name }}</a>
+                                        </h5>
                                         <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
                                         <div class="product-rate">
                                             <div class="product-rating" style="width:90%"></div>

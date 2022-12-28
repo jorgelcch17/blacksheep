@@ -8,11 +8,12 @@
             display: block !important;
         }
 
-        .wishlisted{
+        .wishlisted {
             background-color: #F15412 !important;
             BORDER: 1px solid transparent !important;
         }
-        .wishlisted i{
+
+        .wishlisted i {
             color: #fff !important;
         }
     </style>
@@ -138,11 +139,15 @@
                                             </div>
                                             <div class="product-action-1 show">
                                                 @if ($witems->contains($product->id))
-                                                    <a aria-label="Remover de mi lista de deseos" class="action-btn hover-up wishlisted"
-                                                        href="wishlist.php" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Remover de mi lista de deseos"
+                                                        class="action-btn hover-up wishlisted" href="wishlist.php"
+                                                        wire:click.prevent="removeFromWishlist({{ $product->id }})"><i
+                                                            class="fi-rs-heart"></i></a>
                                                 @else
-                                                    <a aria-label="Agregar a mi lista de deseos" class="action-btn hover-up"
-                                                        href="#" wire:click.prevent="addToWishlist({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i class="fi-rs-heart"></i></a>
+                                                    <a aria-label="Agregar a mi lista de deseos"
+                                                        class="action-btn hover-up" href="#"
+                                                        wire:click.prevent="addToWishlist({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i
+                                                            class="fi-rs-heart"></i></a>
                                                 @endif
                                                 <a aria-label="Agregar al carrito" class="action-btn hover-up"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"
@@ -248,42 +253,20 @@
                                 <h5 class="widget-title mb-10">Nuevos productos</h5>
                                 <div class="bt-1 border-color-1"></div>
                             </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-3.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h5><a href="product-details.html">Chen Cardigan</a></h5>
-                                    <p class="price mb-0 mt-5">Bs 99.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:90%"></div>
+                            @foreach ($nproducts as $nproduct)
+                                <div class="single-post clearfix">
+                                    <div class="image">
+                                        <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}" alt="{{ $nproduct->name }}">
+                                    </div>
+                                    <div class="content pt-10">
+                                        <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
+                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
+                                        <div class="product-rate">
+                                            <div class="product-rating" style="width:90%"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-4.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Chen Sweater</a></h6>
-                                    <p class="price mb-0 mt-5">Bs 89.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:80%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-5.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Colorful Jacket</a></h6>
-                                    <p class="price mb-0 mt-5">Bs 25</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
                             <img src="{{ 'assets/imgs/banner/banner-11.jpg' }}" alt="">

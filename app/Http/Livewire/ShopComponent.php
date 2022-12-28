@@ -67,6 +67,7 @@ class ShopComponent extends Component
         }
 
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.shop-component', compact('products', 'categories'));
+        $nproducts = Product::latest()->take(4)->get();
+        return view('livewire.shop-component', compact('products', 'categories', 'nproducts'));
     }
 }

@@ -40,7 +40,7 @@
                                                         alt="#"></td>
                                                 <td class="product-des product-name">
                                                     <h5 class="product-name"><a
-                                                            href="product-details.html">{{ $item->model->name }}</a>
+                                                            href="{{ route('product.details', $item->model->slug) }}">{{ $item->model->name }}</a>
                                                     </h5>
                                                     {{-- <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy
                                                         magndapibus.

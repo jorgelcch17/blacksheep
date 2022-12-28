@@ -41,11 +41,21 @@
                                     <div class="product-img product-img-zoom">
                                         <a href="{{ route('product.details', $item->model->slug) }}">
                                             <img class="default-img"
-                                                src="{{ asset('assets/imgs/shop/product-') }}{{ $item->model->id }}-1.jpg"
+                                                src="{{ asset('assets/imgs/products') }}/{{ $item->model->image }}"
                                                 alt="{{ $item->model->name }}">
-                                            <img class="hover-img"
-                                                src="{{ asset('assets/imgs/shop/product-') }}{{ $item->model->id }}-2.jpg"
-                                                alt="{{ $item->model->name }}">
+                                            {{-- imprimiendo la segunda imagen que esta en el campo de images --}}
+                                            @php
+                                            $simages = explode(',', $item->model->images);
+                                            // convertir array a collection
+                                            $simages = collect($simages);
+                                        @endphp
+                                        @foreach ($simages as $image)
+                                            @if ($loop->index == 1)
+                                                <img class="hover-img"
+                                                    src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                    alt="">
+                                            @endif
+                                        @endforeach
                                         </a>
                                     </div>
                                     <div class="product-action-1">
@@ -63,7 +73,7 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="shop.html">Music</a>
+                                        <a href="{{ route('product.category', $item->model->category->slug) }}">{{ $item->model->category->name }}</a>
                                     </div>
                                     <h2><a href="product-details.html">{{ $item->model->name }}</a></h2>
                                     <div class="rating-result" title="90%">

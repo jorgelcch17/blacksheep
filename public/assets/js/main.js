@@ -381,7 +381,7 @@
     shopFiltericon.on('click', function() {
         $('.shop-filter-toogle').toggleClass('active');
     })
-    
+    523416
     /*-------------------------------------
         Product details big image slider
     ---------------------------------------*/

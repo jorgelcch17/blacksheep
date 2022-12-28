@@ -110,8 +110,19 @@
                                                     <img class="default-img"
                                                         src="{{ asset('assets/imgs/products') }}/{{ $fproduct->image }}"
                                                         alt="">
-                                                    {{-- <img class="hover-img" src="assets/imgs/shop/product-1-2.jpg"
-                                                        alt=""> --}}
+                                                    {{-- imprimiendo la segunda imagen que esta en el campo de images --}}
+                                                    @php
+                                                        $simages = explode(',', $fproduct->images);
+                                                        // convertir array a collection
+                                                        $simages = collect($simages);
+                                                    @endphp
+                                                    @foreach ($simages as $image)
+                                                        @if ($loop->index == 1)
+                                                            <img class="hover-img"
+                                                                src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                                alt="">
+                                                        @endif
+                                                    @endforeach
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
@@ -1012,7 +1023,9 @@
                     <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
                         @foreach ($brands as $brand)
                             <div class="brand-logo">
-                                <img class="img-grey-hover" src="{{ asset('assets/imgs/brands') }}/{{ $brand->logo }}" alt="logo {{ $brand->name }}">
+                                <img class="img-grey-hover"
+                                    src="{{ asset('assets/imgs/brands') }}/{{ $brand->logo }}"
+                                    alt="logo {{ $brand->name }}">
                             </div>
                         @endforeach
                     </div>

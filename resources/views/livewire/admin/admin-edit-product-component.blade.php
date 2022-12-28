@@ -28,7 +28,8 @@
                                         Editar Producto
                                     </div>
                                     <div class="col-md-6">
-                                        <a href="{{ route('admin.products') }}" class="btn btn-success float-end">Todas los productos</a>
+                                        <a href="{{ route('admin.products') }}" class="btn btn-success float-end">Todas
+                                            los productos</a>
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +137,25 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3 mt-3">
+                                        <label for="newimages" class="form-label">Galeria</label>
+                                        <input type="file" class="form-control" name="newimages"
+                                            wire:model="newimages" multiple>
+                                        @if ($newimages)
+                                            @foreach ($newimages as $newimage)
+                                                @if ($newimage)
+                                                    <img src="{{ $newimage->temporaryUrl() }}" width="120">
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            @foreach ($images as $image)
+                                                @if ($image)
+                                                    <img src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                        width="120">
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="mb-3 mt-3">
                                         <label for="category_id" class="form-label">Categoría</label>
                                         <select class="form-control" name="category_id" wire:model="category_id">
                                             <option value="">Seleccione Categoría</option>
@@ -151,7 +171,7 @@
                                         <label for="brand_id" class="form-label">Marca</label>
                                         <select class="form-control" name="brand_id" wire:model="brand_id">
                                             <option value="">Seleccione Marca</option>
-                                            @foreach($brands as $brand)
+                                            @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                                             @endforeach
                                         </select>
