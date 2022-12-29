@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Province extends Model
+class ShippingAddress extends Model
 {
     use HasFactory;
 
@@ -14,18 +14,13 @@ class Province extends Model
         return $this->belongsTo(Department::class);
     }
 
-    public function cities()
+    public function province()
     {
-        return $this->hasMany(City::class);
+        return $this->belongsTo(Province::class);
     }
 
-    public function shippingAddresses()
+    public function city()
     {
-        return $this->hasMany(ShippingAddress::class);
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
+        return $this->belongsTo(City::class);
     }
 }

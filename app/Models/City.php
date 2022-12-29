@@ -14,6 +14,11 @@ class City extends Model
         return $this->belongsTo(Province::class);
     }
 
+    public function shippingAddresses()
+    {
+        return $this->hasMany(ShippingAddress::class);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

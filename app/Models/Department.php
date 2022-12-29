@@ -14,6 +14,11 @@ class Department extends Model
         return $this->hasMany(Province::class);
     }
 
+    public function shippingAddresses()
+    {
+        return $this->hasMany(ShippingAddress::class);
+    }
+
     public function getRouteKeyName()
     {
     // return $this->getKeyName('slug');

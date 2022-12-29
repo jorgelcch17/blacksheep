@@ -443,7 +443,8 @@
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{ route('user.dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
+                                                    <li><a href="#">Cerrar sesión</a></li>
                                                 </ul>
                                             @endif
                                         </li>
