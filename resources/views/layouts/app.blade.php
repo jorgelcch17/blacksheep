@@ -439,6 +439,7 @@
                                                     <li><a href="#">Clientes</a></li>
                                                     <li><a href="{{ route('admin.brands') }}">Marcas</a></li>
                                                     <li><a href="{{ route('admin.messages') }}">Mensajes</a></li>
+                                                    <li><a href="{{ route('admin.locations') }}">Ubicaciones</a></li>
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">

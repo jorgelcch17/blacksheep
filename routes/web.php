@@ -28,6 +28,10 @@ use App\Http\Livewire\Admin\AdminBrandComponent;
 use App\Http\Livewire\Admin\AdminAddBrandComponent;
 use App\Http\Livewire\Admin\AdminEditBrandComponent;
 use App\Http\Livewire\Admin\AdminMessagesComponent;
+use App\Http\Livewire\Admin\AdminDepartmentComponent;
+use App\Http\Livewire\Admin\AdminProvinceComponent;
+use App\Http\Livewire\Admin\AdminCityComponent;
+
 use App\Http\Livewire\User\UserDashboardComponent;
 
 /*
@@ -87,6 +91,9 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/brand/add', AdminAddBrandComponent::class)->name('admin.brand.add');
     Route::get('/admin/brand/edit/{brand_id}', AdminEditBrandComponent::class)->name('admin.brand.edit');
     Route::get('/admin/messages', AdminMessagesComponent::class)->name('admin.messages');
+    Route::get('/admin/locations', AdminDepartmentComponent::class)->name('admin.locations');
+    Route::get('/admin/location/{department}', AdminProvinceComponent::class)->name('admin.provinces');
+    Route::get('/admin/location/{department}/{province}', AdminCityComponent::class)->name('admin.cities');
 });
 
 

@@ -45,5 +45,9 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234Hola'),
             'utype' => 'ADM',
         ]);
+
+        $this->call(DepartmentSeeder::class);
+        $this->call(ProvinceSeeder::class);
+        $this->call(CitySeeder::class);
     }
 }
