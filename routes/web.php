@@ -31,6 +31,8 @@ use App\Http\Livewire\Admin\AdminMessagesComponent;
 use App\Http\Livewire\Admin\AdminDepartmentComponent;
 use App\Http\Livewire\Admin\AdminProvinceComponent;
 use App\Http\Livewire\Admin\AdminCityComponent;
+use App\Http\Livewire\Admin\AdminCityShippingTypeComponent;
+use App\Http\Livewire\Admin\AdminShippingTypeComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -94,6 +96,8 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/locations', AdminDepartmentComponent::class)->name('admin.locations');
     Route::get('/admin/location/{department}', AdminProvinceComponent::class)->name('admin.provinces');
     Route::get('/admin/location/{department}/{province}', AdminCityComponent::class)->name('admin.cities');
+    Route::get('/admin/location/{department}/{province}/{city}/metodos-de-envio', AdminCityShippingTypeComponent::class)->name('admin.cities.deliveries');
+    Route::get('/admin/tipos-de-envio', AdminShippingTypeComponent::class)->name('admin.shipping.types');
 });
 
 

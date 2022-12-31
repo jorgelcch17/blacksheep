@@ -121,7 +121,7 @@
                                                     <td><a href="#" wire:click.prevent="changeStatusCity({{$city->id}})"><span class="badge bg-danger">Deshabilitado</span></a></td>
                                                 @endif
                                                 <td class="text-end">
-                                                    <a>
+                                                    <a href="{{ route('admin.cities.deliveries', [$department, $province, $city]) }}">
                                                         <svg width="24" height="24" viewBox="0 0 24 24"
                                                             fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path

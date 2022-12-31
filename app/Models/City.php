@@ -19,6 +19,12 @@ class City extends Model
         return $this->hasMany(ShippingAddress::class);
     }
 
+    // relacion muchos a muchos con la tabla shipping_types
+    public function shippingTypes()
+    {
+        return $this->belongsToMany(ShippingType::class)->withPivot('price', 'details');
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

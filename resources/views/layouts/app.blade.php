@@ -361,9 +361,9 @@
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="active" href="/">Inicio </a></li>
+                                    <li><a class="{{ request() -> routeIs('home') ? 'active' : '' }}" href="/">Inicio </a></li>
                                     <li><a href="about.html">Acerca de</a></li>
-                                    <li><a href="{{ route('shop') }}">Tienda</a></li>
+                                    <li><a class="{{ request() -> routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Tienda</a></li>
                                     <li class="position-static"><a href="#">Colecciones <i
                                                 class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
@@ -427,19 +427,20 @@
                                     <li><a href="blog.html">Blog</a></li>
                                     <li><a href="{{ route('contact') }}">Contacto</a></li>
                                     @auth
-                                        <li><a href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
+                                        <li><a class="{{ request() -> routeIs('admin.*') ? 'active' : '' }}" href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
                                             @if (Auth::user()->utype === 'ADM')
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                                    <li><a href="{{ route('admin.products') }}">Productos</a></li>
-                                                    <li><a href="{{ route('admin.categories') }}">Categorías</a></li>
-                                                    <li><a href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.dashboard') ? 'fw-bold' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.products') ? 'fw-bold' : '' }}" href="{{ route('admin.products') }}">Productos</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.categories') ? 'fw-bold' : '' }}" href="{{ route('admin.categories') }}">Categorías</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.home.slider') ? 'fw-bold' : '' }}" href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a></li>
                                                     <li><a href="#">Cupones</a></li>
                                                     <li><a href="#">Ordenes</a></li>
                                                     <li><a href="#">Clientes</a></li>
-                                                    <li><a href="{{ route('admin.brands') }}">Marcas</a></li>
-                                                    <li><a href="{{ route('admin.messages') }}">Mensajes</a></li>
-                                                    <li><a href="{{ route('admin.locations') }}">Ubicaciones</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.brand*') ? 'fw-bold' : '' }}" href="{{ route('admin.brands') }}">Marcas</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.messages') ? 'fw-bold' : '' }}" href="{{ route('admin.messages') }}">Mensajes</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.locations') ? 'fw-bold' : '' }}" href="{{ route('admin.locations') }}">Ubicaciones</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.shipping.types') ? 'fw-bold' : '' }}" href="{{ route('admin.shipping.types') }}">Tipos de envios</a></li>
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">
