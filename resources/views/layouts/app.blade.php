@@ -362,9 +362,9 @@
                             <nav>
                                 <ul>
                                     <li><a class="{{ request() -> routeIs('home') ? 'active' : '' }}" href="/">Inicio </a></li>
-                                    <li><a href="about.html">Acerca de</a></li>
+                                    <li><a class="{{ request() -> routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Nosotros</a></li>
                                     <li><a class="{{ request() -> routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Tienda</a></li>
-                                    <li class="position-static"><a href="#">Colecciones <i
+                                    {{-- <li class="position-static"><a href="#">Colecciones <i
                                                 class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
                                             <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -423,8 +423,8 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a></li>
+                                    </li> --}}
+                                    {{-- <li><a href="blog.html">Blog</a></li> --}}
                                     <li><a class="{{ request() -> routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contacto</a></li>
                                     @auth
                                         <li><a class="{{ request() -> routeIs('admin.*') ? 'active' : '' }}" href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>

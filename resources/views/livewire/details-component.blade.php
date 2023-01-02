@@ -197,14 +197,14 @@
                                         <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
                                             href="#Description">Descripción</a>
                                     </li>
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="nav-link" id="Additional-info-tab" data-bs-toggle="tab"
                                             href="#Additional-info">Detalles adicionales</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="Reviews-tab" data-bs-toggle="tab"
                                             href="#Reviews">Reseñas (3)</a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content">
                                     <div class="tab-pane fade show active" id="Description">

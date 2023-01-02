@@ -12,6 +12,7 @@ use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\ContactComponent;
+use App\Http\Livewire\AboutComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminCategoriesComponent;
@@ -64,6 +65,8 @@ Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.
 Route::get('/search', SearchComponent::class)->name('product.search');
 
 Route::get('/contact', ContactComponent::class)->name('contact');
+
+Route::get('/about', AboutComponent::class)->name('about');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
