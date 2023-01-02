@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\CartComponent;
@@ -33,6 +32,7 @@ use App\Http\Livewire\Admin\AdminProvinceComponent;
 use App\Http\Livewire\Admin\AdminCityComponent;
 use App\Http\Livewire\Admin\AdminCityShippingTypeComponent;
 use App\Http\Livewire\Admin\AdminShippingTypeComponent;
+use App\Http\Livewire\Admin\AdminCouponsComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -74,6 +74,7 @@ Route::get('/contact', ContactComponent::class)->name('contact');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
+
 Route::middleware(['auth'])->group(function(){
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
 });
@@ -98,7 +99,7 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/location/{department}/{province}', AdminCityComponent::class)->name('admin.cities');
     Route::get('/admin/location/{department}/{province}/{city}/metodos-de-envio', AdminCityShippingTypeComponent::class)->name('admin.cities.deliveries');
     Route::get('/admin/tipos-de-envio', AdminShippingTypeComponent::class)->name('admin.shipping.types');
+    Route::get('/admin/cupones', AdminCouponsComponent::class)->name('admin.coupons');
 });
-
 
 require __DIR__.'/auth.php';

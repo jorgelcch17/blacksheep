@@ -425,7 +425,7 @@
                                         </ul>
                                     </li>
                                     <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="{{ route('contact') }}">Contacto</a></li>
+                                    <li><a class="{{ request() -> routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contacto</a></li>
                                     @auth
                                         <li><a class="{{ request() -> routeIs('admin.*') ? 'active' : '' }}" href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
                                             @if (Auth::user()->utype === 'ADM')
@@ -434,7 +434,7 @@
                                                     <li><a class="{{ request() -> routeIs('admin.products') ? 'fw-bold' : '' }}" href="{{ route('admin.products') }}">Productos</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.categories') ? 'fw-bold' : '' }}" href="{{ route('admin.categories') }}">Categorías</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.home.slider') ? 'fw-bold' : '' }}" href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a></li>
-                                                    <li><a href="#">Cupones</a></li>
+                                                    <li><a class="{{ request() -> routeIs('admin.coupons') ? 'fw-bold' : '' }}" href="{{ route('admin.coupons') }}">Cupones</a></li>
                                                     <li><a href="#">Ordenes</a></li>
                                                     <li><a href="#">Clientes</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.brand*') ? 'fw-bold' : '' }}" href="{{ route('admin.brands') }}">Marcas</a></li>
