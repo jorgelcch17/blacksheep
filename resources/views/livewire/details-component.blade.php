@@ -121,31 +121,39 @@
                                         </div> --}}
                                         <div class="attr-detail attr-color mb-15">
                                             <strong class="mr-10">Color</strong>
-                                            <ul class="list-filter color-filter">
-                                                <li><a href="#" data-color="Red"><span
-                                                            class="product-color-red"></span></a></li>
-                                                <li><a href="#" data-color="Yellow"><span
-                                                            class="product-color-yellow"></span></a></li>
-                                                <li class="active"><a href="#" data-color="White"><span
-                                                            class="product-color-white"></span></a></li>
-                                                <li><a href="#" data-color="Orange"><span
-                                                            class="product-color-orange"></span></a></li>
-                                                <li><a href="#" data-color="Cyan"><span
-                                                            class="product-color-cyan"></span></a></li>
-                                                <li><a href="#" data-color="Green"><span
-                                                            class="product-color-green"></span></a></li>
-                                                <li><a href="#" data-color="Purple"><span
-                                                            class="product-color-purple"></span></a></li>
+                                            <ul class="list-filter size-filter font-small me-1">
+                                                @foreach ($pvariants as $pvariant)
+                                                    <li wire:click="goToVariant('{{ $pvariant->slug }}')"
+                                                        class="{{ $pvariant->color == $product->color ? 'active' : '' }}">
+                                                        <a href="#">{{ $pvariant->color }}</a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                         <div class="attr-detail attr-size">
                                             <strong class="mr-10">Talla</strong>
                                             <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">S</a></li>
-                                                <li class="active"><a href="#">M</a></li>
+                                                @foreach ($psizes as $psize)
+                                                    @if ($psize->quantity != 0)
+                                                        <li wire:ignore.self><a href="#"
+                                                                wire:click.prevent="$set('selected_size', {{ $psize->id }})">{{ $psize->size }}</a>
+                                                        </li>
+                                                    @else
+                                                        <li class="position-relative" style="pointer-events: none"><a
+                                                                class="text-white"
+                                                                style="background: rgb(187, 187, 187);">{{ $psize->size }}</a>
+                                                            <img class="position-absolute"
+                                                                style="height: 18px; width:18px; top:-5px;right:-5px;"
+                                                                src="{{ asset('assets/imgs/page/close-circle.png') }}"
+                                                                alt="">
+                                                            {{--  --}}
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                                {{-- <li class="active"><a href="#">M</a></li>
                                                 <li><a href="#">L</a></li>
                                                 <li><a href="#">XL</a></li>
-                                                <li><a href="#">XXL</a></li>
+                                                <li><a href="#">XXL</a></li> --}}
                                             </ul>
                                         </div>
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
@@ -160,20 +168,26 @@
                                             <div class="cart-product-quantity d-block mb-4">
                                                 <div class="d-flex align-items-center">
                                                     <input type="button" value="-" class="rounded-circle p-0"
-                                                        style="width: 34px; height: 34px;" wire:click.prevent="decreaseQuantity">
-                                                    <input type="number" name="quantity" value="1"
-                                                        title="Qty" class="p-3 mx-2" size="4"
+                                                        style="width: 34px; height: 34px;"
+                                                        wire:click.prevent="decreaseQuantity">
+                                                    <input type="number" name="quantity" value="1" title="Qty"
+                                                        class="p-3 mx-2" size="4"
                                                         style="width: 50px; text-align:center;" wire:model="qty">
                                                     <input type="button" value="+" class="rounded-circle p-0"
-                                                        style="width: 34px; height: 34px;" wire:click.prevent="increaseQuantity">
+                                                        style="width: 34px; height: 34px;"
+                                                        wire:click.prevent="increaseQuantity">
                                                 </div>
                                             </div>
                                             <div class="product-extra-link2">
-                                                <button type="button" class="button button-add-to-cart"
+                                                {{-- <button type="button" class="button button-add-to-cart"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir
-                                                    al carrito</button>
+                                                    al carrito</button> --}}
+                                                <button onclick="window.open('https://wa.me/59175853156', '_blank')"
+                                                    class="button button-add-to-cart">Comprar por whatsapp</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                    href="#" wire:click.prevent="addToWishlist({{$product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i class="fi-rs-heart"></i></a>
+                                                    href="#"
+                                                    wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i
+                                                        class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up"
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                             </div>
@@ -184,8 +198,22 @@
                                                 <a href="#" rel="tag">Women</a>, <a href="#"
                                                     rel="tag">Dress</a>
                                             </li>
-                                            <li>Disponibilidad:<span class="in-stock text-success ml-5">8 unidades
-                                                    disponibles</span></li>
+                                            <li>Disponibilidad:
+                                                @if ($qty_for_selected_size > 0 && $qty_for_selected_size !== 'No disponible')
+                                                    <span
+                                                        class="in-stock text-success ml-5">{{ $qty_for_selected_size }}
+                                                        unidades
+                                                        disponibles</span>
+                                                @else
+                                                    @if ($qty_for_selected_size === 'No disponible')
+                                                        <span class="in-stock text-danger ml-5 fw-bold">No hay unidades
+                                                            disponibles</span>
+                                                    @else
+                                                        <span class="text-info">Seleccione una talla</span>
+                                                    @endif
+                                                @endif
+
+                                            </li>
                                         </ul>
                                     </div>
                                     <!-- Detail Info -->
@@ -593,7 +621,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        @endforeach 
                                     </div>
                                 </div>
                             </div>
@@ -613,7 +641,7 @@
                             </ul>
                         </div>
                         <!-- Product sidebar Widget -->
-                        <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                        <div class="sidebar-widget product-sidebar sticky-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
                                 <h5 class="widget-title mb-10">Nuevos Productos</h5>
                                 <div class="bt-1 border-color-1"></div>

@@ -31,6 +31,8 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->unsignedBigInteger('brand_id');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->string('color');
+            $table->string('variant_code')->nullable();
             $table->timestamps();
         });
     }

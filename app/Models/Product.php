@@ -19,4 +19,10 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    // relacion con sizes
+    public function sizes()
+    {
+        return $this->hasMany(Size::class, 'product_id');
+    }
 }

@@ -180,6 +180,138 @@
                                         @enderror
                                     </div>
 
+                                    <div class="mb-3 mt-3">
+                                        <label for="color" class="form-label">Color</label>
+                                        <input type="text" name="color" class="form-control"
+                                            placeholder="Ej: rojo" wire:model="color">
+                                        @error('color')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
+                                    <div class="row">
+                                        <label class="form-label">Tallas y cantidades</label>
+                                        <div class="col-lg-5 mb-3">
+                                            <input type="text" name="size" class="form-control"
+                                                placeholder="Talla. Ej: M" wire:model="temporal_size">
+                                            @error('color')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-5 mb-3">
+                                            <input type="text" name="size" class="form-control"
+                                                placeholder="Cantidad" wire:model="temporal_quantity">
+                                            @error('color')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                        <div class="col-lg-2 mb-3">
+                                            <button type="button" class="btn btn-success"
+                                                wire:click.prevent="addSize">Añadir</button>
+                                            @error('color')
+                                                <p class="text-danger">{{ $message }}</p>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    @if (count($sizes) > 0)
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Talla</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Acción</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($sizes as $size)
+                                                            <tr>
+                                                                <td>{{ $size['size'] }}</td>
+                                                                <td>{{ $size['quantity'] }}</td>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        wire:click.prevent="removeSize({{ $loop->index }})">Eliminar</button>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    <div class="mb-3 mt-3">
+                                        <label for="search" class="form-label">Grupo de producto (opcional)</label>
+                                        <input type="text" name="search" class="form-control"
+                                            placeholder="Buscar producto por nombre" wire:model="search">
+                                        {{-- mosrtrando los productos encontrados en la variable $result_search --}}
+                                        @if (count($result_search) > 0)
+                                            <div class="row position-absolute bg-white z-1000"
+                                                style="right:15px;left:15px;">
+                                                <div class="col-lg-12">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Imagen</th>
+                                                                <th scope="col">Nombre</th>
+                                                                <th scope="col">Acción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($result_search as $eproduct)
+                                                                <tr>
+                                                                    <td>
+                                                                        <img style="height: 120px; width:120px;"
+                                                                            src="{{ asset('assets/imgs/products') }}/{{ $eproduct->image }}"
+                                                                            alt="{{ $eproduct->name }}">
+                                                                    </td>
+                                                                    <td>{{ $eproduct->name }}</td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-success"
+                                                                            wire:click.prevent="selectProductGroup({{ $eproduct->id }})">Seleccionar</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+
+
+
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    @if (count($selected_group) > 0)
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Imagen</th>
+                                                            <th scope="col">Nombre</th>
+                                                            <th scope="col">Categoría</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach ($selected_group as $seproduct)
+                                                            <tr>
+                                                                <td>
+                                                                    <img style="height: 120px; width:120px;" src="{{ asset('assets/imgs/products') }}/{{ $seproduct->image }}" alt="{{ $seproduct->name }}">
+                                                                </td>
+                                                                <td>{{ $seproduct->name }}</td>
+                                                                <td>
+                                                                    {{ $seproduct->category->name }}
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                     <button type="submit" class="btn btn-primary float-end">Actualizar</button>
                                 </form>
                             </div>

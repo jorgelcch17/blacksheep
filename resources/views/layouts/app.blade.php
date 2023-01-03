@@ -87,12 +87,13 @@
 
                         @livewire('header-search-component')
 
+                        {{-- oculto al cliente --}}
                         <div class="header-action-right">
                             <div class="header-action-2">
 
                                 @livewire('wishlist-icon-component')
 
-                                @livewire('cart-icon-component')
+                                {{-- @livewire('cart-icon-component') --}}
                             </div>
                         </div>
                     </div>

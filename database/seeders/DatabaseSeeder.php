@@ -23,8 +23,20 @@ class DatabaseSeeder extends Seeder
         }
         
         \App\Models\Category::factory(6)->create();
+
         
-        \App\Models\product::factory(16)->create();
+        \App\Models\product::factory(16)->create()->each(function($product){
+            $sizes = [
+                ['size' => 'S', 'quantity' => 10],
+                ['size' => 'M', 'quantity' => 11],
+                ['size' => 'L', 'quantity' => 12],
+                ['size' => 'XL', 'quantity' => 13],
+                ['size' => 'XXL', 'quantity' => 14],
+            ];
+            foreach($sizes as $size){
+                $product->sizes()->create($size);
+            }
+        });
 
         // creando 10 registros con factory de brand y pasandole el parametro logo con un valor de 1 a 10 en cada vuelta
 

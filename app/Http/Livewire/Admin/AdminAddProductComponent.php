@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\Brand;
+use App\Models\Size;
 
 class AdminAddProductComponent extends Component
 {
@@ -27,10 +28,74 @@ class AdminAddProductComponent extends Component
     public $images;
     public $category_id;
     public $brand_id;
+    public $color;
+    public $sizes = [];
+
+    // campos para poner las tallas y cantidades antes de añadir a la variable $sizes
+    public $temporal_size;
+    public $temporal_quantity;
+
+    // variable para el buscador de producto
+    public $search;
+    public $result_search=[];
+    public $selected_product_vc;
+    public $selected_group=[];
+
+    // burcar producto por nombre al actualizarse la variable $search
+    public function updatedSearch($value)
+    {
+        $this->result_search = Product::where('name', 'like', '%' . $value . '%')->get();
+    }
+
+    public function selectProductGroup($id)
+    {
+        $product = Product::find($id);
+        $this->selected_product_vc= $product->variant_code;
+        $this->result_search = [];
+        $this->selected_group = Product::where('variant_code', $this->selected_product_vc)->get();
+    }
 
     public function generateSlug()
     {
         $this->slug = Str::slug($this->name);
+    }
+
+    // funcion que añade las tallas y cantidades a la variable $sizes
+    public function addSize()
+    {
+        // añadiendo con push a la variable $sizes
+        $this->validate([
+            'temporal_size' => 'required',
+            'temporal_quantity' => 'required|numeric',
+        ]);
+        $encontrado = false;
+        foreach ($this->sizes as $size) {
+            if (in_array(strtoupper($this->temporal_size), $size)) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+            array_push($this->sizes, [
+                'size' => strtoupper($this->temporal_size),
+                'quantity' => $this->temporal_quantity,
+            ]);
+        }
+
+        else
+        {
+            session()->flash('message', 'La talla ya existe');
+        }
+        $this->temporal_size='';
+        $this->temporal_quantity='';
+    }
+
+    // funcion que elimina las tallas y cantidades de la variable $sizes
+    public function removeSize($index)
+    {
+        unset($this->sizes[$index]);
+        $this->sizes = array_values($this->sizes);
     }
 
     public function addProduct()
@@ -49,6 +114,7 @@ class AdminAddProductComponent extends Component
             'image' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
+            'color' => 'required',
         ]);
         $product = new Product();
         $product->name = $this->name;
@@ -79,7 +145,26 @@ class AdminAddProductComponent extends Component
 
         $product->category_id = $this->category_id;
         $product->brand_id = $this->brand_id;
+        $product->color = $this->color;
+        if($this->selected_product_vc)
+        {
+            $product->variant_code = $this->selected_product_vc;
+        }
+        else
+        {
+            // generando un codigo de variante aleatorio usando $this->faker->unique()->uuid
+            $product->variant_code = $this->faker->unique()->uuid;
+        }
         $product->save();
+
+        foreach($this->sizes as $size)
+        {
+            $new_size = new Size();
+            $new_size->size = $size['size'];
+            $new_size->quantity = $size['quantity'];
+            $new_size->product_id = $product->id;
+            $new_size->save();
+        }
 
         session()->flash('message', 'Producto creado exitosamente');
     }

@@ -31,6 +31,8 @@ class ProductFactory extends Factory
             'image' => 'product-'.$this->faker->numberBetween(1, 16).'.jpg',
             'category_id' => $this->faker->numberBetween(1, 5),
             'brand_id' => $this->faker->numberBetween(1, 10),
+            'color' => $this->faker->randomElement(['rojo', 'azul', 'verde', 'amarillo', 'negro', 'blanco', 'naranja', 'morado', 'cafe', 'rosado', 'gris', 'marron']),
+            'variant_code' =>  $this->faker->unique()->uuid,
         ];
     }
 }

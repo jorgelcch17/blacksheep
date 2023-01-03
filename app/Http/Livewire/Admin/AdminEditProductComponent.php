@@ -9,6 +9,7 @@ use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Brand;
+use App\Models\Size;
 
 class AdminEditProductComponent extends Component
 {
@@ -28,9 +29,34 @@ class AdminEditProductComponent extends Component
     public $category_id;
     public $brand_id;
     public $newimage;
+    public $color;
+    public $sizes = [];
 
     public $images;
     public $newimages;
+
+    // campos para poner las tallas y cantidades antes de añadir a la variable $sizes
+    public $temporal_size;
+    public $temporal_quantity;
+
+    // variable para el buscador de producto
+    public $search;
+    public $result_search=[];
+    public $selected_product_vc;
+    public $selected_group=[];
+
+    public function updatedSearch($value)
+    {
+        $this->result_search = Product::where('name', 'like', '%' . $value . '%')->get();
+    }
+
+    public function selectProductGroup($id)
+    {
+        $product = Product::find($id);
+        $this->selected_product_vc= $product->variant_code;
+        $this->result_search = [];
+        $this->selected_group = Product::where('variant_code', $this->selected_product_vc)->get();
+    }
 
     public function mount($product_id)
     {
@@ -50,6 +76,20 @@ class AdminEditProductComponent extends Component
         $this->images = explode(',', $product->images);
         $this->category_id = $product->category_id;
         $this->brand_id = $product->brand_id;
+        $this->color = $product->color;
+
+        $product_sizes = $product->sizes;
+        foreach($product_sizes as $size)
+        {
+            array_push($this->sizes, [
+                'size' => $size->size,
+                'quantity' => $size->quantity,
+                'product_id' => $size->product_id,
+            ]);
+        }
+
+        $this->selected_product_vc = $product->variant_code;
+        $this->selected_group = Product::where('variant_code', $this->selected_product_vc)->get();
     }
 
     public function generateSlug()
@@ -73,6 +113,8 @@ class AdminEditProductComponent extends Component
             // 'image' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
+            'color' => 'required',
+            'sizes' => 'required',
         ]);
         if($this->newimage)
         {
@@ -133,9 +175,57 @@ class AdminEditProductComponent extends Component
 
         $product->category_id = $this->category_id;
         $product->brand_id = $this->brand_id;
+        $product->color = $this->color;
+        // borrando las tallas y cantidades anteriores
+        $product->sizes()->delete();
+        // añadiendo las tallas y cantidades nuevas
+        foreach($this->sizes as $size)
+        {
+            $product->sizes()->create([
+                'size' => $size['size'],
+                'quantity' => $size['quantity'],
+            ]);
+        }
+        $product->variant_code = $this->selected_product_vc;
         $product->save();
 
         session()->flash('message', 'Producto actualizado exitosamente');
+    }
+
+    public function addSize()
+    {
+        // añadiendo con push a la variable $sizes
+        $this->validate([
+            'temporal_size' => 'required',
+            'temporal_quantity' => 'required|numeric',
+        ]);
+        $encontrado = false;
+        foreach ($this->sizes as $size) {
+            if (in_array(strtoupper($this->temporal_size), $size)) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+            array_push($this->sizes, [
+                'size' => strtoupper($this->temporal_size),
+                'quantity' => $this->temporal_quantity,
+            ]);
+        }
+
+        else
+        {
+            session()->flash('message', 'La talla ya existe');
+        }
+        $this->temporal_size='';
+        $this->temporal_quantity='';
+    }
+
+    public function removeSize($index)
+    {
+        unset($this->sizes[$index]);
+        $this->sizes = array_values($this->sizes);
     }
 
     public function render()
