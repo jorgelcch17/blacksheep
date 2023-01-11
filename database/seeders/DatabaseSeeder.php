@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             $brand_number++;
         }
         
-        \App\Models\Category::factory(6)->create();
+        // \App\Models\Category::factory(6)->create();
+        $this->call(CategorySeeder::class);
 
         
         \App\Models\product::factory(16)->create()->each(function($product){

@@ -105,9 +105,19 @@
                                                     <img class="default-img"
                                                         src="{{ asset('assets/imgs/products') }}/{{ $product->image }}"
                                                         alt="{{ $product->name }}">
-                                                    <img class="hover-img"
-                                                        src="{{ asset('assets/imgs/shop/product-') }}{{ $product->id }}-2.jpg"
-                                                        alt="{{ $product->name }}">
+                                                    {{-- imprimiendo la segunda imagen que esta en el campo de images --}}
+                                                    @php
+                                                        $pimages = explode(',', $product->images);
+                                                        // convertir array a collection
+                                                        $pimages = collect($pimages);
+                                                    @endphp
+                                                    @foreach ($pimages as $image)
+                                                        @if ($loop->index == 1)
+                                                            <img class="hover-img"
+                                                                src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                                alt="">
+                                                        @endif
+                                                    @endforeach
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
@@ -119,23 +129,29 @@
                                                 <a aria-label="Compare" class="action-btn hover-up"
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                             </div>
-                                            <div class="product-badges product-badges-position product-badges-mrg">
+                                            {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">En demanda</span>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
                                                 <a href="shop.html">{{ $product->category->name }}</a>
                                             </div>
-                                            <h2><a href="product-details.html">{{ $product->name }}</a></h2>
+                                            <h2><a
+                                                    href="{{ route('product.details', $product->slug) }}">{{ $product->name }}</a>
+                                            </h2>
                                             <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>90%</span>
                                                 </span>
                                             </div>
                                             <div class="product-price">
-                                                <span>Bs {{ $product->regular_price }} </span>
-                                                {{-- <span class="old-price">$245.8</span> --}}
+                                                @if ($product->sale_price > 0)
+                                                    <span>Bs {{ $product->sale_price }} </span>
+                                                    <span class="old-price">Bs {{ $product->regular_price }}</span>
+                                                @else
+                                                    <span>Bs {{ $product->regular_price }} </span>
+                                                @endif
                                             </div>
                                             <div class="product-action-1 show">
                                                 @if ($witems->contains($product->id))
@@ -183,10 +199,12 @@
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
                             <ul class="categories">
                                 @foreach ($categories as $category)
-                                    <li><a
+                                    <li>
+                                        <a
                                             href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
+
                             </ul>
                         </div>
                         <!-- Fillter By Price -->
@@ -256,11 +274,16 @@
                             @foreach ($nproducts as $nproduct)
                                 <div class="single-post clearfix">
                                     <div class="image">
-                                        <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}" alt="{{ $nproduct->name }}">
+                                        <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}"
+                                            alt="{{ $nproduct->name }}">
                                     </div>
                                     <div class="content pt-10">
                                         <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
-                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
+                                        @if ($nproduct->sale_price > 0)
+                                            <p class="price mb-0 mt-5">Bs {{ $nproduct->sale_price }}</p>
+                                        @else
+                                            <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
+                                        @endif
                                         <div class="product-rate">
                                             <div class="product-rating" style="width:90%"></div>
                                         </div>

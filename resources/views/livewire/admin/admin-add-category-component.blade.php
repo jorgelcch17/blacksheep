@@ -70,6 +70,20 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    <div class="mb-3 mt-3">
+                                        <label class="form-label" for="is_popular">Categoria padre</label>
+                                        <select name="is_popular" class="form-control" wire:model="category_id">
+                                            <option value="">None</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('is_popular')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                    
                                     <button type="submit" class="btn btn-primary float-end">Guardar</button>
                                 </form>
                             </div>

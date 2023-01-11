@@ -99,10 +99,21 @@
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
+                                                @if ($product->sale_price > 0)
+                                                <ins><span class="text-brand">Bs{{ $product->sale_price }}</span></ins>
+                                                    <ins><span class="old-price font-md ml-15">Bs{{ $product->regular_price }}</span></ins>
+                                                    <span class="save-price  font-md color3 ml-15">
+                                                        {{-- calculando el porcentaje de descuento --}}
+                                                        @php
+                                                            $discount = ($product->regular_price - $product->sale_price) * 100 / $product->regular_price;
+                                                        @endphp
+                                                        {{ round($discount) }}% Desc.
+                                                    </span>
+
+                                                @else
                                                 <ins><span class="text-brand">Bs
                                                         {{ $product->regular_price }}</span></ins>
-                                                {{-- <ins><span class="old-price font-md ml-15">$200.00</span></ins> --}}
-                                                {{-- <span class="save-price  font-md color3 ml-15">25% Off</span> --}}
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="bt-1 border-color-1 mt-15 mb-15"></div>

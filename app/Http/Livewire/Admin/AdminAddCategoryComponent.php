@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use App\Models\Category;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
+use App\Models\Subcategory;
 
 class AdminAddCategoryComponent extends Component
 {
@@ -15,6 +16,7 @@ class AdminAddCategoryComponent extends Component
     public $slug;
     public $image;
     public $is_popular=0;
+    public $category_id;
 
     public function generateSlug()
     {
@@ -37,19 +39,35 @@ class AdminAddCategoryComponent extends Component
             'slug' => 'required',
             'image' => 'required'
         ]);
-        $category = new Category();
-        $category->name = $this->name;
-        $category->slug = $this->slug;
-        $imageName = Carbon::now()->timestamp. '.' . $this->image->extension();
-        $this->image->storeAs('categories', $imageName);
-        $category->image = $imageName;
-        $category->is_popular = $this->is_popular;
-        $category->save();
+        if($this->category_id)
+        {
+            $scategory = new Subcategory();
+            $scategory->name = $this->name;
+            $scategory->slug = $this->slug;
+            $imageName = Carbon::now()->timestamp. '.' . $this->image->extension();
+            $this->image->storeAs('categories', $imageName);
+            $scategory->image = $imageName;
+            $scategory->is_popular = $this->is_popular;
+            $scategory->category_id = $this->category_id;
+            $scategory->save();
+        }
+        else
+        {
+            $category = new Category();
+            $category->name = $this->name;
+            $category->slug = $this->slug;
+            $imageName = Carbon::now()->timestamp. '.' . $this->image->extension();
+            $this->image->storeAs('categories', $imageName);
+            $category->image = $imageName;
+            $category->is_popular = $this->is_popular;
+            $category->save();
+        }
         session()->flash('message', 'Categoria creada correctamente!');
     }
 
     public function render()
     {
-        return view('livewire.admin.admin-add-category-component');
+        $categories = Category::all();
+        return view('livewire.admin.admin-add-category-component', compact('categories'));
     }
 }

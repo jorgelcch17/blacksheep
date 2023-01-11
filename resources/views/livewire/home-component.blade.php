@@ -979,8 +979,18 @@
                                             <img class="default-img"
                                                 src="{{ asset('assets/imgs/products') }}/{{ $lproduct->image }}"
                                                 alt="{{ $lproduct->name }}">
-                                            {{-- <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg"
-                                                alt=""> --}}
+                                            @php
+                                                $simages = explode(',', $lproduct->images);
+                                                // convertir array a collection
+                                                $limages = collect($simages);
+                                            @endphp
+                                            @foreach ($limages as $image)
+                                                @if ($loop->index == 1)
+                                                    <img class="hover-img"
+                                                        src="{{ asset('assets/imgs/products') }}/{{ $image }}"
+                                                        alt="">
+                                                @endif
+                                            @endforeach
                                         </a>
                                     </div>
                                     <div class="product-action-1">
@@ -1003,8 +1013,12 @@
                                         </span>
                                     </div>
                                     <div class="product-price">
-                                        <span>Bs {{ $lproduct->regular_price }} </span>
-                                        {{-- <span class="old-price">$245.8</span> --}}
+                                        @if ($lproduct->sale_price > 0)
+                                            <span>Bs{{ $lproduct->sale_price }}</span>
+                                            <span class="old-price">Bs{{ $lproduct->regular_price }}</span>
+                                        @else
+                                            <span>Bs{{ $lproduct->regular_price }} </span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

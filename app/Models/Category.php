@@ -13,4 +13,10 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    // relacion con subcategory
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategory::class);
+    }
 }

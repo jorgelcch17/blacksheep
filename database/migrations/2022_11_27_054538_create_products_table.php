@@ -27,9 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('quantity')->default(10);
             $table->string('image');
             $table->text('images')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->unsignedBigInteger('brand_id');
+            $table->unsignedBigInteger('brand_id')->nullable();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color');
             $table->string('variant_code')->nullable();
