@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Category;
 use Cart;
+use App\Models\Tag;
 
 class ShopComponent extends Component
 {
@@ -68,6 +69,7 @@ class ShopComponent extends Component
 
         $categories = Category::orderBy('name', 'ASC')->get();
         $nproducts = Product::latest()->take(4)->get();
-        return view('livewire.shop-component', compact('products', 'categories', 'nproducts'));
+        $tags = Tag::all();
+        return view('livewire.shop-component', compact('products', 'categories', 'nproducts', 'tags'));    
     }
 }

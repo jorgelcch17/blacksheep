@@ -34,6 +34,7 @@ use App\Http\Livewire\Admin\AdminCityComponent;
 use App\Http\Livewire\Admin\AdminCityShippingTypeComponent;
 use App\Http\Livewire\Admin\AdminShippingTypeComponent;
 use App\Http\Livewire\Admin\AdminCouponsComponent;
+use App\Http\Livewire\Admin\AdminTagComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -103,6 +104,7 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/location/{department}/{province}/{city}/metodos-de-envio', AdminCityShippingTypeComponent::class)->name('admin.cities.deliveries');
     Route::get('/admin/tipos-de-envio', AdminShippingTypeComponent::class)->name('admin.shipping.types');
     Route::get('/admin/cupones', AdminCouponsComponent::class)->name('admin.coupons');
+    Route::get('/admin/etiquetas', AdminTagComponent::class)->name('admin.tags');
 });
 
 require __DIR__.'/auth.php';

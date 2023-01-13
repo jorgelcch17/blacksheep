@@ -25,4 +25,10 @@ class Product extends Model
     {
         return $this->hasMany(Size::class, 'product_id');
     }
+
+    // relacion con tags    
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
 }

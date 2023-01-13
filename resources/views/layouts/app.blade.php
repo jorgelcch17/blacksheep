@@ -191,6 +191,7 @@
                                                     <li><a class="{{ request() -> routeIs('admin.messages') ? 'fw-bold' : '' }}" href="{{ route('admin.messages') }}">Mensajes</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.locations') ? 'fw-bold' : '' }}" href="{{ route('admin.locations') }}">Ubicaciones</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.shipping.types') ? 'fw-bold' : '' }}" href="{{ route('admin.shipping.types') }}">Tipos de envios</a></li>
+                                                    <li><a href="{{ route('admin.tags') }}">Etiquetas</a></li>
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">
@@ -548,6 +549,9 @@
     <!-- Template  JS -->
     <script src="{{ asset('assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('assets/js/shop.js?v=3.3') }}"></script>
+
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+
 
     @livewireScripts
 
