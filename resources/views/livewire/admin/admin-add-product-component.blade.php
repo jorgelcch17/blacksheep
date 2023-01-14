@@ -168,6 +168,20 @@
                                             <p class="text-danger">{{ $message }}</p>
                                         @enderror
                                     </div>
+
+                                    <div class="mb-3 mt-3">
+                                        <label for="subcategory_id" class="form-label">Subcategoría</label>
+                                        <select class="form-control" name="subcategory_id" wire:model="subcategory_id" {{ $category_id == '' ? 'disabled':'' }}>
+                                            <option value="">Seleccione Subcategoría</option>
+                                            @foreach ($subcategories as $subcategory)
+                                                <option value="{{ $subcategory->id }}">{{ $subcategory->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('category_id')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+
                                     <div class="mb-3 mt-3">
                                         <label for="brand_id" class="form-label">Marca</label>
                                         <select class="form-control" name="brand_id" wire:model="brand_id">

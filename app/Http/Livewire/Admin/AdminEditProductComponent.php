@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Size;
 use App\Models\Tag;
+use App\Models\Subcategory;
 
 class AdminEditProductComponent extends Component
 {
@@ -28,10 +29,12 @@ class AdminEditProductComponent extends Component
     public $quantity;
     public $image;
     public $category_id;
+    public $subcategory_id;
     public $brand_id;
     public $newimage;
     public $color;
     public $sizes = [];
+    public $subcategories = [];
 
     public $images;
     public $newimages;
@@ -66,6 +69,11 @@ class AdminEditProductComponent extends Component
         {
             $this->result_search_tag = [];
         }
+    }
+
+    public function updatedCategoryId($value)
+    {
+        $this->subcategories = Subcategory::where('category_id', $value)->get();
     }
 
     // funcion que añade las etiquetas a la variable $selected_tags
@@ -115,6 +123,8 @@ class AdminEditProductComponent extends Component
         $this->image = $product->image;
         $this->images = explode(',', $product->images);
         $this->category_id = $product->category_id;
+        $this->subcategories = Subcategory::where('category_id', $product->category_id)->get();
+        $this->subcategory_id = $product->subcategory_id;
         $this->brand_id = $product->brand_id;
         $this->color = $product->color;
 

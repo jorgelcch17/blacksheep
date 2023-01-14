@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use App\Models\Brand;
 use App\Models\Size;
 use App\Models\Tag;
+use App\Models\Subcategory;
 
 class AdminAddProductComponent extends Component
 {
@@ -28,9 +29,11 @@ class AdminAddProductComponent extends Component
     public $image;
     public $images;
     public $category_id;
+    public $subcategory_id;
     public $brand_id;
     public $color;
     public $sizes = [];
+    public $subcategories = [];
 
     // campos para poner las tallas y cantidades antes de añadir a la variable $sizes
     public $temporal_size;
@@ -64,6 +67,11 @@ class AdminAddProductComponent extends Component
         {
             $this->result_search_tag = [];
         }
+    }
+
+    public function updatedCategoryId($value)
+    {
+        $this->subcategories = Subcategory::where('category_id', $value)->get();
     }
 
     // funcion que añade las etiquetas a la variable $selected_tags
@@ -192,6 +200,7 @@ class AdminAddProductComponent extends Component
         }
 
         $product->category_id = $this->category_id;
+        $product->subcategory_id = $this->subcategory_id;
         $product->brand_id = $this->brand_id;
         $product->color = $this->color;
         if($this->selected_product_vc)
@@ -225,6 +234,7 @@ class AdminAddProductComponent extends Component
     {
         $categories = Category::orderBy('name', 'ASC')->get();
         $brands = Brand::orderBy('name', 'ASC')->get();
-        return view('livewire.admin.admin-add-product-component', compact('categories', 'brands'));
+        $tags = Tag::orderBy('name', 'ASC')->get();
+        return view('livewire.admin.admin-add-product-component', compact('categories', 'brands', 'tags'));
     }
 }
