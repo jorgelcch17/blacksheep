@@ -16,6 +16,14 @@
         .wishlisted i {
             color: #fff !important;
         }
+
+        .selected-tag {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -242,7 +250,7 @@
                             <div id="slider-range" wire:ignore></div>
                             <div class="price_slider_amount">
                                 <div class="label-input">
-                                    <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span> -
+                                    <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span>
                                     <span class="text-info">Bs {{ $max_value }}</span>
                                 </div>
                             </div>
@@ -250,7 +258,13 @@
                     </div>
                     <div class="list-group">
                         <div class="list-group-item mb-10 mt-10">
-                            <label class="fw-900">Etiquetas</label>
+                            @foreach($tags as $tag)
+                            <div class="d-inline-block mb-1">
+                                <span class="selected-tag">
+                                    {{ $tag['name'] }}
+                                   </span>
+                            </div>
+                            @endforeach
 
                             {{-- <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="checkbox"
@@ -287,8 +301,8 @@
                                 </div> --}}
                         </div>
                     </div>
-                    <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                        Filtrar</a>
+                    {{-- <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
+                        Filtrar</a> --}}
                 </div>
                 <!-- Product sidebar Widget -->
                 <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">

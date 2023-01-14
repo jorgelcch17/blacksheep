@@ -5,6 +5,14 @@
             -webkit-appearance: none;
             margin: 0;
         }
+
+        .selected-tag {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -640,15 +648,18 @@
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
                         <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Etiquetas</h5>
                             <ul class="categories">
-                                <li><a href="shop.html">Shoes & Bags</a></li>
+                                @foreach($product->tags as $tag)
+                                    <li><a class="selected-tag text-white" href="#">{{ $tag->name }}</a></li>
+                                @endforeach
+                                {{-- <li><a href="shop.html">Shoes & Bags</a></li>
                                 <li><a href="shop.html">Blouses & Shirts</a></li>
                                 <li><a href="shop.html">Dresses</a></li>
                                 <li><a href="shop.html">Swimwear</a></li>
                                 <li><a href="shop.html">Beauty</a></li>
                                 <li><a href="shop.html">Jewelry & Watch</a></li>
-                                <li><a href="shop.html">Accessories</a></li>
+                                <li><a href="shop.html">Accessories</a></li> --}}
                             </ul>
                         </div>
                         <!-- Product sidebar Widget -->

@@ -7,6 +7,14 @@
         nav .hidden {
             display: block !important;
         }
+
+        .selected-tag {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -240,7 +248,8 @@
                                             placeholder="Buscar producto por nombre" wire:model="search">
                                         {{-- mosrtrando los productos encontrados en la variable $result_search --}}
                                         @if (count($result_search) > 0)
-                                            <div class="row position-absolute bg-white z-1000" style="right:15px;left:15px;">
+                                            <div class="row position-absolute bg-white z-1000"
+                                                style="right:15px;left:15px;">
                                                 <div class="col-lg-12">
                                                     <table class="table table-striped">
                                                         <thead>
@@ -254,7 +263,9 @@
                                                             @foreach ($result_search as $eproduct)
                                                                 <tr>
                                                                     <td>
-                                                                        <img style="height: 120px; width:120px;" src="{{ asset('assets/imgs/products') }}/{{ $eproduct->image }}" alt="{{ $eproduct->name }}">
+                                                                        <img style="height: 120px; width:120px;"
+                                                                            src="{{ asset('assets/imgs/products') }}/{{ $eproduct->image }}"
+                                                                            alt="{{ $eproduct->name }}">
                                                                     </td>
                                                                     <td>{{ $eproduct->name }}</td>
                                                                     <td>
@@ -265,12 +276,12 @@
                                                             @endforeach
                                                         </tbody>
                                                     </table>
-                                                    
 
-                                                    
+
+
                                                 </div>
                                             </div>
-                                            @endif
+                                        @endif
                                     </div>
                                     {{-- enlistando el grupo de productos de la variable selected_group --}}
                                     @if (count($selected_group) > 0)
@@ -288,7 +299,9 @@
                                                         @foreach ($selected_group as $seproduct)
                                                             <tr>
                                                                 <td>
-                                                                    <img style="height: 120px; width:120px;" src="{{ asset('assets/imgs/products') }}/{{ $seproduct->image }}" alt="{{ $seproduct->name }}">
+                                                                    <img style="height: 120px; width:120px;"
+                                                                        src="{{ asset('assets/imgs/products') }}/{{ $seproduct->image }}"
+                                                                        alt="{{ $seproduct->name }}">
                                                                 </td>
                                                                 <td>{{ $seproduct->name }}</td>
                                                                 <td>
@@ -302,6 +315,55 @@
                                         </div>
                                     @endif
 
+                                    <div class="mb-3 mt-3">
+                                        <label for="search" class="form-label">Etiquetas</label>
+                                        <input type="text" name="search" class="form-control"
+                                            placeholder="Buscar etiquetas" wire:model="search_tag">
+                                        {{-- mosrtrando los productos encontrados en la variable $result_search --}}
+                                        @if (count($result_search_tag) > 0)
+                                            <div class="row position-absolute bg-white z-1000"
+                                                style="right:15px;left:15px;">
+                                                <div class="col-lg-12">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Nombre</th>
+                                                                <th scope="col">Acción</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($result_search_tag as $rtag)
+                                                                <tr>
+                                                                    <td>{{ $rtag->name }}</td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-success"
+                                                                            wire:click.prevent="addTag({{ $rtag->id }})">Seleccionar</button>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+
+
+
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    {{-- enlistando el grupo de productos de la variable selected_group --}}
+                                    @if (count($selected_tags) > 0)
+                                        <div>
+                                            @foreach ($selected_tags as $selected_tag)
+                                            <span class="selected-tag">
+                                                {{ $selected_tag['name'] }}
+                                                <svg wire:click="removeTag({{ $selected_tag['id'] }})" style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M16.2,17H14.2L12,13.2L9.8,17H7.8L11,12L7.8,7H9.8L12,10.8L14.2,7H16.2L13,12M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z" />
+                                                </svg>
+                                               </span>
+                                            @endforeach
+                                        </div>
+                                    @endif
 
                                     <button type="submit" class="btn btn-primary float-end">Guardar</button>
                                 </form>

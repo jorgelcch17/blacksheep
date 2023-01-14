@@ -10,6 +10,7 @@ use App\Models\Product;
 use Carbon\Carbon;
 use App\Models\Brand;
 use App\Models\Size;
+use App\Models\Tag;
 
 class AdminAddProductComponent extends Component
 {
@@ -41,11 +42,58 @@ class AdminAddProductComponent extends Component
     public $selected_product_vc;
     public $selected_group=[];
 
+    // variable para el buscador de etiquetas
+    public $search_tag;
+    public $result_search_tag=[];
+    public $selected_tags=[];
+
     // burcar producto por nombre al actualizarse la variable $search
     public function updatedSearch($value)
     {
         $this->result_search = Product::where('name', 'like', '%' . $value . '%')->get();
     }
+
+    // burcar etiquetas por nombre al actualizarse la variable $search_tag
+    public function updatedSearchTag($value)
+    {
+        if($this->search_tag)
+        {
+            $this->result_search_tag = Tag::where('name', 'like', '%' . $value . '%')->whereNotIn('id',array_column($this->selected_tags, 'id'))->get();
+        }
+        else
+        {
+            $this->result_search_tag = [];
+        }
+    }
+
+    // funcion que añade las etiquetas a la variable $selected_tags
+    public function addTag($id)
+    {
+        $tag = Tag::find($id);
+        $encontrado = false;
+        foreach ($this->selected_tags as $stag) {
+            if (in_array($tag->id, $stag)) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+            array_push($this->selected_tags, [
+                'id' => $tag->id,
+                'name' => $tag->name,
+            ]);
+        }
+        $this->result_search_tag = [];
+        $this->search_tag = '';
+    }
+
+    public function removeTag($id)
+{
+    $this->selected_tags = array_filter($this->selected_tags, function ($tag) use ($id) {
+        return $tag['id'] != $id;
+    });
+}
 
     public function selectProductGroup($id)
     {
@@ -155,7 +203,11 @@ class AdminAddProductComponent extends Component
             // generando un codigo de variante aleatorio usando $this->faker->unique()->uuid
             $product->variant_code = $this->faker->unique()->uuid;
         }
+        // guardando las etiquetas
+        
         $product->save();
+        $selected_tags_ids = array_column($this->selected_tags, 'id');
+        $product->tags()->sync($selected_tags_ids);
 
         foreach($this->sizes as $size)
         {

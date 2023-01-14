@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Size;
+use App\Models\Tag;
 
 class AdminEditProductComponent extends Component
 {
@@ -45,9 +46,48 @@ class AdminEditProductComponent extends Component
     public $selected_product_vc;
     public $selected_group=[];
 
+    // variables para las etiquetas
+    public $search_tag;
+    public $result_search_tag=[];
+    public $selected_tags=[];
+
     public function updatedSearch($value)
     {
         $this->result_search = Product::where('name', 'like', '%' . $value . '%')->get();
+    }
+
+    public function updatedSearchTag($value)
+    {
+        if($this->search_tag)
+        {
+            $this->result_search_tag = Tag::where('name', 'like', '%' . $value . '%')->whereNotIn('id',array_column($this->selected_tags, 'id'))->get();
+        }
+        else
+        {
+            $this->result_search_tag = [];
+        }
+    }
+
+    // funcion que añade las etiquetas a la variable $selected_tags
+    public function addTag($id)
+    {
+        $tag = Tag::find($id);
+        $encontrado = false;
+        foreach ($this->selected_tags as $stag) {
+            if (in_array($tag->id, $stag)) {
+                $encontrado = true;
+                break;
+            }
+        }
+
+        if (!$encontrado) {
+            array_push($this->selected_tags, [
+                'id' => $tag->id,
+                'name' => $tag->name,
+            ]);
+        }
+        $this->result_search_tag = [];
+        $this->search_tag = '';
     }
 
     public function selectProductGroup($id)
@@ -90,10 +130,12 @@ class AdminEditProductComponent extends Component
 
         $this->selected_product_vc = $product->variant_code;
         $this->selected_group = Product::where('variant_code', $this->selected_product_vc)->get();
+
+        $this->selected_tags = $product->tags->toArray();
     }
 
     public function generateSlug()
-    {
+{
         $this->slug = Str::slug($this->name);
     }
 
@@ -188,6 +230,8 @@ class AdminEditProductComponent extends Component
         }
         $product->variant_code = $this->selected_product_vc;
         $product->save();
+        $selected_tags_ids = array_column($this->selected_tags, 'id');
+        $product->tags()->sync($selected_tags_ids);
 
         session()->flash('message', 'Producto actualizado exitosamente');
     }
@@ -226,6 +270,13 @@ class AdminEditProductComponent extends Component
     {
         unset($this->sizes[$index]);
         $this->sizes = array_values($this->sizes);
+    }
+
+    public function removeTag($id)
+    {
+        $this->selected_tags = array_filter($this->selected_tags, function ($tag) use ($id) {
+            return $tag['id'] != $id;
+        });
     }
 
     public function render()
