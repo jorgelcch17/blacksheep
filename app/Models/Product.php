@@ -14,6 +14,12 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    // relacion con subcategories
+    public function subcategory()
+    {
+        return $this->belongsTo(Subcategory::class, 'subcategory_id');
+    }
+
     // relacion con brands
     public function brand()
     {

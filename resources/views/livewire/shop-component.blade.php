@@ -185,7 +185,7 @@
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             {{ $products->links() }}
-                             {{-- <nav aria-label="Page navigation example">
+                            {{-- <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-start">
                                     <li class="page-item active"><a class="page-link" href="#">01</a></li>
                                     <li class="page-item"><a class="page-link" href="#">02</a></li>
@@ -196,77 +196,78 @@
                                                 class="fi-rs-angle-double-small-right"></i></a></li>
                                 </ul>
                             </nav> --}}
-                        
-                    </div>
-                </div>
-                <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                    <div class="row">
-                        <div class="col-lg-12 col-mg-6"></div>
-                        <div class="col-lg-12 col-mg-6"></div>
-                    </div>
-                    <<div class="widget-category mb-30" x-data="{ openCategory: null }">
-                        <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
-                        <ul class="categories">
-                            @foreach ($categories as $category)
-                                <li>
-                                    <a href="{{ route('product.category', $category->slug) }}">
-                                        {{ $category->name }}
-                                    </a>
-                                    <a href="#"
-                                        @click.prevent="openCategory === {{ $category->id }} ? openCategory = null : openCategory = {{ $category->id }}"><svg
-                                            style="width:24px;height:24px" viewBox="0 0 24 24">
-                                            <path fill="currentColor" d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
-                                        </svg>
-                                    </a>
-                                    <ul class="sub-menu" x-transition:enter="transition ease-out duration-100"
-                                        x-transition:enter-start="opacity-0 transform"
-                                        x-transition:enter-end="opacity-100 transform"
-                                        x-transition:leave="transition ease-in duration-75"
-                                        x-transition:leave-start="opacity-100 transform"
-                                        x-transition:leave-end="opacity-0 transform"
-                                        x-show="openCategory === {{ $category->id }}">
-                                        @foreach ($category->subcategories as $subcategory)
-                                            <li>
-                                                <a href="{{ route('product.category', $subcategory->slug) }}"
-                                                    style="padding-left: 20px;">
-                                                    {{ $subcategory->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                            @endforeach
-                        </ul>
-                </div>
 
-                <!-- Fillter By Price -->
-                <div class="sidebar-widget price_range range mb-30">
-                    <div class="widget-header position-relative mb-20 pb-10">
-                        <h5 class="widget-title mb-10">Filtrar por precio</h5>
-                        <div class="bt-1 border-color-1"></div>
+                        </div>
                     </div>
-                    <div class="price-filter">
-                        <div class="price-filter-inner">
-                            <div id="slider-range" wire:ignore></div>
-                            <div class="price_slider_amount">
-                                <div class="label-input">
-                                    <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span>
-                                    <span class="text-info">Bs {{ $max_value }}</span>
+                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                        <div class="row">
+                            <div class="col-lg-12 col-mg-6"></div>
+                            <div class="col-lg-12 col-mg-6"></div>
+                        </div>
+                        <div class="widget-category mb-30" x-data="{ openCategory: null }">
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorías</h5>
+                            <ul class="categories">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('product.category', $category->slug) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                        <a href="#"
+                                            @click.prevent="openCategory === {{ $category->id }} ? openCategory = null : openCategory = {{ $category->id }}"><svg
+                                                style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                                            </svg>
+                                        </a>
+                                        <ul class="sub-menu" x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="opacity-0 transform"
+                                            x-transition:enter-end="opacity-100 transform"
+                                            x-transition:leave="transition ease-in duration-75"
+                                            x-transition:leave-start="opacity-100 transform"
+                                            x-transition:leave-end="opacity-0 transform"
+                                            x-show="openCategory === {{ $category->id }}">
+                                            @foreach ($category->subcategories as $subcategory)
+                                                <li>
+                                                    <a href="{{ route('product.category', $subcategory->slug) }}"
+                                                        style="padding-left: 20px;">
+                                                        {{ $subcategory->name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
+                            </ul>
+                    </div>
+
+                    <!-- Fillter By Price -->
+                    <div class="sidebar-widget price_range range mb-30">
+                        <div class="widget-header position-relative mb-20 pb-10">
+                            <h5 class="widget-title mb-10">Filtrar por precio</h5>
+                            <div class="bt-1 border-color-1"></div>
+                        </div>
+                        <div class="price-filter">
+                            <div class="price-filter-inner">
+                                <div id="slider-range" wire:ignore></div>
+                                <div class="price_slider_amount">
+                                    <div class="label-input">
+                                        <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span>
+                                        <span class="text-info">Bs {{ $max_value }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="list-group">
-                        <div class="list-group-item mb-10 mt-10">
-                            @foreach($tags as $tag)
-                            <div class="d-inline-block mb-1">
-                                <span class="selected-tag">
-                                    {{ $tag['name'] }}
-                                   </span>
-                            </div>
-                            @endforeach
+                        <div class="list-group">
+                            <div class="list-group-item mb-10 mt-10">
+                                @foreach ($tags as $tag)
+                                    <div class="d-inline-block mb-1">
+                                        <span class="selected-tag">
+                                            {{ $tag['name'] }}
+                                        </span>
+                                    </div>
+                                @endforeach
 
-                            {{-- <div class="custome-checkbox">
+                                {{-- <div class="custome-checkbox">
                                     <input class="form-check-input" type="checkbox" name="checkbox"
                                         id="exampleCheckbox1" value="">
                                     <label class="form-check-label" for="exampleCheckbox1"><span>Rojo
@@ -299,47 +300,47 @@
                                     <label class="form-check-label" for="exampleCheckbox31"><span>Usado
                                             (45)</span></label>
                                 </div> --}}
-                        </div>
-                    </div>
-                    {{-- <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
-                        Filtrar</a> --}}
-                </div>
-                <!-- Product sidebar Widget -->
-                <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
-                    <div class="widget-header position-relative mb-20 pb-10">
-                        <h5 class="widget-title mb-10">Nuevos productos</h5>
-                        <div class="bt-1 border-color-1"></div>
-                    </div>
-                    @foreach ($nproducts as $nproduct)
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}"
-                                    alt="{{ $nproduct->name }}">
                             </div>
-                            <div class="content pt-10">
-                                <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
-                                @if ($nproduct->sale_price > 0)
-                                    <p class="price mb-0 mt-5">Bs {{ $nproduct->sale_price }}</p>
-                                @else
-                                    <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
-                                @endif
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:90%"></div>
+                        </div>
+                        {{-- <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
+                        Filtrar</a> --}}
+                    </div>
+                    <!-- Product sidebar Widget -->
+                    <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                        <div class="widget-header position-relative mb-20 pb-10">
+                            <h5 class="widget-title mb-10">Nuevos productos</h5>
+                            <div class="bt-1 border-color-1"></div>
+                        </div>
+                        @foreach ($nproducts as $nproduct)
+                            <div class="single-post clearfix">
+                                <div class="image">
+                                    <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}"
+                                        alt="{{ $nproduct->name }}">
+                                </div>
+                                <div class="content pt-10">
+                                    <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
+                                    @if ($nproduct->sale_price > 0)
+                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->sale_price }}</p>
+                                    @else
+                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
+                                    @endif
+                                    <div class="product-rate">
+                                        <div class="product-rating" style="width:90%"></div>
+                                    </div>
                                 </div>
                             </div>
+                        @endforeach
+                    </div>
+                    <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
+                        <img src="{{ 'assets/imgs/banner/banner-11.jpg' }}" alt="">
+                        <div class="banner-text">
+                            <span>Women Zone</span>
+                            <h4>Save 17% on <br>Office Dress</h4>
+                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
-                    @endforeach
-                </div>
-                <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
-                    <img src="{{ 'assets/imgs/banner/banner-11.jpg' }}" alt="">
-                    <div class="banner-text">
-                        <span>Women Zone</span>
-                        <h4>Save 17% on <br>Office Dress</h4>
-                        <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
-</div>
 </div>
 </section>
 </main>

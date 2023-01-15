@@ -226,6 +226,7 @@ class AdminEditProductComponent extends Component
         }
 
         $product->category_id = $this->category_id;
+        $product->subcategory_id = $this->subcategory_id;
         $product->brand_id = $this->brand_id;
         $product->color = $this->color;
         // borrando las tallas y cantidades anteriores

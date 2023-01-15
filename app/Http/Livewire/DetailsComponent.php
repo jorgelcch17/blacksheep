@@ -43,7 +43,15 @@ class DetailsComponent extends Component
 
     public function store($product_id, $product_name, $product_price)
     {
-        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price)->associate('\App\Models\Product');
+        // verificar si se seleccionó un tamaño, caso contrario no se puede agregar al carrito
+        if($this->selected_size == null){
+            session()->flash('error_message', 'Debe seleccionar un tamaño');
+            return;
+        }
+        $size = Size::find($this->selected_size);
+        $size_name = $size->size;
+        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price, ['size' => $size_name])->associate('\App\Models\Product');
+        // dd(Cart::instance('cart')->content());
         session()->flash('success_message', 'Producto añadido al carrito');
         return redirect()->route('shop.cart');
     }

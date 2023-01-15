@@ -174,7 +174,13 @@
                                                 <li><a href="#">XL</a></li>
                                                 <li><a href="#">XXL</a></li> --}}
                                             </ul>
+                                            {{-- mensaje en rojo indicando que debe elejir una talla --}}
                                         </div>
+                                        @if(Session::has('error_message'))
+                                            <div class="text-danger" role="alert">
+                                                {{ Session::get('error_message') }}
+                                            </div>
+                                        @endif
                                         <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                         <div class="detail-extralink">
                                             {{-- <div class="detail-qty border radius">
@@ -197,12 +203,13 @@
                                                         wire:click.prevent="increaseQuantity">
                                                 </div>
                                             </div>
+                                            {{ $selected_size }}
                                             <div class="product-extra-link2">
-                                                {{-- <button type="button" class="button button-add-to-cart"
+                                                <button type="button" class="button button-add-to-cart"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir
-                                                    al carrito</button> --}}
-                                                <button onclick="window.open('https://wa.me/59175853156', '_blank')"
-                                                    class="button button-add-to-cart">Comprar por whatsapp</button>
+                                                    al carrito</button>
+                                                {{-- <button onclick="window.open('https://wa.me/59175853156', '_blank')"
+                                                    class="button button-add-to-cart">Comprar por whatsapp</button> --}}
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                     href="#"
                                                     wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i

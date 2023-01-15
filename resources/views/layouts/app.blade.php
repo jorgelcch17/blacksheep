@@ -93,7 +93,7 @@
 
                                 @livewire('wishlist-icon-component')
 
-                                {{-- @livewire('cart-icon-component') --}}
+                                @livewire('cart-icon-component')
                             </div>
                         </div>
                     </div>
