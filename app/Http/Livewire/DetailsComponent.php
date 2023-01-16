@@ -15,9 +15,10 @@ class DetailsComponent extends Component
     public $selected_size = null;
     public $qty_for_selected_size = null;
 
-    public function mount($slug){
+    public function mount($id, $slug){
+        $this->id = $id;
         $this->slug = $slug;
-        $product = Product::where('slug', $slug)->first();
+        $product = Product::where('id', $id)->first();
         // calculamos la cantidad de productos disponibles sumando las cantidades de todos los tamaños
         $pquantity = $product->sizes->sum('quantity');
         if($pquantity == 0){
@@ -62,10 +63,10 @@ class DetailsComponent extends Component
         $this->emitTo('wishlist-icon-component', 'refreshComponent');
     }
 
-    public function goToVariant($slug)
+    public function goToVariant($id, $slug)
     {
         // $this->slug = $slug;
-        return redirect()->route('product.details', ['slug' => $slug]);
+        return redirect()->route('product.details', ['id'=>$id, 'slug' => $slug]);
     }
 
     public function render()

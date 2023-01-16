@@ -142,7 +142,7 @@
                                             <strong class="mr-10">Color</strong>
                                             <ul class="list-filter size-filter font-small me-1">
                                                 @foreach ($pvariants as $pvariant)
-                                                    <li wire:click="goToVariant('{{ $pvariant->slug }}')"
+                                                    <li wire:click="goToVariant('{{ $pvariant->id }}','{{ $pvariant->slug }}')"
                                                         class="{{ $pvariant->color == $product->color ? 'active' : '' }}">
                                                         <a href="#">{{ $pvariant->color }}</a>
                                                     </li>
@@ -595,7 +595,7 @@
                                                 <div class="product-cart-wrap small hover-up">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href="{{ route('product.details', $rproduct->slug) }}"
+                                                            <a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}"
                                                                 tabindex="0">
                                                                 <img class="default-img"
                                                                     src="{{ asset('assets/imgs/products') }}/{{ $rproduct->image }}"
@@ -634,7 +634,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap">
-                                                        <h2><a href="{{ route('product.details', $rproduct->slug) }}"
+                                                        <h2><a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}"
                                                                 tabindex="0">{{ $rproduct->name }}</a></h2>
                                                         <div class="rating-result" title="90%">
                                                             <span>
@@ -683,7 +683,7 @@
                                     </div>
                                     <div class="content pt-10">
                                         <h5><a
-                                                href="{{ route('product.details', $nproduct->slug) }}">{{ $nproduct->name }}</a>
+                                                href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $nproduct->name }}</a>
                                         </h5>
                                         <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
                                         <div class="product-rate">

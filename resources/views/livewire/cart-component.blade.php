@@ -39,8 +39,8 @@
                                                         src="{{ asset('assets/imgs/products') }}/{{ $item->model->image }}"
                                                         alt="#"></td>
                                                 <td class="product-des product-name text-start">
-                                                    <h4 class="product-name"><a
-                                                            href="{{ route('product.details', $item->model->slug) }}">{{ $item->model->name }}</a>
+                                                    <h4 class="product-name">
+                                                        <a href="{{ route('product.details', ['id' => $item->model->id, 'slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
                                                     </h4>
                                                     {{-- <p>{{ $item->model->subcategory->name }}</p> --}}
                                                     <p style="font-size:14px;"><strong>Color:</strong> {{ $item->model->color }}</p>

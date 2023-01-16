@@ -109,7 +109,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('product.details', $product->slug) }}">
+                                                <a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">
                                                     <img class="default-img"
                                                         src="{{ asset('assets/imgs/products') }}/{{ $product->image }}"
                                                         alt="{{ $product->name }}">
@@ -146,7 +146,7 @@
                                                 <a href="shop.html">{{ $product->category->name }}</a>
                                             </div>
                                             <h2><a
-                                                    href="{{ route('product.details', $product->slug) }}">{{ $product->name }}</a>
+                                                    href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->name }}</a>
                                             </h2>
                                             <div class="rating-result" title="90%">
                                                 <span>

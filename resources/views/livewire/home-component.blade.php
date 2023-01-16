@@ -106,7 +106,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('product.details', $fproduct->slug) }}">
+                                                <a href="{{ route('product.details', ['id'=>$fproduct->id, 'slug'=>$fproduct->slug]) }}">
                                                     <img class="default-img"
                                                         src="{{ asset('assets/imgs/products') }}/{{ $fproduct->image }}"
                                                         alt="">
@@ -143,7 +143,7 @@
                                                 <a href="shop.html">Clothing</a>
                                             </div>
                                             <h2><a
-                                                    href="{{ route('product.details', $fproduct->slug) }}">{{ $fproduct->name }}</a>
+                                                    href="{{ route('product.details', ['id'=>$fproduct->id, 'slug'=>$fproduct->slug]) }}">{{ $fproduct->name }}</a>
                                             </h2>
                                             <div class="rating-result" title="90%">
                                                 <span>
@@ -975,7 +975,7 @@
                             <div class="product-cart-wrap small hover-up">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="{{ route('product.details', $lproduct->slug) }}">
+                                        <a href="{{ route('product.details', ['id'=>$lproduct->id, 'slug'=>$lproduct->slug]) }}">
                                             <img class="default-img"
                                                 src="{{ asset('assets/imgs/products') }}/{{ $lproduct->image }}"
                                                 alt="{{ $lproduct->name }}">

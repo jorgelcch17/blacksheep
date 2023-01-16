@@ -54,7 +54,7 @@ Route::get('/', HomeComponent::class)->name('home');
 
 Route::get('/tienda', ShopComponent::class)->name('shop');
 
-Route::get('/producto/{slug}', DetailsComponent::class)->name('product.details');
+Route::get('/producto/{id}/{slug}', DetailsComponent::class)->name('product.details'); 
 
 Route::get('/carrito', CartComponent::class)->name('shop.cart');
 

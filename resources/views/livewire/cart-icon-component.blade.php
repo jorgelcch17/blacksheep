@@ -6,15 +6,16 @@
         @endif
     </a>
     <div class="cart-dropdown-wrap cart-dropdown-hm2">
+        @if (Cart::instance('cart')->count() > 0)
         <ul>
             @foreach (Cart::instance('cart')->content() as $item)
                 <li>
                     <div class="shopping-cart-img">
-                        <a href="{{ route('product.details', $item->model->slug) }}"><img alt="{{ $item->model->name }}"
+                        <a href="{{ route('product.details', ['id'=>$item->model->id, 'slug'=>$item->model->slug]) }}"><img alt="{{ $item->model->name }}"
                                 src="{{ asset('assets/imgs/products') }}/{{ $item->model->image }}"></a>
                     </div>
                     <div class="shopping-cart-title">
-                        <h4><a href="{{ route('product.details', $item->model->slug) }}">{{ substr($item->model->name, 0, 20) }}...</a></h4>
+                        <h4><a href="{{ route('product.details', ['id'=>$item->model->id, 'slug'=>$item->model->slug]) }}">{{ substr($item->model->name, 0, 20) }}...</a></h4>
                         <h3><span>{{ $item->qty }} × </span>Bs {{ $item->model->regular_price }}</h3>
                     </div>
                     {{-- <div class="shopping-cart-delete">
@@ -23,6 +24,8 @@
                 </li>
             @endforeach
         </ul>
+            
+        @endif
         <div class="shopping-cart-footer">
             <div class="shopping-cart-total">
                 <h4>Total <span>Bs {{ Cart::instance('cart')->total() }}</span></h4>
