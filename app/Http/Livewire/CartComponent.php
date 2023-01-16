@@ -144,7 +144,7 @@ class CartComponent extends Component
 
         $this->deleteCart(Auth::user()->email);
 
-        return redirect()->route('shop');
+        return redirect()->route('checkout', ['order_id' => $order->id]);
     }
 
     public function deleteCart($user_id)

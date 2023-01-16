@@ -181,6 +181,7 @@
                                             @if (Auth::user()->utype === 'ADM')
                                                 <ul class="sub-menu">
                                                     <li><a class="{{ request() -> routeIs('admin.dashboard') ? 'fw-bold' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                    <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.products') ? 'fw-bold' : '' }}" href="{{ route('admin.products') }}">Productos</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.categories') ? 'fw-bold' : '' }}" href="{{ route('admin.categories') }}">Categorías</a></li>
                                                     <li><a class="{{ request() -> routeIs('admin.home.slider') ? 'fw-bold' : '' }}" href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a></li>

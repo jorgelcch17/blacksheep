@@ -70,8 +70,6 @@ Route::get('/contact', ContactComponent::class)->name('contact');
 
 Route::get('/about', AboutComponent::class)->name('about');
 
-Route::get('/order/{order_id}/payment', OrderComponent::class)->name('checkout');
-
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -108,6 +106,8 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/tipos-de-envio', AdminShippingTypeComponent::class)->name('admin.shipping.types');
     Route::get('/admin/cupones', AdminCouponsComponent::class)->name('admin.coupons');
     Route::get('/admin/etiquetas', AdminTagComponent::class)->name('admin.tags');
+
+    Route::get('/order/{order_id}/checkout', CheckoutComponent::class)->name('checkout');
 });
 
 require __DIR__.'/auth.php';

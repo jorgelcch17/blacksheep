@@ -47,4 +47,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class);
     }
+    
+    // relacion con direcciones
+    public function addresses()
+    {
+        return $this->hasMany(ShippingAddress::class);
+    }
 }

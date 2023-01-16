@@ -8,6 +8,8 @@ class CheckoutComponent extends Component
 {
     public function render()
     {
-        return view('livewire.checkout-component');
+        // obteniendo las direcciones del usuario
+        $addresses = auth()->user()->addresses;
+        return view('livewire.checkout-component', compact('addresses'));
     }
 }
