@@ -8,6 +8,7 @@ use App\Models\Product;
 use Cart;
 use App\Models\Category;
 use App\Models\Brand;
+use Illuminate\Support\Facades\Auth;
 
 class HomeComponent extends Component
 {
@@ -25,6 +26,14 @@ class HomeComponent extends Component
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8); // products featured
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(4); // cattegories featured
         $brands = Brand::where('status', 1)->inRandomOrder()->get();
+
+        // resturando el carrito de compras y deseos en caso de que el usuario este autenticado
+        if(Auth::check())
+        {
+            Cart::instance('cart')->restore(Auth::user()->email);
+            Cart::instance('wishlist')->restore(Auth::user()->email);
+        }
+
          return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories', 'brands'));
     }
 }

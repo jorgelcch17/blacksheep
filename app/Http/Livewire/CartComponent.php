@@ -6,6 +6,11 @@ use Livewire\Component;
 use Cart;
 use App\Models\Coupon;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\models\Order;
+// use DB for database;
+use DB;
+
 
 class CartComponent extends Component
 {
@@ -83,6 +88,71 @@ class CartComponent extends Component
         }
     }
 
+    public function setAmountForCheckout()
+    {
+        if(!Cart::instance('cart')->count() > 0)
+        {
+            session()->forget('checkout');
+            return;
+        }
+
+        if(session()->has('coupon'))
+        {
+            session()->put('checkout', [
+                'discount' => $this->discount,
+                'subtotal' => $this->subtotalAfterDiscount,
+                'tax' => $this->taxAfterDiscount,
+                'total' => $this->totalAfterDiscount,
+            ]);
+        }
+        else
+        {
+            session()->put('checkout', [
+                'discount' => 0,
+                'subtotal' => Cart::instance('cart')->subtotal(),
+                'tax' => Cart::instance('cart')->tax(),
+                'total' => Cart::instance('cart')->total(),
+            ]);
+        }
+    }
+
+    public function createOrder()
+    {
+        // verificando si el usuario está autenticado
+        if(!Auth::check())
+        {
+            return redirect()->route('login');
+        }
+        $order = new Order();
+        $order->user_id = Auth::user()->id;
+        $order->subtotal = session()->get('checkout')['subtotal'];
+        $order->discount = session()->get('checkout')['discount'];
+        $order->tax = session()->get('checkout')['tax'];
+        $order->total = session()->get('checkout')['total'];
+
+        $order->content = Cart::instance('cart')->content();
+
+        $order->save();
+
+        foreach(Cart::instance('cart')->content() as $item)
+        {
+            discount($item);
+        }
+
+        // eliminando el carrito de compras, instancia cart
+        Cart::instance('cart')->destroy();
+
+        $this->deleteCart(Auth::user()->email);
+
+        return redirect()->route('shop');
+    }
+
+    public function deleteCart($user_id)
+    {
+        // eliminando el carrito guardado en la base de datos
+        $cart = DB::table('shoppingcart')->where('identifier', $user_id)->delete();
+    }
+
     public function render()
     {
         if(session()->has('coupon'))
@@ -95,6 +165,13 @@ class CartComponent extends Component
             {
                 $this->calculateDiscount();
             }
+        }
+
+        $this->setAmountForCheckout();
+
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
         }
 
         return view('livewire.cart-component');

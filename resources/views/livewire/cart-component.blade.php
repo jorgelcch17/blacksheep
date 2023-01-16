@@ -199,8 +199,8 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <a href="checkout.html" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
-                                        Ir a pagar</a>
+                                   <a href="#" wire:click.prevent="createOrder" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
+                                        Crear Orden</a>
                                 </div>
                             </div>
                         </div>

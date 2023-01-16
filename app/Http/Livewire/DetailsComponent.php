@@ -50,7 +50,7 @@ class DetailsComponent extends Component
         }
         $size = Size::find($this->selected_size);
         $size_name = $size->size;
-        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price, ['size' => $size_name])->associate('\App\Models\Product');
+        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price, ['code_size' => $size->id, 'size' => $size_name])->associate('\App\Models\Product');
         // dd(Cart::instance('cart')->content());
         session()->flash('success_message', 'Producto añadido al carrito');
         return redirect()->route('shop.cart');
