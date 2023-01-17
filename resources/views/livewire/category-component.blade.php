@@ -7,6 +7,13 @@
         nav .hidden {
             display: block !important;
         }
+        .selected-tag {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
     </style>
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -88,7 +95,8 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">
+                                                <a
+                                                    href="{{ route('product.details', ['id' => $product->id, 'slug' => $product->slug]) }}">
                                                     <img class="default-img"
                                                         src="{{ asset('assets/imgs/shop/product-') }}{{ $product->id }}-1.jpg"
                                                         alt="{{ $product->name }}">
@@ -155,12 +163,44 @@
                             <div class="col-lg-12 col-mg-6"></div>
                             <div class="col-lg-12 col-mg-6"></div>
                         </div>
-                        <div class="widget-category mb-30">
+                        <div class="widget-category mb-30" x-data="{ openCategory: null }">
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Categorias</h5>
-                            <ul class="categories">
+                            {{-- <ul class="categories">
                                 @foreach ($categories as $category)
                                     <li><a
                                             href="{{ route('product.category', $category->slug) }}">{{ $category->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul> --}}
+                            <ul class="categories">
+                                @foreach ($categories as $category)
+                                    <li>
+                                        <a href="{{ route('product.category', $category->slug) }}">
+                                            {{ $category->name }}
+                                        </a>
+                                        <a href="#"
+                                            @click.prevent="openCategory === {{ $category->id }} ? openCategory = null : openCategory = {{ $category->id }}"><svg
+                                                style="width:24px;height:24px" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+                                            </svg>
+                                        </a>
+                                        <ul class="sub-menu" x-transition:enter="transition ease-out duration-100"
+                                            x-transition:enter-start="opacity-0 transform"
+                                            x-transition:enter-end="opacity-100 transform"
+                                            x-transition:leave="transition ease-in duration-75"
+                                            x-transition:leave-start="opacity-100 transform"
+                                            x-transition:leave-end="opacity-0 transform"
+                                            x-show="openCategory === {{ $category->id }}">
+                                            @foreach ($category->subcategories as $subcategory)
+                                                <li>
+                                                    <a href="{{ route('product.category', ['category_slug' => $category->slug, 'scategory_slug' => $subcategory->slug]) }}"
+                                                        style="padding-left: 20px;">
+                                                        {{ $subcategory->name }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
                                     </li>
                                 @endforeach
                             </ul>
@@ -173,110 +213,86 @@
                             </div>
                             <div class="price-filter">
                                 <div class="price-filter-inner">
-                                    <div id="slider-range"></div>
+                                    <div id="slider-range" wire:ignore></div>
                                     <div class="price_slider_amount">
                                         <div class="label-input">
-                                            <span>Rango:</span><input type="text" id="amount" name="price"
-                                                placeholder="Add Your Price">
+                                            <span>Rango:</span><span class="text-info">Bs {{ $min_value }}</span>
+                                            <span class="text-info">Bs {{ $max_value }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group">
                                 <div class="list-group-item mb-10 mt-10">
-                                    <label class="fw-900">Color</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox1" value="">
-                                        <label class="form-check-label" for="exampleCheckbox1"><span>Red
-                                                (56)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox2" value="">
-                                        <label class="form-check-label" for="exampleCheckbox2"><span>Green
-                                                (78)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox3" value="">
-                                        <label class="form-check-label" for="exampleCheckbox3"><span>Blue
-                                                (54)</span></label>
-                                    </div>
-                                    <label class="fw-900 mt-15">Condición del producto</label>
-                                    <div class="custome-checkbox">
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox11" value="">
-                                        <label class="form-check-label" for="exampleCheckbox11"><span>Nuevo
-                                                (1506)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox21" value="">
-                                        <label class="form-check-label" for="exampleCheckbox21"><span>Reacondicionado
-                                                (27)</span></label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" name="checkbox"
-                                            id="exampleCheckbox31" value="">
-                                        <label class="form-check-label" for="exampleCheckbox31"><span>Usado
-                                                (45)</span></label>
-                                    </div>
+                                    @foreach ($tags as $tag)
+                                        <div class="d-inline-block mb-1">
+                                            <span class="selected-tag">
+                                                {{ $tag['name'] }}
+                                            </span>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <a href="shop.html" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i>
                                 Filtrar</a>
                         </div>
                         <!-- Product sidebar Widget -->
-                        <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
-                            <div class="widget-header position-relative mb-20 pb-10">
-                                <h5 class="widget-title mb-10">Nuevos Productos</h5>
-                                <div class="bt-1 border-color-1"></div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-3.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h5><a href="product-details.html">Chen Cardigan</a></h5>
-                                    <p class="price mb-0 mt-5">$99.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:90%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-4.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Chen Sweater</a></h6>
-                                    <p class="price mb-0 mt-5">$89.50</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:80%"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="single-post clearfix">
-                                <div class="image">
-                                    <img src="{{ 'assets/imgs/shop/thumbnail-5.jpg' }}" alt="#">
-                                </div>
-                                <div class="content pt-10">
-                                    <h6><a href="product-details.html">Colorful Jacket</a></h6>
-                                    <p class="price mb-0 mt-5">$25</p>
-                                    <div class="product-rate">
-                                        <div class="product-rating" style="width:60%"></div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                        <div class="widget-header position-relative mb-20 pb-10">
+                            <h5 class="widget-title mb-10">Nuevos productos</h5>
+                            <div class="bt-1 border-color-1"></div>
                         </div>
-                        <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
+                        @foreach ($nproducts as $nproduct)
+                            <div class="single-post clearfix">
+                                <div class="image">
+                                    <img src="{{ asset('assets/imgs/products') }}/{{ $nproduct->image }}"
+                                        alt="{{ $nproduct->name }}">
+                                </div>
+                                <div class="content pt-10">
+                                    <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
+                                    @if ($nproduct->sale_price > 0)
+                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->sale_price }}</p>
+                                    @else
+                                        <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
+                                    @endif
+                                    {{-- <div class="product-rate">
+                                        <div class="product-rating" style="width:90%"></div>
+                                    </div> --}}
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                        {{-- <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
                             <img src="{{ 'assets/imgs/banner/banner-11.jpg' }}" alt="">
                             <div class="banner-text">
                                 <span>Women Zone</span>
                                 <h4>Save 17% on <br>Office Dress</h4>
                                 <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </section>
     </main>
 </div>
+
+@push('scripts')
+    <script>
+        var sliderrange = $('#slider-range');
+        var amountprice = $('#amount');
+        $(function() {
+            sliderrange.slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [0, 1000],
+                slide: function(event, ui) {
+                    // amountprice.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                    @this.set('min_value', ui.values[0]);
+                    @this.set('max_value', ui.values[1]);
+                }
+            });
+        });
+    </script>
+@endpush

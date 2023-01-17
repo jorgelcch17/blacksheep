@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <!-- End Gallery -->
-                                    <div class="social-icons single-share">
+                                    {{-- <div class="social-icons single-share">
                                         <ul class="text-grey-5 d-inline-block">
                                             <li><strong class="mr-10">Compartir esto:</strong></li>
                                             <li class="social-facebook"><a href="#"><img
@@ -87,7 +87,7 @@
                                                         src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}"
                                                         alt=""></a></li>
                                         </ul>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <div class="col-md-6 col-sm-12 col-xs-12">
                                     <div class="detail-info">
@@ -102,25 +102,27 @@
                                                     <div class="product-rating" style="width:90%">
                                                     </div>
                                                 </div>
-                                                <span class="font-small ml-5 text-muted"> (25 reseñas)</span>
+                                                <span class="font-small ml-5 text-muted"> ({{ rand(1, 20) }}
+                                                    reseñas)</span>
                                             </div>
                                         </div>
                                         <div class="clearfix product-price-cover">
                                             <div class="product-price primary-color float-left">
                                                 @if ($product->sale_price > 0)
-                                                <ins><span class="text-brand">Bs{{ $product->sale_price }}</span></ins>
-                                                    <ins><span class="old-price font-md ml-15">Bs{{ $product->regular_price }}</span></ins>
+                                                    <ins><span
+                                                            class="text-brand">Bs{{ $product->sale_price }}</span></ins>
+                                                    <ins><span
+                                                            class="old-price font-md ml-15">Bs{{ $product->regular_price }}</span></ins>
                                                     <span class="save-price  font-md color3 ml-15">
                                                         {{-- calculando el porcentaje de descuento --}}
                                                         @php
-                                                            $discount = ($product->regular_price - $product->sale_price) * 100 / $product->regular_price;
+                                                            $discount = (($product->regular_price - $product->sale_price) * 100) / $product->regular_price;
                                                         @endphp
                                                         {{ round($discount) }}% Desc.
                                                     </span>
-
                                                 @else
-                                                <ins><span class="text-brand">Bs
-                                                        {{ $product->regular_price }}</span></ins>
+                                                    <ins><span class="text-brand">Bs
+                                                            {{ $product->regular_price }}</span></ins>
                                                 @endif
                                             </div>
                                         </div>
@@ -176,7 +178,7 @@
                                             </ul>
                                             {{-- mensaje en rojo indicando que debe elejir una talla --}}
                                         </div>
-                                        @if(Session::has('error_message'))
+                                        @if (Session::has('error_message'))
                                             <div class="text-danger" role="alert">
                                                 {{ Session::get('error_message') }}
                                             </div>
@@ -205,11 +207,11 @@
                                             </div>
                                             {{ $selected_size }}
                                             <div class="product-extra-link2">
-                                                <button type="button" class="button button-add-to-cart"
+                                                {{-- <button type="button" class="button button-add-to-cart"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir
-                                                    al carrito</button>
-                                                {{-- <button onclick="window.open('https://wa.me/59175853156', '_blank')"
-                                                    class="button button-add-to-cart">Comprar por whatsapp</button> --}}
+                                                    al carrito</button> --}}
+                                                <button onclick="window.open('https://wa.me/59175853156', '_blank')"
+                                                    class="button button-add-to-cart">Comprar por whatsapp</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                     href="#"
                                                     wire:click.prevent="addToWishlist({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"><i
@@ -220,9 +222,14 @@
                                         </div>
                                         <ul class="product-meta font-xs color-grey mt-50">
                                             <li class="mb-5">SKU: <a href="#">{{ $product->SKU }}</a></li>
-                                            <li class="mb-5">Etiquetas: <a href="#" rel="tag">Cloth</a>,
-                                                <a href="#" rel="tag">Women</a>, <a href="#"
-                                                    rel="tag">Dress</a>
+                                            <li class="mb-5">Etiquetas:
+                                                @if ($product->tags->count() > 0)
+                                                    @foreach ($product->tags as $tag)
+                                                        <a href="#" rel="tag">{{ $tag->name }}</a>,
+                                                    @endforeach
+                                                @else
+                                                    <a href="#" style="color: black;">Sin etiquetas</a>
+                                                @endif
                                             </li>
                                             <li>Disponibilidad:
                                                 @if ($qty_for_selected_size > 0 && $qty_for_selected_size !== 'No disponible')
@@ -595,7 +602,7 @@
                                                 <div class="product-cart-wrap small hover-up">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}"
+                                                            <a href="{{ route('product.details', ['id' => $product->id, 'slug' => $product->slug]) }}"
                                                                 tabindex="0">
                                                                 <img class="default-img"
                                                                     src="{{ asset('assets/imgs/products') }}/{{ $rproduct->image }}"
@@ -615,31 +622,19 @@
                                                                 @endforeach
                                                             </a>
                                                         </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view"
-                                                                class="action-btn small hover-up"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#quickViewModal"><i
-                                                                    class="fi-rs-search"></i></a>
-                                                            <a aria-label="Add To Wishlist"
-                                                                class="action-btn small hover-up" href="wishlist.php"
-                                                                tabindex="0"><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label="Compare" class="action-btn small hover-up"
-                                                                href="compare.php" tabindex="0"><i
-                                                                    class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div
+                                                        {{-- <div
                                                             class="product-badges product-badges-position product-badges-mrg">
                                                             <span class="hot">En demanda</span>
-                                                        </div>
+                                                        </div> --}}
                                                     </div>
                                                     <div class="product-content-wrap">
-                                                        <h2><a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}"
+                                                        <h2><a href="{{ route('product.details', ['id' => $product->id, 'slug' => $product->slug]) }}"
                                                                 tabindex="0">{{ $rproduct->name }}</a></h2>
-                                                        <div class="rating-result" title="90%">
+                                                        {{-- <div class="rating-result" title="90%">
                                                             <span>
+                                                                90%
                                                             </span>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="product-price">
                                                             <span>Bs {{ $rproduct->regular_price }} </span>
                                                             {{-- <span class="old-price">$245.8</span> --}}
@@ -647,30 +642,16 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach 
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                        <div class="widget-category mb-30">
-                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Etiquetas</h5>
-                            <ul class="categories">
-                                @foreach($product->tags as $tag)
-                                    <li><a class="selected-tag text-white" href="#">{{ $tag->name }}</a></li>
-                                @endforeach
-                                {{-- <li><a href="shop.html">Shoes & Bags</a></li>
-                                <li><a href="shop.html">Blouses & Shirts</a></li>
-                                <li><a href="shop.html">Dresses</a></li>
-                                <li><a href="shop.html">Swimwear</a></li>
-                                <li><a href="shop.html">Beauty</a></li>
-                                <li><a href="shop.html">Jewelry & Watch</a></li>
-                                <li><a href="shop.html">Accessories</a></li> --}}
-                            </ul>
-                        </div>
                         <!-- Product sidebar Widget -->
-                        <div class="sidebar-widget product-sidebar sticky-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                        <div
+                            class="sidebar-widget product-sidebar sticky-sidebar  mb-30 p-30 bg-grey border-radius-10">
                             <div class="widget-header position-relative mb-20 pb-10">
                                 <h5 class="widget-title mb-10">Nuevos Productos</h5>
                                 <div class="bt-1 border-color-1"></div>
@@ -683,12 +664,12 @@
                                     </div>
                                     <div class="content pt-10">
                                         <h5><a
-                                                href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $nproduct->name }}</a>
+                                                href="{{ route('product.details', ['id' => $product->id, 'slug' => $product->slug]) }}">{{ $nproduct->name }}</a>
                                         </h5>
                                         <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
-                                        <div class="product-rate">
+                                        {{-- <div class="product-rate">
                                             <div class="product-rating" style="width:90%"></div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                             @endforeach

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeComponent extends Component
 {
+    public $tabs = 2;
+
     public function store($product_id, $product_name, $product_price)
     {
         Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\Product');
@@ -24,8 +26,16 @@ class HomeComponent extends Component
         $slides = HomeSlider::where('status', 1)->get();
         $lproducts = Product::orderBy('created_at', 'DESC')->get(); // Latest Products for Home Page
         $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8); // products featured
-        $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(4); // cattegories featured
+        $popular_products = Product::inRandomOrder()->get()->take(8); /* obteniendo 8 productos aleatorios */
+        // obteniendo los ultimo 8 productos recientes
+        $recent_products = Product::orderBy('created_at', 'DESC')->get()->take(8);
+        $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(7); // cattegories featured
         $brands = Brand::where('status', 1)->inRandomOrder()->get();
+
+        if($fproducts->count() > 0)
+        {
+            $this->tabs = 1;
+        }
 
         // resturando el carrito de compras y deseos en caso de que el usuario este autenticado
         if(Auth::check())
@@ -33,7 +43,6 @@ class HomeComponent extends Component
             Cart::instance('cart')->restore(Auth::user()->email);
             Cart::instance('wishlist')->restore(Auth::user()->email);
         }
-
-         return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories', 'brands'));
+         return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories', 'brands', 'popular_products', 'recent_products'));
     }
 }

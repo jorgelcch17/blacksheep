@@ -7,13 +7,19 @@ use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Category;
 use Cart;
+use App\Models\Subcategory;
+use App\Models\Tag;
 
 class CategoryComponent extends Component
 {
     use WithPagination;
     public $pageSize = 12;
     public $orderBy = 'por defecto';
-    public $slug;
+    public $category_slug;
+    public $scategory_slug;
+
+    public $min_value = 0;
+    public $max_value = 1000;
 
     public function store($product_id, $product_name, $product_price)
     {
@@ -32,27 +38,47 @@ class CategoryComponent extends Component
         $this->orderBy = $order;
     }
 
-    public function mount($slug){
-        $this->slug = $slug;   
+    public function mount($category_slug, $scategory_slug=null){
+        $this->category_slug = $category_slug;  
+        $this->scategory_slug = $scategory_slug; 
     }
 
     public function render()
     {
-        $category = Category::where('slug', $this->slug)->first();
-        $category_id = $category->id;
-        $category_name = $category->name;
+        $category_id = null;
+        $category_name = "";
+        $filter = "";
+        if($this->scategory_slug)
+        {
+            $scategory = Subcategory::where('slug', $this->scategory_slug)->first();
+
+            $category_id = $scategory->id;
+            $category_name = $scategory->name;
+            $filter = "sub";
+        }
+        else
+        {
+            $category = Category::where('slug', $this->category_slug)->first();
+            $category_id = $category->id;
+            $category_name = $category->name;
+            $filter = "";
+        }
+
+        // $category = Category::where('slug', $this->category_slug)->first();
         if($this->orderBy == 'Precio: Bajo a alto')
         {
-            $products = Product::where('category_id', $category_id)->orderBy('regular_price', 'ASC')->paginate($this->pageSize);    
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'ASC')->paginate($this->pageSize);    
         }elseif($this->orderBy == 'Precio: Alto a bajo'){
-            $products = Product::where('category_id', $category_id)->orderBy('regular_price', 'DESC')->paginate($this->pageSize);  
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'DESC')->paginate($this->pageSize);  
         }elseif($this->orderBy == 'mas recientes'){
-            $products = Product::where('category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
         }else{
-            $products = Product::where('category_id', $category_id)->paginate($this->pageSize);
+            $products = Product::where($filter.'category_id', $category_id)->paginate($this->pageSize);
         }
 
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('livewire.category-component', compact('products', 'categories', 'category_name'));
+        $tags = Tag::all();
+        $nproducts = Product::latest()->take(4)->get();
+        return view('livewire.category-component', compact('products', 'categories', 'category_name', 'tags', 'nproducts'));
     }
 }

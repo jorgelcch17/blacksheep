@@ -9,6 +9,7 @@ use App\Models\Category;
 use Cart;
 use App\Models\Tag;
 
+
 class ShopComponent extends Component
 {
     use WithPagination;

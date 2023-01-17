@@ -128,7 +128,7 @@
                                                     @endforeach
                                                 </a>
                                             </div>
-                                            <div class="product-action-1">
+                                            {{-- <div class="product-action-1">
                                                 <a aria-label="Quick view" class="action-btn hover-up"
                                                     data-bs-toggle="modal" data-bs-target="#quickViewModal">
                                                     <i class="fi-rs-search"></i></a>
@@ -136,7 +136,7 @@
                                                     href="wishlist.php"><i class="fi-rs-heart"></i></a>
                                                 <a aria-label="Compare" class="action-btn hover-up"
                                                     href="compare.php"><i class="fi-rs-shuffle"></i></a>
-                                            </div>
+                                            </div> --}}
                                             {{-- <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">En demanda</span>
                                             </div> --}}
@@ -148,11 +148,11 @@
                                             <h2><a
                                                     href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->name }}</a>
                                             </h2>
-                                            <div class="rating-result" title="90%">
+                                            {{-- <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>90%</span>
                                                 </span>
-                                            </div>
+                                            </div> --}}
                                             <div class="product-price">
                                                 @if ($product->sale_price > 0)
                                                     <span>Bs {{ $product->sale_price }} </span>
@@ -173,9 +173,9 @@
                                                         wire:click.prevent="addToWishlist({{ $product->id }},'{{ $product->name }}', {{ $product->regular_price }})"><i
                                                             class="fi-rs-heart"></i></a>
                                                 @endif
-                                                <a aria-label="Agregar al carrito" class="action-btn hover-up"
+                                                {{-- <a aria-label="Agregar al carrito" class="action-btn hover-up"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})"
-                                                    href="shop-cart.php"><i class="fi-rs-shopping-bag-add"></i></a>
+                                                    href="shop-cart.php"><i class="fi-rs-shopping-bag-add"></i></a> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -228,7 +228,7 @@
                                             x-show="openCategory === {{ $category->id }}">
                                             @foreach ($category->subcategories as $subcategory)
                                                 <li>
-                                                    <a href="{{ route('product.category', $subcategory->slug) }}"
+                                                    <a href="{{ route('product.category', ['category_slug' => $category->slug, 'scategory_slug'=>$subcategory->slug]) }}"
                                                         style="padding-left: 20px;">
                                                         {{ $subcategory->name }}
                                                     </a>
@@ -314,19 +314,19 @@
                         @foreach ($nproducts as $nproduct)
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="{{ 'assets/imgs/products' }}/{{ $nproduct->image }}"
+                                    <img src="{{ asset('assets/imgs/products') }}/{{ $nproduct->image }}"
                                         alt="{{ $nproduct->name }}">
                                 </div>
                                 <div class="content pt-10">
-                                    <h5><a href="product-details.html">{{ $nproduct->name }}</a></h5>
+                                    <h5><a href="{{ route('product.details', ['id'=>$nproduct->id, 'slug'=>$nproduct->slug]) }}">{{ $nproduct->name }}</a></h5>
                                     @if ($nproduct->sale_price > 0)
                                         <p class="price mb-0 mt-5">Bs {{ $nproduct->sale_price }}</p>
                                     @else
                                         <p class="price mb-0 mt-5">Bs {{ $nproduct->regular_price }}</p>
                                     @endif
-                                    <div class="product-rate">
+                                    {{-- <div class="product-rate">
                                         <div class="product-rating" style="width:90%"></div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         @endforeach

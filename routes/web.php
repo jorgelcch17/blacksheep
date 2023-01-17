@@ -62,7 +62,7 @@ Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 
 Route::get('/checkout', CheckoutComponent::class)->name('shop.checkout');
 
-Route::get('/product-category/{slug}', CategoryComponent::class)->name('product.category');
+Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
 
 Route::get('/search', SearchComponent::class)->name('product.search');
 

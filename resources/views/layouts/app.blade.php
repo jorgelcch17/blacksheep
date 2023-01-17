@@ -45,9 +45,9 @@
                         <div class="text-center">
                             <div id="news-flash" class="d-inline-block">
                                 <ul>
-                                    <li>Obtén dispositivos con un 50% de descuento.<a href="shop.html">Ver detalles</a></li>
+                                    <li>Obtén jeans con un 50% de descuento.<a href="shop.html">Ver detalles</a></li>
                                     <li>Ofertas de gran valor - Ahorra más con cupones</li>
-                                    <li>Joyería de plata, ahorra hasta un 35% hoy. <a href="shop.html">Comprar ahora</a>
+                                    <li>Dia de la madre, ahorra hasta un 35% hoy. <a href="shop.html">Comprar ahora</a>
                                     </li>
                                 </ul>
                             </div>
@@ -81,7 +81,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="index.html"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="isologo black sheep"></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="isologo black sheep"></a>
                     </div>
                     <div class="header-right">
 
@@ -93,7 +93,7 @@
 
                                 @livewire('wishlist-icon-component')
 
-                                @livewire('cart-icon-component')
+                                {{-- @livewire('cart-icon-component') --}}
                             </div>
                         </div>
                     </div>
@@ -439,7 +439,7 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="index.html"><img src="{{ asset('assets/imgs/logo/logotipo.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contacto</h5>
                             <p class="wow fadeIn animated">
