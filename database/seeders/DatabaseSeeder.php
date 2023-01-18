@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
 
         
-        \App\Models\product::factory(16)->create()->each(function($product){
+        \App\Models\Product::factory(16)->create()->each(function($product){
             $sizes = [
                 ['size' => 'S', 'quantity' => 10],
                 ['size' => 'M', 'quantity' => 11],
