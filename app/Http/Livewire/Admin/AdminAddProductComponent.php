@@ -12,6 +12,7 @@ use App\Models\Brand;
 use App\Models\Size;
 use App\Models\Tag;
 use App\Models\Subcategory;
+use Faker\Factory as Faker;
 
 class AdminAddProductComponent extends Component
 {
@@ -210,7 +211,8 @@ class AdminAddProductComponent extends Component
         else
         {
             // generando un codigo de variante aleatorio usando $this->faker->unique()->uuid
-            $product->variant_code = $this->faker->unique()->uuid;
+            $faker = Faker::create();
+            $product->variant_code = $faker->unique()->uuid;
         }
         // guardando las etiquetas
         
