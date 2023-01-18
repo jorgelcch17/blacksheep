@@ -8,7 +8,7 @@
                 @foreach ($categories as $category)
                 @if ($category->subcategories->count() != 0)
                 <li class="has-children">
-                    <a href="{{ route('product.category', $category->slug) }}"><i class="surfsidemedia-font-home"></i>{{ $category->name }}</a>
+                    <a href="{{ route('product.category', ['category_slug'=>$category->slug]) }}"><i class="surfsidemedia-font-home"></i>{{ $category->name }}</a>
                     <div class="dropdown-menu">
                             <ul class="mega-menu d-lg-flex">
                                 <li class="mega-menu-col col-lg-7">
@@ -19,7 +19,7 @@
                                                 </li> --}}
                                                 @foreach($category->subcategories as $subcategory)
                                                 <li>
-                                                    <a class="dropdown-item nav-link nav_item" href="{{ route('product.category', $subcategory->slug) }}">{{ $subcategory->name }}</a>
+                                                    <a class="dropdown-item nav-link nav_item" href="{{ route('product.category', ['category_slug'=>$category->slug, 'scategory_slug' => $subcategory->slug]) }}">{{ $subcategory->name }}</a>
                                                 </li>
                                                 @endforeach
                                             </ul>
