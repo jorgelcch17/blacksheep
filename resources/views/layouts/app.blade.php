@@ -286,7 +286,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="assets/imgs/logo/moda_urbana.png" alt="logo"></a>
+                    <a href="/"><img src="{{ asset('assets/imgs/logo/moda_urbana.png') }}" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -385,21 +385,21 @@
                     <!-- mobile menu end -->
                 </div>
                 <div class="mobile-header-info-wrap mobile-header-border">
-                    <div class="single-mobile-header-info mt-30">
-                        <a href="contact.html"> Our location </a>
+                    {{-- <div class="single-mobile-header-info mt-30">
+                        <a href="{{ route('home') }}"> Our location </a>
+                    </div> --}}
+                    <div class="single-mobile-header-info">
+                        <a href="{{ route('login') }}">Iniciar sesión </a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="login.html">Iniciar sesión </a>
+                        <a href="{{ route('register') }}">Registrarse</a>
                     </div>
                     <div class="single-mobile-header-info">
-                        <a href="register.html">Registrarse</a>
-                    </div>
-                    <div class="single-mobile-header-info">
-                        <a href="#">(+1) 0000-000-000 </a>
+                        <a href="#">(+591) 78501526 </a>
                     </div>
                 </div>
                 <div class="mobile-social-icon">
-                    <h5 class="mb-15 text-grey-4">Follow Us</h5>
+                    <h5 class="mb-15 text-grey-4">Siguenos</h5>
                     <a href="#"><img src="assets/imgs/theme/icons/icon-facebook.svg" alt=""></a>
                     <a href="#"><img src="assets/imgs/theme/icons/icon-twitter.svg" alt=""></a>
                     <a href="#"><img src="assets/imgs/theme/icons/icon-instagram.svg" alt=""></a>
