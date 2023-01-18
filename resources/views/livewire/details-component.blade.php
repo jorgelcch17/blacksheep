@@ -210,7 +210,7 @@
                                                 {{-- <button type="button" class="button button-add-to-cart"
                                                     wire:click.prevent="store({{ $product->id }}, '{{ $product->name }}', {{ $product->regular_price }})">Añadir
                                                     al carrito</button> --}}
-                                                <button onclick="window.open('https://wa.me/59175853156', '_blank')"
+                                                <button onclick="window.open('https://wa.me/59178501526', '_blank')"
                                                     class="button button-add-to-cart">Comprar por whatsapp</button>
                                                 <a aria-label="Add To Wishlist" class="action-btn hover-up"
                                                     href="#"

@@ -104,7 +104,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="index.html"><img src="{{ asset('assets/imgs/logo/logotipo.png') }}" alt="logo"></a>
+                        <a href="/"><img style="height: 50px; width: auto; object-fit: contain" src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         @livewire('explore-categories-component')
@@ -213,14 +213,15 @@
                     </p>
                     <div class="header-action-right d-block d-lg-none">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
+                            {{-- <div class="header-action-icon-2">
                                 <a href="shop-wishlist.php">
                                     <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-heart.svg">
                                     <span class="pro-count white">4</span>
                                 </a>
-                            </div>
+                            </div> --}}
+                            @livewire('wishlist-icon-component')
 
-                            <div class="header-action-icon-2">
+                            {{-- <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="cart.html">
                                     <img alt="Surfside Media" src="assets/imgs/theme/icons/icon-cart.svg">
                                     <span class="pro-count white">2</span>
@@ -264,7 +265,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
+
+                            @livewire('cart-icon-component')
 
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -283,7 +286,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="assets/imgs/logo/logo.png" alt="logo"></a>
+                    <a href="index.html"><img src="assets/imgs/logo/moda_urbana.png" alt="logo"></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -328,11 +331,14 @@
                     <nav>
                         <ul class="mobile-menu">
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="index.html">Home</a></li>
+                                    href="/">Inicio</a></li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="shop.html">shop</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Our
-                                    Collections</a>
+                                    href="{{ route('about') }}">Nosotros</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="{{ route('shop') }}">Tienda</a></li>
+                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="{{ route('contact') }}">Contacto</a></li>
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Nuestras Colecciones</a>
                                 <ul class="dropdown">
                                     <li class="menu-item-has-children"><span class="menu-expand"></span><a
                                             href="#">Women's Fashion</a>
@@ -364,8 +370,8 @@
                                 </ul>
                             </li>
                             <li class="menu-item-has-children"><span class="menu-expand"></span><a
-                                    href="blog.html">Blog</a></li>
-                            <li class="menu-item-has-children"><span class="menu-expand"></span><a
+                                    href="blog.html">Blog</a></li> --}}
+                            {{-- <li class="menu-item-has-children"><span class="menu-expand"></span><a
                                     href="#">Language</a>
                                 <ul class="dropdown">
                                     <li><a href="#">English</a></li>
@@ -373,7 +379,7 @@
                                     <li><a href="#">German</a></li>
                                     <li><a href="#">Spanish</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </nav>
                     <!-- mobile menu end -->
@@ -479,14 +485,14 @@
                     <div class="col-lg-2  col-md-3">
                         <h5 class="widget-title wow fadeIn animated">Mi cuenta</h5>
                         <ul class="footer-list wow fadeIn animated">
-                            <li><a href="my-account.html">Mi cuenta</a></li>
-                            <li><a href="#">Ver Carrito</a></li>
-                            <li><a href="#">Mi lista de deseos</a></li>
-                            <li><a href="#">Seguimiento de mi pedido</a></li>
-                            <li><a href="#">Ordenes</a></li>
+                            <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
+                            <li><a href="{{ route('shop.cart') }}">Ver Carrito</a></li>
+                            <li><a href="{{ route('shop.wishlist') }}">Mi lista de deseos</a></li>
+                            {{-- <li><a href="#">Seguimiento de mi pedido</a></li> --}}
+                            {{-- <li><a href="#">Ordenes</a></li> --}}
                         </ul>
                     </div>
-                    <div class="col-lg-4 mob-center">
+                    {{-- <div class="col-lg-4 mob-center">
                         <h5 class="widget-title wow fadeIn animated">Instalar App</h5>
                         <div class="row">
                             <div class="col-md-8 col-lg-12">
@@ -504,7 +510,7 @@
                                     alt="">
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
