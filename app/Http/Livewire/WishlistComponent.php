@@ -3,8 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Cart;
-
+use Gloudemans\Shoppingcart\Facades\Cart;
 class WishlistComponent extends Component
 {
     public function removeFromWishlist($product_id)
@@ -18,6 +17,16 @@ class WishlistComponent extends Component
                 return;
             }
         }
+    }
+
+    public function restoreWishlist()
+    {
+        Cart::instance('wishlist')->merge(auth()->user()->id);
+    }
+
+    public function restoreWish()
+    {
+        Cart::instance('wishlist')->restore(auth()->user()->id);
     }
 
     public function render()

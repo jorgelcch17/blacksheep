@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\HomeSlider;
 use App\Models\Product;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Category;
 use App\Models\Brand;
 use Illuminate\Support\Facades\Auth;
@@ -38,11 +38,11 @@ class HomeComponent extends Component
         }
 
         // resturando el carrito de compras y deseos en caso de que el usuario este autenticado
-        if(Auth::check())
-        {
-            Cart::instance('cart')->restore(Auth::user()->email);
-            Cart::instance('wishlist')->restore(Auth::user()->email);
-        }
+        // if(Auth::check())
+        // {
+        //     Cart::instance('cart')->restore(Auth::user()->email);
+        //     Cart::instance('wishlist')->restore(Auth::user()->email);
+        // }
          return view('livewire.home-component', compact('slides', 'lproducts', 'fproducts', 'pcategories', 'brands', 'popular_products', 'recent_products'));
     }
 }

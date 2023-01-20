@@ -6,7 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Category;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Tag;
 
 

@@ -71,6 +71,9 @@
                                         <span class="hot">Hot</span>
                                     </div>
                                 </div>
+
+                            
+
                                 <div class="product-content-wrap">
                                     <div class="product-category">
                                         <a href="{{ route('product.category', $item->model->category->slug) }}">{{ $item->model->category->name }}</a>

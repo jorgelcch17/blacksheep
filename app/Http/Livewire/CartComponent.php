@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -170,10 +170,10 @@ class CartComponent extends Component
 
         $this->setAmountForCheckout();
 
-        if(Auth::check())
-        {
-            Cart::instance('cart')->store(Auth::user()->email);
-        }
+        // if(Auth::check())
+        // {
+        //     Cart::instance('cart')->store(Auth::user()->email);
+        // }
 
         return view('livewire.cart-component');
     }
