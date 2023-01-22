@@ -14,7 +14,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/logo/isotipo.png') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/toggle-bs5.css') }}">
     @livewireStyles
+    
     @yield('css')
 </head>
 
@@ -81,7 +83,8 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="isologo black sheep"></a>
+                        <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}"
+                                alt="isologo black sheep"></a>
                     </div>
                     <div class="header-right">
 
@@ -104,16 +107,20 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href="/"><img style="height: 50px; width: auto; object-fit: contain" src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
+                        <a href="/"><img style="height: 50px; width: auto; object-fit: contain"
+                                src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         @livewire('explore-categories-component')
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block">
                             <nav>
                                 <ul>
-                                    <li><a class="{{ request() -> routeIs('home') ? 'active' : '' }}" href="/">Inicio </a></li>
-                                    <li><a class="{{ request() -> routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">Nosotros</a></li>
-                                    <li><a class="{{ request() -> routeIs('shop') ? 'active' : '' }}" href="{{ route('shop') }}">Tienda</a></li>
+                                    <li><a class="{{ request()->routeIs('home') ? 'active' : '' }}"
+                                            href="/">Inicio </a></li>
+                                    <li><a class="{{ request()->routeIs('about') ? 'active' : '' }}"
+                                            href="{{ route('about') }}">Nosotros</a></li>
+                                    <li><a class="{{ request()->routeIs('shop') ? 'active' : '' }}"
+                                            href="{{ route('shop') }}">Tienda</a></li>
                                     {{-- <li class="position-static"><a href="#">Colecciones <i
                                                 class="fi-rs-angle-down"></i></a>
                                         <ul class="mega-menu">
@@ -175,24 +182,108 @@
                                         </ul>
                                     </li> --}}
                                     {{-- <li><a href="blog.html">Blog</a></li> --}}
-                                    <li><a class="{{ request() -> routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contacto</a></li>
+                                    <li><a class="{{ request()->routeIs('contact') ? 'active' : '' }}"
+                                            href="{{ route('contact') }}">Contacto</a></li>
+
                                     @auth
-                                        <li><a class="{{ request() -> routeIs('admin.*') ? 'active' : '' }}" href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
+                                        @if (Auth::user()->utype === 'ADM')
+                                            <li class="position-static"><a href="#">Mi Cuenta <i
+                                                        class="fi-rs-angle-down"></i></a>
+                                                <ul class="mega-menu">
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Productos</a>
+                                                        <ul>
+                                                            <li><a class="{{ request()->routeIs('admin.products') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.products') }}">Productos</a></li>
+                                                            <li><a class="{{ request()->routeIs('admin.categories') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.categories') }}">Categorías</a>
+                                                            </li>
+                                                            <li><a class="{{ request()->routeIs('admin.brand*') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.brands') }}">Marcas</a></li>
+                                                            <li><a href="{{ route('admin.tags') }}">Etiquetas</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Pedidos</a>
+                                                        <ul>
+                                                            <li><a href="#">Ordenes</a></li>
+                                                            <li><a class="{{ request()->routeIs('admin.locations') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.locations') }}">Ubicaciones</a>
+                                                            </li>
+                                                            <li><a class="{{ request()->routeIs('admin.shipping.types') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.shipping.types') }}">Tipos de
+                                                                    envios</a>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Clientes</a>
+                                                        <ul>
+                                                            <li><a href="#">Clientes</a></li>
+                                                            <li><a class="{{ request()->routeIs('admin.messages') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.messages') }}">Mensajes</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Banners</a>
+                                                        <ul>
+                                                            <li><a class="{{ request()->routeIs('admin.home.slider') ? 'fw-bold' : '' }}"
+                                                                    href="{{ route('admin.home.slider') }}">Gestionar
+                                                                    Carrusel</a>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Empresa</a>
+                                                        <ul>
+                                                            <li><a href="{{ route('company.info') }}">Información de la
+                                                                    empresa</a></li>
+                                                            <li><a href="{{ route('admin.terms-and-conditions') }}">Términos y Condiciones</a></li>
+                                                            <li><a href="{{ route('admin.questions') }}">Preguntas frecuentes</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        @else
+                                            <li><a class="{{ request()->routeIs('admin.*') ? 'active' : '' }}"
+                                                    href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
+                                                    <li><a href="#">Cerrar sesión</a></li>
+                                                </ul>
+                                            </li>
+                                        @endif
+                                    @endauth
+
+                                    {{-- @auth
+                                        <li><a class="{{ request()->routeIs('admin.*') ? 'active' : '' }}"
+                                                href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
                                             @if (Auth::user()->utype === 'ADM')
                                                 <ul class="sub-menu">
-                                                    <li><a class="{{ request() -> routeIs('admin.dashboard') ? 'fw-bold' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.dashboard') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                                                     <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.products') ? 'fw-bold' : '' }}" href="{{ route('admin.products') }}">Productos</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.categories') ? 'fw-bold' : '' }}" href="{{ route('admin.categories') }}">Categorías</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.home.slider') ? 'fw-bold' : '' }}" href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.coupons') ? 'fw-bold' : '' }}" href="{{ route('admin.coupons') }}">Cupones</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.products') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.products') }}">Productos</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.categories') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.categories') }}">Categorías</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.home.slider') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.home.slider') }}">Gestionar Carrusel</a>
+                                                    </li>
+                                                    <li><a class="{{ request()->routeIs('admin.coupons') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.coupons') }}">Cupones</a></li>
                                                     <li><a href="#">Ordenes</a></li>
                                                     <li><a href="#">Clientes</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.brand*') ? 'fw-bold' : '' }}" href="{{ route('admin.brands') }}">Marcas</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.messages') ? 'fw-bold' : '' }}" href="{{ route('admin.messages') }}">Mensajes</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.locations') ? 'fw-bold' : '' }}" href="{{ route('admin.locations') }}">Ubicaciones</a></li>
-                                                    <li><a class="{{ request() -> routeIs('admin.shipping.types') ? 'fw-bold' : '' }}" href="{{ route('admin.shipping.types') }}">Tipos de envios</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.brand*') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.brands') }}">Marcas</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.messages') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.messages') }}">Mensajes</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.locations') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.locations') }}">Ubicaciones</a></li>
+                                                    <li><a class="{{ request()->routeIs('admin.shipping.types') ? 'fw-bold' : '' }}"
+                                                            href="{{ route('admin.shipping.types') }}">Tipos de envios</a>
+                                                    </li>
                                                     <li><a href="{{ route('admin.tags') }}">Etiquetas</a></li>
+                                                    <li><a href="{{ route('company.info') }}">Información de la
+                                                            empresa</a></li>
                                                 </ul>
                                             @else
                                                 <ul class="sub-menu">
@@ -201,13 +292,16 @@
                                                 </ul>
                                             @endif
                                         </li>
-                                    @endauth
+                                    @endauth --}}
                                 </ul>
                             </nav>
                         </div>
                     </div>
-                    <div class="hotline d-none d-lg-block">
-                        <p><i class="fi-rs-smartphone"></i><span>Llámanos</span> (+591) 78501526 </p>
+                    @php
+                        $info = App\Models\CompanyInfo::first();
+                    @endphp
+                    <div class="hotline d-none d-lg-{{ $info->phone_number ? 'block' : '' }}">
+                        <p><i class="fi-rs-smartphone"></i><span>Llámanos</span> {{ $info->phone_number }} </p>
                     </div>
                     <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%
                     </p>
@@ -394,8 +488,8 @@
                     <div class="single-mobile-header-info">
                         <a href="{{ route('register') }}">Registrarse</a>
                     </div>
-                    <div class="single-mobile-header-info">
-                        <a href="#">(+591) 78501526 </a>
+                    <div class="single-mobile-header-info {{ $info->phone_number ? '' : 'd-none' }}">
+                        <a href="#">{{ $info->phone_number }} </a>
                     </div>
                 </div>
                 <div class="mobile-social-icon">
@@ -419,11 +513,13 @@
                     <div class="col-lg-7 mb-md-3 mb-lg-0">
                         <div class="row align-items-center">
                             <div class="col flex-horizontal-center">
-                                <img class="icon-email" src="{{ asset('assets/imgs/theme/icons/icon-email.svg') }}" alt="">
+                                <img class="icon-email" src="{{ asset('assets/imgs/theme/icons/icon-email.svg') }}"
+                                    alt="">
                                 <h4 class="font-size-20 mb-0 ml-3">Registrate al boletín de noticias</h4>
                             </div>
                             <div class="col my-4 my-md-0 des">
-                                <h5 class="font-size-15 ml-4 mb-0">...y recibe un <strong>cupon de 25 bs para tu primera compra.</strong></h5>
+                                <h5 class="font-size-15 ml-4 mb-0">...y recibe un <strong>cupon de 25 bs para tu
+                                        primera compra.</strong></h5>
                             </div>
                         </div>
                     </div>
@@ -445,41 +541,54 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
                             <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="{{ route('home') }}"><img src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img
+                                        src="{{ asset('assets/imgs/logo/logo_for_web.png') }}" alt="logo"></a>
                             </div>
                             <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contacto</h5>
                             <p class="wow fadeIn animated">
-                                <strong>Dirección: </strong>Centro comercial Indana
+                                <strong>Dirección: </strong>
+                                {{ $info->address ? $info->address : 'No hay direcciones' }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Celular: </strong>+591 78501526
+                                <strong>Celular: </strong>
+                                {{ $info->phone_number ? $info->phone_number : 'Sin número' }}
                             </p>
                             <p class="wow fadeIn animated">
-                                <strong>Email: </strong>contact@blacksheep.com
+                                <strong>Email: </strong> {{ $info->email ? $info->email : 'Sin correo' }}
                             </p>
                             <h5 class="mb-10 mt-30 fw-600 text-grey-4 wow fadeIn animated">Siguenos en</h5>
                             <div class="mobile-social-icon wow fadeIn animated mb-sm-5 mb-md-0">
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
-                                        alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}"
-                                        alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}"
-                                        alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-pinterest.svg') }}"
-                                        alt=""></a>
-                                <a href="#"><img src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}"
-                                        alt=""></a>
+                                @if ($info->facebook)
+                                    <a href="{{ $info->facebook }}"><img
+                                            src="{{ asset('assets/imgs/theme/icons/icon-facebook.svg') }}"
+                                            alt=""></a>
+                                @endif
+                                @if ($info->twitter)
+                                    <a href="{{ $info->twitter }}"><img
+                                            src="{{ asset('assets/imgs/theme/icons/icon-twitter.svg') }}"
+                                            alt=""></a>
+                                @endif
+                                @if ($info->instagram)
+                                    <a href="{{ $info->instagram }}"><img
+                                            src="{{ asset('assets/imgs/theme/icons/icon-instagram.svg') }}"
+                                            alt=""></a>
+                                @endif
+                                @if ($info->youtube)
+                                    <a href="{{ $info->youtube }}"><img
+                                            src="{{ asset('assets/imgs/theme/icons/icon-youtube.svg') }}"
+                                            alt=""></a>      
+                                @endif
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3">
                         <h5 class="widget-title wow fadeIn animated">Acerca de</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
-                            <li><a href="#">Sobre nosotros</a></li>
+                            <li><a href="{{ route('about') }}">Sobre nosotros</a></li>
                             <li><a href="#">Información de entrega</a></li>
-                            <li><a href="#">Política de privacidad</a></li>
-                            <li><a href="#">Términos &amp; Condiciones</a></li>
-                            <li><a href="#">Contáctanos</a></li>
+                            <li><a href="{{ route('questions') }}">Preguntas frecuentes</a></li>
+                            <li><a href="{{ route('terms-and-conditions') }}">Términos &amp; Condiciones</a></li>
+                            <li><a href="{{ route('contact') }}">Contáctanos</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-2  col-md-3">
@@ -521,7 +630,8 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="float-md-left font-sm text-muted mb-0">
-                        <a href="privacy-policy.html">Políticas de privacidad</a> | <a href="terms-conditions.html">Términos &amp; Condiciones</a>
+                        <a href="privacy-policy.html">Políticas de privacidad</a> | <a
+                            href="{{ route('terms-and-conditions') }}">Términos &amp; Condiciones</a>
                     </p>
                 </div>
                 <div class="col-lg-6">

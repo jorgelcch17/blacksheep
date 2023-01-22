@@ -65,6 +65,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ShippingTypeSeeder::class);
 
+        \DB::table('company_infos')->insert([
+            [
+                'email' => 'support@blacksheep.com.bo'
+            ]
+        ]);
+
         $this->call(TagSeeder::class);
+        $this->call(QuestionSeeder::class);
     }
 }

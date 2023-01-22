@@ -14,6 +14,8 @@ use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\AboutComponent;
 use App\Http\Livewire\OrderComponent;
+use App\Http\Livewire\TermsAndConditionsComponent;
+use App\Http\Livewire\QuestionsComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\AdminCategoriesComponent;
@@ -36,6 +38,9 @@ use App\Http\Livewire\Admin\AdminCityShippingTypeComponent;
 use App\Http\Livewire\Admin\AdminShippingTypeComponent;
 use App\Http\Livewire\Admin\AdminCouponsComponent;
 use App\Http\Livewire\Admin\AdminTagComponent;
+use App\Http\Livewire\Admin\AdminCompanyInfoComponent;
+use App\Http\Livewire\Admin\AdminQuestionsComponent;
+use App\Http\Livewire\Admin\AdminTermsAndConditionsComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -69,6 +74,10 @@ Route::get('/search', SearchComponent::class)->name('product.search');
 Route::get('/contact', ContactComponent::class)->name('contact');
 
 Route::get('/about', AboutComponent::class)->name('about');
+
+Route::get('/terminos-y-condiciones', TermsAndConditionsComponent::class)->name('terms-and-conditions');
+
+Route::get('/preguntas-frecuentes', QuestionsComponent::class)->name('questions');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -108,6 +117,10 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/etiquetas', AdminTagComponent::class)->name('admin.tags');
 
     Route::get('/order/{order_id}/checkout', CheckoutComponent::class)->name('checkout');
+
+    Route::get('/admin/company-info', AdminCompanyInfoComponent::class)->name('company.info');
+    Route::get('/admin/terms-and-conditions', AdminTermsAndConditionsComponent::class)->name('admin.terms-and-conditions');
+    Route::get('/admin/preguntas-frecuentes', AdminQuestionsComponent::class)->name('admin.questions');
 });
 
 require __DIR__.'/auth.php';
