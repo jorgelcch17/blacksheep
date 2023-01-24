@@ -174,7 +174,7 @@ class AdminAddProductComponent extends Component
             'description' => 'required',
             'regular_price' => 'required',
             // 'sale_price' => 'required',
-            'sku' => 'required',
+            // 'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
             // 'quantity' => 'required',

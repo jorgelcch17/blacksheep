@@ -156,7 +156,7 @@
                                                     id="stock_status" wire:model="stock_status">
                                                     <option value="instock">En Stock</option>
                                                     <option value="outofstock">Fuera de Stock</option>
-                                                    <option value="pre-order">A pedido</option>
+                                                    <option value="preorder">A pedido</option>
                                                 </select>
                                                 @error('stock_status')
                                                     <p class="text-danger">{{ $message }}</p>

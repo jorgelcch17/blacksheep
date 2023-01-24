@@ -59,17 +59,17 @@ class ShopComponent extends Component
     {
         if($this->orderBy == 'Precio: Bajo a alto')
         {
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('regular_price', 'ASC')->paginate($this->pageSize);    
+            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('is_active', 1)->orderBy('regular_price', 'ASC')->paginate($this->pageSize);    
         }elseif($this->orderBy == 'Precio: Alto a bajo'){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('regular_price', 'DESC')->paginate($this->pageSize);  
+            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('is_active', 1)->orderBy('regular_price', 'DESC')->paginate($this->pageSize);  
         }elseif($this->orderBy == 'mas recientes'){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('is_active', 1)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
         }else{
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->paginate($this->pageSize);
+            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('is_active', 1)->paginate($this->pageSize);
         }
 
         $categories = Category::orderBy('name', 'ASC')->get();
-        $nproducts = Product::latest()->take(4)->get();
+        $nproducts = Product::latest()->where('is_active', 1)->take(4)->get();
         $tags = Tag::all();
         return view('livewire.shop-component', compact('products', 'categories', 'nproducts', 'tags'));    
     }

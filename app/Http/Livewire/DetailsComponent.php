@@ -9,25 +9,98 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {
-    public $slug;
-    public $qty=1;
+    public $product_id;
+    // public $slug;
+    public $qty=0;
 
+    public $stock_status = null;
     public $selected_size = null;
     public $qty_for_selected_size = null;
 
+    // mensajes a mostrar en español
+    protected $messages = [
+        'selected_size.required' => 'Debes seleccionar una talla',
+        'qty.required' => 'Debes seleccionar una cantidad',
+        'qty.numeric' => 'La cantidad debe ser un número',
+        'qty.between' => 'La cantidad debe ser menor o igual a la cantidad de productos disponibles',
+    ];
+
     public function mount($id, $slug){
-        $this->id = $id;
-        $this->slug = $slug;
+        $this->product_id = $id;
+        // $this->slug = $slug;
         $product = Product::where('id', $id)->first();
-        // calculamos la cantidad de productos disponibles sumando las cantidades de todos los tamaños
-        $pquantity = $product->sizes->sum('quantity');
-        if($pquantity == 0){
-            $this->qty_for_selected_size = 'No disponible';
+
+        if($product->is_active === 0){
+            abort(404);
+        }
+        // // calculamos la cantidad de productos disponibles sumando las cantidades de todos los tamaños
+        // $pquantity = $product->sizes->sum('quantity');
+        // if($pquantity == 0){
+        //     $this->qty_for_selected_size = 'No disponible';
+        // }
+        $this->stock_status = $product->stock_status;
+        if($product->stock_status == 'instock')
+        {
+            // sumando todo el stock de todos los tamaños
+            $this->qty_for_selected_size = $product->sizes->sum('quantity');
+        }elseif($product->stock_status == 'outofstock'){
+            $this->qty_for_selected_size = 'Sin existencias';
+        }elseif($product->stock_status == 'preorder'){
+            $this->qty_for_selected_size = 'A pedido';
+        }
+    }
+
+    public function updatedQty(){
+        if($this->stock_status == 'instock')
+        {
+            $this->validate([
+                'selected_size' => 'required',
+                // validando que qty sea menor o igual a la cantidad de productos disponibles y mayor a 0
+                'qty' => 'required|numeric|between:1,'.$this->qty_for_selected_size,
+            ]);
         }
     }
 
     public function increaseQuantity(){
-        $this->qty++;
+        // if($this->stock_status == 'instock')
+        // {
+        //     $this->validate([
+        //         'selected_size' => 'required',
+        //         // validando que qty sea menor o igual a la cantidad de productos disponibles y mayor a 0
+        //         'qty' => 'required|numeric|between:1,'.$this->qty_for_selected_size-1,
+        //     ]);
+        // }
+        // if($this->stock_status == 'preorder')
+        // {
+        //     $this->validate([
+        //         'selected_size' => 'required',
+        //         'qty' => 'required|numeric'
+        //     ]);
+        // }
+        if($this->stock_status != 'outofstock')
+        {
+            $this->validate([
+                'selected_size' => 'required',
+                'qty' => 'required|numeric'
+            ]);    
+        }
+
+        if($this->stock_status == 'outofstock')
+        {
+            return;
+        }elseif($this->stock_status == 'instock')
+        {
+            if($this->qty < $this->qty_for_selected_size){
+                $this->qty++;
+            }
+        }else{
+            $this->qty++;
+        }
+
+        // if($this->stock_status != 'outofstock')
+        // {
+        //     $this->qty++;
+        // }
     }
     
     public function decreaseQuantity(){
@@ -39,6 +112,7 @@ class DetailsComponent extends Component
     public function updatedSelectedSize($value){
         // $product = Product::where('slug', $this->slug)->first();
         $size = Size::where('id', $value)->first();
+        $this->qty = 1;
         $this->qty_for_selected_size = $size->quantity;
     }
 
@@ -71,7 +145,7 @@ class DetailsComponent extends Component
 
     public function render()
     {
-        $product = Product::where('slug', $this->slug)->first();
+        $product = Product::where('id', $this->product_id)->first();
         $rproducts = Product::where('category_id', $product->category_id)->inRandomOrder()->limit(4)->get();
         $nproducts = Product::latest()->take(4)->get();
         $psizes = $product->sizes;

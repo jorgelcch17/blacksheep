@@ -24,11 +24,11 @@ class HomeComponent extends Component
     public function render()
     {
         $slides = HomeSlider::where('status', 1)->get();
-        $lproducts = Product::orderBy('created_at', 'DESC')->get(); // Latest Products for Home Page
-        $fproducts = Product::where('featured', 1)->inRandomOrder()->get()->take(8); // products featured
-        $popular_products = Product::inRandomOrder()->get()->take(8); /* obteniendo 8 productos aleatorios */
+        $lproducts = Product::orderBy('created_at', 'DESC')->where('is_active', 1)->get(); // Latest Products for Home Page
+        $fproducts = Product::where('featured', 1)->where('is_active', 1)->inRandomOrder()->get()->take(8); // products featured
+        $popular_products = Product::inRandomOrder()->where('is_active', 1)->get()->take(8); /* obteniendo 8 productos aleatorios */
         // obteniendo los ultimo 8 productos recientes
-        $recent_products = Product::orderBy('created_at', 'DESC')->get()->take(8);
+        $recent_products = Product::orderBy('created_at', 'DESC')->where('is_active', 1)->get()->take(8);
         $pcategories = Category::where('is_popular', 1)->inRandomOrder()->get()->take(7); // cattegories featured
         $brands = Brand::where('status', 1)->inRandomOrder()->get();
 
