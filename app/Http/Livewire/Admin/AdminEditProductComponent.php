@@ -26,18 +26,20 @@ class AdminEditProductComponent extends Component
     public $sku;
     public $stock_status = 'instock';
     public $featured = 0;
-    public $quantity;
+    // public $quantity;
     public $image;
     public $category_id;
     public $subcategory_id;
     public $brand_id;
     public $newimage;
     public $color;
+    public $is_active;
     public $sizes = [];
     public $subcategories = [];
 
+
     public $images;
-    public $newimages;
+    // public $newimages;
 
     // campos para poner las tallas y cantidades antes de añadir a la variable $sizes
     public $temporal_size;
@@ -53,6 +55,58 @@ class AdminEditProductComponent extends Component
     public $search_tag;
     public $result_search_tag=[];
     public $selected_tags=[];
+
+    // escuchando el evento refreshParent
+    protected $listeners = ['refreshParent' => 'refreshComponent'];
+
+
+    // function refreshComponent
+    public function refreshComponent()
+    {
+        $this->mount($this->product_id);
+    }
+
+    public function updatedImages()
+    {
+        $this->changeOrder();
+    }
+
+    public function changeOrder()
+    {
+        // pasando el array de imagenes a string
+        $this->images = implode(',', $this->images);
+        // buscando el producto
+        $product = Product::find($this->product_id);
+        // actualizando el campo images
+        $product->images = $this->images;
+        // guardando el producto
+        $product->save();
+        $this->mount($this->product_id);
+    }
+
+    // funcion para eliminar una imagen
+    public function deleteImage($image)
+    {
+        // buscando el producto
+        $product = Product::find($this->product_id);
+        // pasando el string de imagenes a array
+        $images = explode(',', $product->images);
+        // eliminando la imagen del array
+        $key = array_search($image, $images);
+        unset($images[$key]);
+        // eliminando la imagen del servidor
+        if(file_exists('assets/imgs/products/'.$image))
+        {
+            unlink('assets/imgs/products/'.$image);
+        }
+        // pasando el array de imagenes a string
+        $this->images = implode(',', $images);
+        // actualizando el campo images
+        $product->images = $this->images;
+        // guardando el producto
+        $product->save();
+        $this->mount($this->product_id);
+    }
 
     public function updatedSearch($value)
     {
@@ -108,7 +162,7 @@ class AdminEditProductComponent extends Component
 
     public function mount($product_id)
     {
-        $product = Product::find($this->product_id);
+        $product = Product::find($product_id);
         $this->product_id = $product->id;
         $this->name = $product->name;
         $this->slug = $product->slug;
@@ -119,7 +173,7 @@ class AdminEditProductComponent extends Component
         $this->sku = $product->SKU;
         $this->stock_status = $product->stock_status;
         $this->featured = $product->featured;
-        $this->quantity = $product->quantity;
+        // $this->quantity = $product->quantity;
         $this->image = $product->image;
         $this->images = explode(',', $product->images);
         $this->category_id = $product->category_id;
@@ -127,8 +181,10 @@ class AdminEditProductComponent extends Component
         $this->subcategory_id = $product->subcategory_id;
         $this->brand_id = $product->brand_id;
         $this->color = $product->color;
+        $this->is_active = $product->is_active;
 
         $product_sizes = $product->sizes;
+        $this->sizes = [];
         foreach($product_sizes as $size)
         {
             array_push($this->sizes, [
@@ -161,7 +217,7 @@ class AdminEditProductComponent extends Component
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
-            'quantity' => 'required',
+            // 'quantity' => 'required',
             // 'image' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -192,43 +248,48 @@ class AdminEditProductComponent extends Component
         $product->SKU = $this->sku;
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
-        $product->quantity = $this->quantity;
+        // $product->quantity = $this->quantity;
         if($this->newimage)
         {
-            unlink('assets/imgs/products/'.$product->image);
+            // eliminando la imagen del archivo products usando file_exists
+            if(file_exists('assets/imgs/products/'.$product->image))
+            {
+                unlink('assets/imgs/products/'.$product->image);
+            }
             $imageName = Carbon::now()->timestamp . '. ' . $this->newimage->extension();
             $this->newimage->storeAs('products', $imageName);
             $product->image = $imageName;
         }
 
-        if($this->newimages)
-        {
-            if($product->images)
-            {
-                $images = explode(',', $product->images);
-                foreach($images as $image)
-                {
-                    if($image)
-                    {
-                        unlink('assets/imgs/products/'.$image);
-                    }
-                }
-            }
+        // if($this->newimages)
+        // {
+        //     if($product->images)
+        //     {
+        //         $images = explode(',', $product->images);
+        //         foreach($images as $image)
+        //         {
+        //             if($image)
+        //             {
+        //                 unlink('assets/imgs/products/'.$image);
+        //             }
+        //         }
+        //     }
 
-            $imagesname = '';
-            foreach($this->newimages as $key=>$image)
-            {
-                $imgName = Carbon::now()->timestamp . $key . '.' . $image->extension();
-                $image->storeAs('products', $imgName);
-                $imagesname = $imagesname. ',' . $imgName ;
-            }
-            $product->images = $imagesname;
-        }
+        //     $imagesname = '';
+        //     foreach($this->newimages as $key=>$image)
+        //     {
+        //         $imgName = Carbon::now()->timestamp . $key . '.' . $image->extension();
+        //         $image->storeAs('products', $imgName);
+        //         $imagesname = $imagesname. ',' . $imgName ;
+        //     }
+        //     $product->images = $imagesname;
+        // }
 
         $product->category_id = $this->category_id;
         $product->subcategory_id = $this->subcategory_id;
         $product->brand_id = $this->brand_id;
         $product->color = $this->color;
+        $product->is_active = $this->is_active;
         // borrando las tallas y cantidades anteriores
         $product->sizes()->delete();
         // añadiendo las tallas y cantidades nuevas

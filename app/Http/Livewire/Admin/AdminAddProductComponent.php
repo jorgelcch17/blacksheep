@@ -26,13 +26,13 @@ class AdminAddProductComponent extends Component
     public $sku;
     public $stock_status = 'instock';
     public $featured = 0;
-    public $quantity;
     public $image;
     public $images;
     public $category_id;
     public $subcategory_id;
     public $brand_id;
     public $color;
+    public $is_active = 0;
     public $sizes = [];
     public $subcategories = [];
 
@@ -50,6 +50,12 @@ class AdminAddProductComponent extends Component
     public $search_tag;
     public $result_search_tag=[];
     public $selected_tags=[];
+
+    public function addImage($image)
+    {
+        $this->images[] = $image->store('public/images');
+        dd($this->images);
+    }
 
     // burcar producto por nombre al actualizarse la variable $search
     public function updatedSearch($value)
@@ -97,12 +103,16 @@ class AdminAddProductComponent extends Component
         $this->search_tag = '';
     }
 
+    public function imprimir()
+    {
+        dd($this->images);
+    }
     public function removeTag($id)
-{
-    $this->selected_tags = array_filter($this->selected_tags, function ($tag) use ($id) {
-        return $tag['id'] != $id;
-    });
-}
+    {
+        $this->selected_tags = array_filter($this->selected_tags, function ($tag) use ($id) {
+            return $tag['id'] != $id;
+        });
+    }
 
     public function selectProductGroup($id)
     {
@@ -167,7 +177,7 @@ class AdminAddProductComponent extends Component
             'sku' => 'required',
             'stock_status' => 'required',
             'featured' => 'required',
-            'quantity' => 'required',
+            // 'quantity' => 'required',
             'image' => 'required',
             'category_id' => 'required',
             'brand_id' => 'required',
@@ -183,22 +193,25 @@ class AdminAddProductComponent extends Component
         $product->SKU = $this->sku;
         $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
-        $product->quantity = $this->quantity;
+        // $product->quantity = $this->quantity;
         $imageName = Carbon::now()->timestamp . '.' . $this->image->extension();
         $this->image->storeAs('products', $imageName);
         $product->image = $imageName;
 
-        if($this->images)
-        {
-            $imagesname = '';
-            foreach($this->images as $key=>$image)
-            {
-                $imgName = Carbon::now()->timestamp . $key . '.' . $image->extension();
-                $image->storeAs('products', $imgName);
-                $imagesname = $imagesname . ',' . $imgName;
-            }
-            $product->images = $imagesname;
-        }
+        // if($this->images)
+        // {
+        //     $imagesname = '';
+        //     foreach($this->images as $key=>$image)
+        //     {
+        //         // $imgName = Carbon::now()->timestamp . $key . '.' . $image->extension();
+        //         // $image->storeAs('products', $imgName);
+        //         $imgName = $image->hashName();
+        //         $image->storeAs('products', $imgName);
+        //         $imagesname = $imagesname . ',' . $imgName;
+        //     }
+        //     // $product->images = $imagesname;
+        //     $product->images = trim($imagesname, ',');
+        // }
 
         $product->category_id = $this->category_id;
         $product->subcategory_id = $this->subcategory_id;
@@ -215,6 +228,7 @@ class AdminAddProductComponent extends Component
             $product->variant_code = $faker->unique()->uuid;
         }
         // guardando las etiquetas
+        $product->is_active = $this->is_active;
         
         $product->save();
         $selected_tags_ids = array_column($this->selected_tags, 'id');
@@ -230,6 +244,7 @@ class AdminAddProductComponent extends Component
         }
 
         session()->flash('message', 'Producto creado exitosamente');
+        return redirect()->route('admin.product.edit', ['product_id' => $product->id]);
     }
 
     public function render()

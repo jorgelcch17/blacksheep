@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('SKU')->unique()->nullable();
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
-            $table->unsignedBigInteger('quantity')->default(10);
+            // $table->unsignedBigInteger('quantity')->default(10);
             $table->string('image');
             $table->text('images')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
@@ -34,6 +34,8 @@ return new class extends Migration
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->string('color');
             $table->string('variant_code')->nullable();
+            // campo para publicar o no el producto
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

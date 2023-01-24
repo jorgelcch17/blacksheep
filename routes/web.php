@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Livewire\HomeComponent;
@@ -121,6 +122,8 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/company-info', AdminCompanyInfoComponent::class)->name('company.info');
     Route::get('/admin/terms-and-conditions', AdminTermsAndConditionsComponent::class)->name('admin.terms-and-conditions');
     Route::get('/admin/preguntas-frecuentes', AdminQuestionsComponent::class)->name('admin.questions');
+
+    Route::post('/admin/products/{product_id}/files', [ProductController::class, 'files'])->name('admin.products.files');
 });
 
 require __DIR__.'/auth.php';
