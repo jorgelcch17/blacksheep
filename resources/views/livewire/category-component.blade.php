@@ -111,7 +111,7 @@
                                                         $pimages = collect($pimages);
                                                     @endphp
                                                     @foreach ($pimages as $image)
-                                                        @if ($loop->index == 1)
+                                                        @if ($loop->index == 0)
                                                             <img class="hover-img"
                                                                 src="{{ asset('assets/imgs/products') }}/{{ $image }}"
                                                                 alt="">

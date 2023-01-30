@@ -121,7 +121,7 @@
                                                         $fimages = collect($fimages);
                                                     @endphp
                                                     @foreach ($fimages as $image)
-                                                        @if ($loop->index == 1)
+                                                        @if ($loop->index == 0)
                                                             <img class="hover-img"
                                                                 src="{{ asset('assets/imgs/products') }}/{{ $image }}"
                                                                 alt="">
@@ -190,7 +190,7 @@
                                                         $pimages = collect($pimages);
                                                     @endphp
                                                     @foreach ($pimages as $image)
-                                                        @if ($loop->index == 1)
+                                                        @if ($loop->index == 0)
                                                             <img class="hover-img"
                                                                 src="{{ asset('assets/imgs/products') }}/{{ $image }}"
                                                                 alt="">
@@ -256,7 +256,7 @@
                                                         $recent_images = collect($recent_images);
                                                     @endphp
                                                     @foreach ($recent_images as $image)
-                                                        @if ($loop->index == 1)
+                                                        @if ($loop->index == 0)
                                                             <img class="hover-img"
                                                                 src="{{ asset('assets/imgs/products') }}/{{ $image }}"
                                                                 alt="">
@@ -397,7 +397,7 @@
                                                 $limages = collect($limages);
                                             @endphp
                                             @foreach ($limages as $image)
-                                                @if ($loop->index == 1)
+                                                @if ($loop->index == 0)
                                                     <img class="hover-img"
                                                         src="{{ asset('assets/imgs/products') }}/{{ $image }}"
                                                         alt="">
