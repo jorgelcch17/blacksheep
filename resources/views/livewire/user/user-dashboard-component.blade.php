@@ -79,39 +79,29 @@
                                                     <table class="table">
                                                         <thead>
                                                             <tr>
-                                                                <th>Order</th>
-                                                                <th>Date</th>
-                                                                <th>Status</th>
+                                                                <th>Orden</th>
+                                                                <th>Fecha</th>
+                                                                <th>Estado</th>
                                                                 <th>Total</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>#1357</td>
-                                                                <td>March 45, 2022</td>
-                                                                <td>Processing</td>
-                                                                <td>$125.00 for 2 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>#2468</td>
-                                                                <td>June 29, 2022</td>
-                                                                <td>Completed</td>
-                                                                <td>$364.00 for 5 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>#2366</td>
-                                                                <td>August 02, 2022</td>
-                                                                <td>Completed</td>
-                                                                <td>$280.00 for 3 item</td>
-                                                                <td><a href="#" class="btn-small d-block">View</a>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach($orders as $order)
+                                                                <tr>
+                                                                    <td>#1357</td>
+                                                                    <td>March 45, 2022</td>
+                                                                    <td>Processing</td>
+                                                                    <td>$125.00 for 2 item</td>
+                                                                    <td><a href="#"
+                                                                            class="btn-small d-block">View</a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
+                                                        <tfoot>
+                                                            {{ $orders->links() }}
+                                                        </tfoot>
                                                     </table>
                                                 </div>
                                             </div>
@@ -175,7 +165,8 @@
                                                                 {{-- <a href="#" class="text-info">Editar</a> --}}
                                                                 <!-- Button trigger modal -->
                                                                 <a data-bs-toggle="modal"
-                                                                    data-bs-target="#staticBackdrop2" wire:click.prevent="editAddress({{ $address->id }})">
+                                                                    data-bs-target="#staticBackdrop2"
+                                                                    wire:click.prevent="editAddress({{ $address->id }})">
                                                                     Editar
                                                                 </a>
                                                                 {{-- enlace de eliminar --}}
@@ -614,7 +605,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary" wire:click.prevent="updateAddress">Guardar</button>
+                    <button type="button" class="btn btn-primary"
+                        wire:click.prevent="updateAddress">Guardar</button>
                 </div>
             </div>
         </div>

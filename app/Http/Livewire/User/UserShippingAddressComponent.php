@@ -2,18 +2,15 @@
 
 namespace App\Http\Livewire\User;
 
-use Livewire\Component;
-use App\Models\ShippingAddress;
-use Illuminate\Support\Facades\Auth;
+use App\Models\City;
 use App\Models\Department;
 use App\Models\Province;
-use App\Models\Order;
-use App\Models\City;
-use Livewire\WithPagination;
+use App\Models\ShippingAddress;
+use Illuminate\Support\Facades\Auth;
+use Livewire\Component;
 
-class UserDashboardComponent extends Component
+class UserShippingAddressComponent extends Component
 {
-    use WithPagination;
     // variables para agregar una nueva dirección
     public $alias;
     public $name;
@@ -61,7 +58,7 @@ class UserDashboardComponent extends Component
     {
         $this->cities = City::where('province_id', $value)->get();
     }
-    
+
     public function storeAddress()
     {
         $this->validate([
@@ -166,9 +163,8 @@ class UserDashboardComponent extends Component
 
     public function render()
     {
-        $orders = Order::where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->paginate(5);
         $addresses = ShippingAddress::where('user_id', Auth::user()->id)->get();
         $departments = Department::where('status', 1)->get();
-        return view('livewire.user.user-dashboard-component', compact('addresses', 'departments', 'orders'));
+        return view('livewire.user.user-shipping-address-component', compact('addresses', 'departments'));
     }
 }

@@ -134,9 +134,9 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="shop.html">{{ $product->category->name }}</a>
+                                                <a href="{{ route('product.category', ['category_slug' => $product->category->slug]) }}">{{ $product->category->name }}</a>
                                             </div>
-                                            <h2><a href="product-details.html">{{ $product->name }}</a></h2>
+                                            <h2><a href="{{ route('product.details', ['id'=>$product->id, 'slug'=>$product->slug]) }}">{{ $product->name }}</a></h2>
                                             {{-- <div class="rating-result" title="90%">
                                                 <span>
                                                     <span>90%</span>

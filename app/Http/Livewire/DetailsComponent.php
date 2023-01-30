@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\CompanyInfo;
 use Livewire\Component;
 use App\Models\Product;
 use App\Models\Size;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Storage;
 
 class DetailsComponent extends Component
 {
@@ -13,7 +15,7 @@ class DetailsComponent extends Component
     // public $slug;
     public $qty=0;
 
-    public $stock_status = null;
+    // public $stock_status = null;
     public $selected_size = null;
     public $qty_for_selected_size = null;
 
@@ -22,7 +24,7 @@ class DetailsComponent extends Component
         'selected_size.required' => 'Debes seleccionar una talla',
         'qty.required' => 'Debes seleccionar una cantidad',
         'qty.numeric' => 'La cantidad debe ser un número',
-        'qty.between' => 'La cantidad debe ser menor o igual a la cantidad de productos disponibles',
+        'qty.max' => 'La cantidad debe ser menor o igual a la cantidad de productos disponibles',
     ];
 
     public function mount($id, $slug){
@@ -38,16 +40,17 @@ class DetailsComponent extends Component
         // if($pquantity == 0){
         //     $this->qty_for_selected_size = 'No disponible';
         // }
-        $this->stock_status = $product->stock_status;
-        if($product->stock_status == 'instock')
-        {
-            // sumando todo el stock de todos los tamaños
-            $this->qty_for_selected_size = $product->sizes->sum('quantity');
-        }elseif($product->stock_status == 'outofstock'){
-            $this->qty_for_selected_size = 'Sin existencias';
-        }elseif($product->stock_status == 'preorder'){
-            $this->qty_for_selected_size = 'A pedido';
-        }
+        // $this->stock_status = $product->stock_status;
+        // if($product->stock_status == 'instock')
+        // {
+        //     // sumando todo el stock de todos los tamaños
+        //     $this->qty_for_selected_size = $product->sizes->sum('quantity');
+        // }elseif($product->stock_status == 'outofstock'){
+        //     $this->qty_for_selected_size = 'Sin existencias';
+        // }elseif($product->stock_status == 'preorder'){
+        //     $this->qty_for_selected_size = 'A pedido';
+        // }
+        $this->qty_for_selected_size = $product->sizes->sum('quantity');
     }
 
     public function updatedQty(){
@@ -61,7 +64,28 @@ class DetailsComponent extends Component
         }
     }
 
+    public function removeFromWishlist($product_id)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if($witem->id == $product_id)
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->emitTo('wishlist-icon-component', 'refreshComponent');
+                return;
+            }
+        }
+    }
+
     public function increaseQuantity(){
+        $this->validate([
+            'selected_size' => 'required',
+            // validando que qty sea menor o igual a la cantidad de productos disponibles y mayor a 0
+            'qty' => 'required|numeric|max:'.$this->qty_for_selected_size-1,
+        ]);
+
+        $this->qty++;
+
         // if($this->stock_status == 'instock')
         // {
         //     $this->validate([
@@ -77,25 +101,25 @@ class DetailsComponent extends Component
         //         'qty' => 'required|numeric'
         //     ]);
         // }
-        if($this->stock_status != 'outofstock')
-        {
-            $this->validate([
-                'selected_size' => 'required',
-                'qty' => 'required|numeric'
-            ]);    
-        }
+        // if($this->stock_status != 'outofstock')
+        // {
+        //     $this->validate([
+        //         'selected_size' => 'required',
+        //         'qty' => 'required|numeric'
+        //     ]);    
+        // }
 
-        if($this->stock_status == 'outofstock')
-        {
-            return;
-        }elseif($this->stock_status == 'instock')
-        {
-            if($this->qty < $this->qty_for_selected_size){
-                $this->qty++;
-            }
-        }else{
-            $this->qty++;
-        }
+        // if($this->stock_status == 'outofstock')
+        // {
+        //     return;
+        // }elseif($this->stock_status == 'instock')
+        // {
+        //     if($this->qty < $this->qty_for_selected_size){
+        //         $this->qty++;
+        //     }
+        // }else{
+        //     $this->qty++;
+        // }
 
         // if($this->stock_status != 'outofstock')
         // {
@@ -116,7 +140,7 @@ class DetailsComponent extends Component
         $this->qty_for_selected_size = $size->quantity;
     }
 
-    public function store($product_id, $product_name, $product_price)
+    public function store($product_id, $product_name, $product_price, $weigth=0)
     {
         // verificar si se seleccionó un tamaño, caso contrario no se puede agregar al carrito
         if($this->selected_size == null){
@@ -125,7 +149,7 @@ class DetailsComponent extends Component
         }
         $size = Size::find($this->selected_size);
         $size_name = $size->size;
-        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price, ['code_size' => $size->id, 'size' => $size_name])->associate('\App\Models\Product');
+        Cart::instance('cart')->add($product_id, $product_name, $this->qty, $product_price,0, ['code_size' => $size->id, 'size' => $size_name, 'image' => Product::find($product_id)->image])->associate('\App\Models\Product');
         // dd(Cart::instance('cart')->content());
         session()->flash('success_message', 'Producto añadido al carrito');
         return redirect()->route('shop.cart');
@@ -151,6 +175,7 @@ class DetailsComponent extends Component
         $psizes = $product->sizes;
         // obteniendo los productos que tengan el campo variant_code igual al del producto actual y que no sean null
         $pvariants = Product::where('variant_code', $product->variant_code)->get();
-        return view('livewire.details-component', compact('product', 'rproducts', 'nproducts', 'psizes', 'pvariants'));
+        $whatsapp = CompanyInfo::first()->phone_number;
+        return view('livewire.details-component', compact('product', 'rproducts', 'nproducts', 'psizes', 'pvariants', 'whatsapp'));
     }
 }

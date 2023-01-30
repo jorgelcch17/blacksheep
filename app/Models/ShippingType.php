@@ -18,4 +18,10 @@ class ShippingType extends Model
     {
         return $this->belongsToMany(City::class)->withPivot('price', 'details');
     }
+
+    // relacion con la tabla CityShippingType
+    public function cityShippingType()
+    {
+        return $this->hasMany(CityShippingType::class);
+    }
 }

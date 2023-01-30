@@ -86,12 +86,12 @@
                                                 <input required="" type="password" name="password" placeholder="Contraseña" required autocomplete="current-password">
                                             </div>
                                             <div class="login_footer form-group">
-                                                <div class="chek-form">
+                                                {{-- <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="remember" id="checkremember" value="">
                                                         <label class="form-check-label" for="checkremember"><span>Recordar mi inicio de sesión</span></label>
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <a class="text-muted" href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
                                             </div>
                                             <div class="form-group">

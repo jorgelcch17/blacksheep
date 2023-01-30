@@ -19,6 +19,11 @@
                                     <strong>Éxito:</strong> {{ Session::get('success_message') }}
                                 </div>
                             @endif
+                            @if (Session::has('danger_message'))
+                                <div class="alert alert-danger">
+                                    <strong>Ups:</strong> {{ Session::get('danger_message') }}
+                                </div>
+                            @endif
                             @if (Cart::instance('cart')->count() > 0)
                                 <table class="table shopping-summery text-center clean">
                                     <thead>
@@ -40,18 +45,21 @@
                                                         alt="#"></td>
                                                 <td class="product-des product-name text-start">
                                                     <h4 class="product-name">
-                                                        <a href="{{ route('product.details', ['id' => $item->model->id, 'slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
+                                                        <a
+                                                            href="{{ route('product.details', ['id' => $item->model->id, 'slug' => $item->model->slug]) }}">{{ $item->model->name }}</a>
                                                     </h4>
                                                     {{-- <p>{{ $item->model->subcategory->name }}</p> --}}
-                                                    <p style="font-size:14px;"><strong>Color:</strong> {{ $item->model->color }}</p>
-                                                    <p style="font-size:14px;"><strong>Talla:</strong> {{ $item->options->size }}</p>
+                                                    <p style="font-size:14px;"><strong>Color:</strong>
+                                                        {{ $item->model->color }}</p>
+                                                    <p style="font-size:14px;"><strong>Talla:</strong>
+                                                        {{ $item->options->size }}</p>
                                                     {{-- <p class="font-xs">Maboriosam in a tonto nesciung eget<br> distingy
                                                         magndapibus.
                                                     </p> --}}
                                                 </td>
                                                 <td class="price" data-title="Price"><span>Bs
                                                         {{ $item->model->regular_price }} </span></td>
-                                                <td class="text-center" data-title="Stock">
+                                                {{-- <td class="text-center" data-title="Stock">
                                                     <div class="detail-qty border radius  m-auto">
                                                         <a href="#" class="qty-down"
                                                             wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"><i
@@ -60,6 +68,15 @@
                                                         <a href="#" class="qty-up"
                                                             wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"><i
                                                                 class="fi-rs-angle-small-up"></i></a>
+                                                    </div>
+                                                </td> --}}
+                                                <td>
+                                                    <div class="detail-qty border radius  m-auto">
+                                                        <a style="bottom:0;"><i class="fi-rs-angle-small-down"
+                                                                wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"></i></a>
+                                                        <span>{{ $item->qty }}</span>
+                                                        <a href="#" style="top:0;"><i class="fi-rs-angle-small-up"
+                                                                wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"></i></a>
                                                     </div>
                                                 </td>
                                                 <td class="text-right" data-title="Cart">
@@ -86,7 +103,8 @@
                         </div>
                         <div class="cart-action text-end">
                             <a class="btn  mr-10 mb-sm-15"><i class="fi-rs-shuffle mr-10"></i>Actualizar Carrito</a>
-                            <a class="btn" href="{{ route('shop') }}"><i class="fi-rs-shopping-bag mr-10"></i>Continuar Comprando</a>
+                            <a class="btn" href="{{ route('shop') }}"><i
+                                    class="fi-rs-shopping-bag mr-10"></i>Continuar Comprando</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">
@@ -98,7 +116,8 @@
                                     <div class="total-amount">
                                         <div class="left">
                                             <div class="coupon">
-                                                <form action="#" target="_blank" wire:submit.prevent="applyCouponCode">
+                                                <form action="#" target="_blank"
+                                                    wire:submit.prevent="applyCouponCode">
                                                     @if (Session::has('coupon_message'))
                                                         <div class="alert alert-danger">
                                                             <strong></strong>
@@ -117,13 +136,16 @@
                                                     </div>
                                                 </form>
                                             </div>
-                                            @if(Session::has('coupon'))
+                                            @if (Session::has('coupon'))
                                                 <div class="">
-                                                    Código de promoción: 
+                                                    Código de promoción:
                                                     <strong>{{ Session::get('coupon')['code'] }}</strong>
                                                     {{-- <a href="#">Remover</a> --}}
-                                                    <svg wire:click.prevent="removeCouponCode" style="width:24px;height:24px;cursor: pointer;" viewBox="0 0 24 24">
-                                                        <path fill="#E30613" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                                                    <svg wire:click.prevent="removeCouponCode"
+                                                        style="width:24px;height:24px;cursor: pointer;"
+                                                        viewBox="0 0 24 24">
+                                                        <path fill="#E30613"
+                                                            d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
                                                     </svg>
                                                 </div>
                                             @endif
@@ -148,9 +170,11 @@
                                                 @if (Session::has('coupon'))
                                                     {{-- applying the coupon --}}
                                                     <tr>
-                                                        <td class="cart_total_label">Descuento ({{ Session::get('coupon')['code'] }})</td>
+                                                        <td class="cart_total_label">Descuento
+                                                            ({{ Session::get('coupon')['code'] }})</td>
                                                         <td class="cart_total_amount"><strong><span
-                                                                    class="font-lg fw-900 text-brand">Bs {{ $discount }}</span></strong>
+                                                                    class="font-lg fw-900 text-brand">Bs
+                                                                    {{ $discount }}</span></strong>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -161,13 +185,14 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="cart_total_label">Tax ({{ config('cart.tax') }}%)</td>
+                                                        <td class="cart_total_label">Tax ({{ config('cart.tax') }}%)
+                                                        </td>
                                                         <td class="cart_total_amount"><strong><span
                                                                     class="font-lg fw-900 text-brand">Bs
                                                                     {{ $taxAfterDiscount }}</span></strong>
                                                         </td>
                                                     </tr>
-                                                    
+
                                                     <tr>
                                                         <td class="cart_total_label">Total</td>
                                                         <td class="cart_total_amount"><strong><span
@@ -199,8 +224,11 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                   <a href="#" wire:click.prevent="createOrder" class="btn "> <i class="fi-rs-box-alt mr-10"></i>
-                                        Crear Orden</a>
+                                    @if (Cart::instance('cart')->count() > 0)
+                                        <a href="#" wire:click.prevent="createOrder" class="btn btn-danger"> <i
+                                                class="fi-rs-box-alt mr-10"></i>
+                                            Crear Orden</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>

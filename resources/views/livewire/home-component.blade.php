@@ -213,9 +213,9 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop.html">{{ $popular_product->category->name }}</a>
+                                            <a href="{{ route('product.category', ['category_slug' => $popular_product->category->slug]) }}">{{ $popular_product->category->name }}</a>
                                         </div>
-                                        <h2><a href="product-details.html">{{ $popular_product->name }}</a></h2>
+                                        <h2><a href="{{ route('product.details', ['id' => $popular_product->id, 'slug' => $popular_product->slug]) }}">{{ $popular_product->name }}</a></h2>
                                         {{-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>
@@ -279,9 +279,9 @@
                                     </div>
                                     <div class="product-content-wrap">
                                         <div class="product-category">
-                                            <a href="shop.html">{{ $recent_product->category->name }}</a>
+                                            <a href="{{ route('product.category', ['category_slug' => $recent_product->category->slug]) }}">{{ $recent_product->category->name }}</a>
                                         </div>
-                                        <h2><a href="product-details.html">{{ $recent_product->name }}</a></h2>
+                                        <h2><a href="{{ route('product.details', ['id' => $recent_product->id, 'slug' => $recent_product->slug]) }}">{{ $recent_product->name }}</a></h2>
                                         {{-- <div class="rating-result" title="90%">
                                             <span>
                                                 <span>90%</span>

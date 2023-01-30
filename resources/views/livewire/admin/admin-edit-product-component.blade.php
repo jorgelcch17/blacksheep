@@ -131,7 +131,7 @@
                                                     <input type="text" class="form-control" name="sale_price"
                                                         id="sale_price" aria-describedby="helpId"
                                                         placeholder="Ingrese el precio de oferta"
-                                                        wire:price="sale_price">
+                                                        wire:model="sale_price">
                                                     @error('sale_price')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror

@@ -24,7 +24,7 @@ class AdminEditProductComponent extends Component
     public $regular_price;
     public $sale_price;
     public $sku;
-    public $stock_status = 'instock';
+    // public $stock_status = 'instock';
     public $featured = 0;
     // public $quantity;
     public $image;
@@ -171,7 +171,7 @@ class AdminEditProductComponent extends Component
         $this->regular_price = $product->regular_price;
         $this->sale_price = $product->sale_price;
         $this->sku = $product->SKU;
-        $this->stock_status = $product->stock_status;
+        // $this->stock_status = $product->stock_status;
         $this->featured = $product->featured;
         // $this->quantity = $product->quantity;
         $this->image = $product->image;
@@ -215,7 +215,7 @@ class AdminEditProductComponent extends Component
             'regular_price' => 'required',
             // 'sale_price' => 'required',
             // 'sku' => 'required',
-            'stock_status' => 'required',
+            // 'stock_status' => 'required',
             'featured' => 'required',
             // 'quantity' => 'required',
             // 'image' => 'required',
@@ -246,7 +246,7 @@ class AdminEditProductComponent extends Component
             $product->sale_price = null;
         }
         $product->SKU = $this->sku;
-        $product->stock_status = $this->stock_status;
+        // $product->stock_status = $this->stock_status;
         $product->featured = $this->featured;
         // $product->quantity = $this->quantity;
         if($this->newimage)

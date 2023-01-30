@@ -102,7 +102,7 @@
                                                 <input required="" type="password" name="password_confirmation"
                                                     placeholder="Confirmar contraseña" required>
                                             </div>
-                                            <div class="login_footer form-group">
+                                            {{-- <div class="login_footer form-group">
                                                 <div class="chek-form">
                                                     <div class="custome-checkbox">
                                                         <input class="form-check-input" type="checkbox" name="checkbox"
@@ -114,7 +114,7 @@
                                                 </div>
                                                 <a href="privacy-policy.html"><i
                                                         class="fi-rs-book-alt mr-5 text-muted"></i>Conocer más</a>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-fill-out btn-block hover-up"
                                                     name="login">Enviar y Registrarse</button>

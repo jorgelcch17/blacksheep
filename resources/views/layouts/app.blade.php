@@ -25,7 +25,7 @@
         <div class="header-top header-top-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-xl-3 col-lg-4">
+                    <div class="col-xl-3 col-lg-4" style="visibility: hidden;">
                         <div class="header-info">
                             <ul>
                                 <li>
@@ -96,7 +96,7 @@
 
                                 @livewire('wishlist-icon-component')
 
-                                {{-- @livewire('cart-icon-component') --}}
+                                @livewire('cart-icon-component')
                             </div>
                         </div>
                     </div>
@@ -206,7 +206,7 @@
                                                     <li class="sub-mega-menu sub-mega-menu-width-22">
                                                         <a class="menu-title" href="#">Pedidos</a>
                                                         <ul>
-                                                            <li><a href="#">Ordenes</a></li>
+                                                            <li><a href="{{ route('admin.orders') }}">Ordenes</a></li>
                                                             <li><a class="{{ request()->routeIs('admin.locations') ? 'fw-bold' : '' }}"
                                                                     href="{{ route('admin.locations') }}">Ubicaciones</a>
                                                             </li>
@@ -246,7 +246,10 @@
                                             <li><a class="{{ request()->routeIs('admin.*') ? 'active' : '' }}"
                                                     href="#">Mi Cuenta<i class="fi-rs-angle-down"></i></a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li>
+                                                    {{-- <li><a href="{{ route('user.dashboard') }}">Mi cuenta</a></li> --}}
+                                                    <li><a href="{{ route('profile.edit') }}">Mi perfil</a></li>
+                                                    <li><a href="{{ route('user.orders') }}">Mis Ordenes</a></li>
+                                                    <li><a href="{{ route('user.address') }}">Mis direcciones</a></li>
                                                     <li><a href="#">Cerrar sesión</a></li>
                                                 </ul>
                                             </li>

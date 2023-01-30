@@ -6,6 +6,7 @@ use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Coupon;
 use Carbon\Carbon;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\models\Order;
 // use DB for database;
@@ -23,9 +24,17 @@ class CartComponent extends Component
     public function increaseQuantity($rowId)
     {
         $product = Cart::instance('cart')->get($rowId);
-        $qty = $product->qty + 1;
-        Cart::instance('cart')->update($rowId, $qty);
-        $this->emitTo('cart-icon-component', 'refreshComponent');
+        $product_stock = Product::find($product->id)->sizes->where('size', $product->options->size)->first();
+        if($product->qty < $product_stock->quantity)
+        {
+            $qty = $product->qty + 1;
+            Cart::instance('cart')->update($rowId, $qty);
+            $this->emitTo('cart-icon-component', 'refreshComponent');
+        }
+        else
+        {
+            session()->flash('danger_message', 'No hay suficiente stock!');
+        }
     }
 
     public function decreaseQuantity($rowId)
@@ -114,11 +123,12 @@ class CartComponent extends Component
                 'total' => Cart::instance('cart')->total(),
             ]);
         }
+        // dd(session()->get('checkout'));
     }
 
     public function createOrder()
     {
-        // verificando si el usuario está autenticado
+        // verificando si el usuario esta autenticado, si no esta lo enviamos al login y no creamos la orden
         if(!Auth::check())
         {
             return redirect()->route('login');
@@ -144,7 +154,9 @@ class CartComponent extends Component
 
         $this->deleteCart(Auth::user()->email);
 
-        return redirect()->route('checkout', ['order_id' => $order->id]);
+        
+        // redirigiendo a la ruta checkout
+        return redirect()->route('checkout', $order->id);
     }
 
     public function deleteCart($user_id)

@@ -86,13 +86,13 @@ class CategoryComponent extends Component
         // $category = Category::where('slug', $this->category_slug)->first();
         if($this->orderBy == 'Precio: Bajo a alto')
         {
-            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'ASC')->paginate($this->pageSize);    
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pageSize);    
         }elseif($this->orderBy == 'Precio: Alto a bajo'){
-            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'DESC')->paginate($this->pageSize);  
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pageSize);  
         }elseif($this->orderBy == 'mas recientes'){
-            $products = Product::where($filter.'category_id', $category_id)->orderBy('created_at', 'DESC')->paginate($this->pageSize);
+            $products = Product::where($filter.'category_id', $category_id)->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate($this->pageSize);
         }else{
-            $products = Product::where($filter.'category_id', $category_id)->paginate($this->pageSize);
+            $products = Product::where($filter.'category_id', $category_id)->where('is_active', 1)->paginate($this->pageSize);
         }
 
         $categories = Category::orderBy('name', 'ASC')->get();

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('subtotal', 8, 2);
             $table->float('discount', 8, 2)->default(0);
             $table->float('tax', 8, 2)->default(0);
+            $table->float('shipping_cost', 8, 2)->default(0);
             $table->float('total', 8, 2);
 
             $table->enum('status', [

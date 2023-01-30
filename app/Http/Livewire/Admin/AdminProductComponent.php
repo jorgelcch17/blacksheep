@@ -20,6 +20,18 @@ class AdminProductComponent extends Component
         session()->flash('message', 'Producto eliminado exitosamente!');
     }
 
+    public function changeStatus($id)
+    {
+        $product = Product::find($id);
+        if($product->is_active == 1){
+            $product->is_active = 0;
+        }else{
+            $product->is_active = 1;
+        }
+        $product->save();
+        session()->flash('message', 'El estado del producto ha sido cambiado');
+    }
+
     public function render()
     {
         $products = Product::orderBy('created_at', 'DESC')->paginate(10);

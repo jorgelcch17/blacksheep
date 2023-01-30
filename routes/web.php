@@ -42,8 +42,13 @@ use App\Http\Livewire\Admin\AdminTagComponent;
 use App\Http\Livewire\Admin\AdminCompanyInfoComponent;
 use App\Http\Livewire\Admin\AdminQuestionsComponent;
 use App\Http\Livewire\Admin\AdminTermsAndConditionsComponent;
+use App\Http\Livewire\Admin\AdminOrdersComponent;
+use App\Http\Livewire\Admin\AdminOrderDetailsComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\User\UserOrdersComponent;
+use App\Http\Livewire\User\UserOrderDetailsComponent;
+use App\Http\Livewire\User\UserShippingAddressComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,8 +71,6 @@ Route::get('/carrito', CartComponent::class)->name('shop.cart');
 
 Route::get('/wishlist', WishlistComponent::class)->name('shop.wishlist');
 
-Route::get('/checkout', CheckoutComponent::class)->name('shop.checkout');
-
 Route::get('/product-category/{category_slug}/{scategory_slug?}', CategoryComponent::class)->name('product.category');
 
 Route::get('/search', SearchComponent::class)->name('product.search');
@@ -84,14 +87,18 @@ Route::get('/preguntas-frecuentes', QuestionsComponent::class)->name('questions'
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
+    Route::get('/order/{order_id}/checkout', CheckoutComponent::class)->name('checkout');
+    Route::get('/user/ordenes', UserOrdersComponent::class)->name('user.orders');
+    Route::get('/user/ordenes/{order_id}', UserOrderDetailsComponent::class)->name('user.order.details');
+    Route::get('/user/direccion', UserShippingAddressComponent::class)->name('user.address');
 });
 
 Route::middleware(['auth', 'authadmin'])->group(function(){
@@ -116,8 +123,9 @@ Route::middleware(['auth', 'authadmin'])->group(function(){
     Route::get('/admin/tipos-de-envio', AdminShippingTypeComponent::class)->name('admin.shipping.types');
     Route::get('/admin/cupones', AdminCouponsComponent::class)->name('admin.coupons');
     Route::get('/admin/etiquetas', AdminTagComponent::class)->name('admin.tags');
+    Route::get('/admin/orders', AdminOrdersComponent::class)->name('admin.orders');
+    Route::get('/admin/order/{order_id}', AdminOrderDetailsComponent::class)->name('admin.order.details');
 
-    Route::get('/order/{order_id}/checkout', CheckoutComponent::class)->name('checkout');
 
     Route::get('/admin/company-info', AdminCompanyInfoComponent::class)->name('company.info');
     Route::get('/admin/terms-and-conditions', AdminTermsAndConditionsComponent::class)->name('admin.terms-and-conditions');
